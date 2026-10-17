@@ -9,7 +9,7 @@ const {chromium}=require('/tmp/qa/node_modules/playwright'),assert=require('node
  await p.waitForFunction(()=>!!navigator.serviceWorker.controller);
  const resources=await p.evaluate(async()=>{
  const manifest=await(await fetch('manifest.webmanifest')).json();
- const cache=await caches.open('lilou-yakazu-v2');return {manifest,keys:(await cache.keys()).map(r=>r.url)};
+ const cache=await caches.open('lilou-yakazu-v3');return {manifest,keys:(await cache.keys()).map(r=>r.url)};
  });
  assert.equal(resources.manifest.display,'standalone');assert.equal(resources.manifest.icons.length,2);assert.equal(resources.keys.length,18);
  await p.waitForFunction(()=>!!localStorage.getItem('lilou-yakazu-v1'));

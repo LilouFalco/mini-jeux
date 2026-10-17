@@ -1,9 +1,9 @@
 'use strict';
-const CACHE='lilou-yakazu-v2';
+const CACHE='lilou-yakazu-v3';
 const FILES=['./','index.html','style.css','fonts.css','app.js','engine.js','worker.js','icon.svg','symbols.woff2','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png',...Array.from({length:6},(_,i)=>'fonts/font-'+i+'.ttf')];
 const ROOT=new URL('./',self.location).href;
 self.addEventListener('install',event=>{
- event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES.map(path=>new URL(path,ROOT).href))).then(()=>self.skipWaiting()));
+ event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES.map(path=>new Request(new URL(path,ROOT).href,{cache:'reload'})))).then(()=>self.skipWaiting()));
 });
 self.addEventListener('activate',event=>{
  event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('lilou-yakazu-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));
