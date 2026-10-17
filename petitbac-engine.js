@@ -9,5 +9,6 @@ function nextPts(p){return PTS[(PTS.indexOf(p)+1)%PTS.length]}
 function totals(n,marks){const t=Array(n).fill(0);Object.values(marks).forEach(row=>row.forEach((p,i)=>{t[i]+=p||0}));return t}
 function leaders(t){const m=Math.max(...t);return t.map((x,i)=>x===m?i:-1).filter(i=>i>=0)}
 function pickCats(n,r){const k=Object.keys(CATS),o=[];const a=k.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor((r||Math.random)()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,n)}
-root.PetitBac={ALL,pool,pickCats,CATS,DEFAULT,LETTERS,pickLetter,nextPts,totals,leaders,PTS};
+function nextLetter(used,r,ex){const L=pool(ex);let u=L.every(l=>(used||[]).includes(l))?[]:(used||[]).slice();const l=pickLetter(u,r,ex);return {letter:l,used:u.concat(l)}}
+root.PetitBac={nextLetter,ALL,pool,pickCats,CATS,DEFAULT,LETTERS,pickLetter,nextPts,totals,leaders,PTS};
 if(typeof module!=='undefined')module.exports=root.PetitBac})(typeof window!=='undefined'?window:globalThis);

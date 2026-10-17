@@ -16,7 +16,7 @@ function setup(){const ck=Object.keys(P.CATS);
  v.querySelectorAll('input').forEach(i=>i.oninput=()=>{S.names[+i.dataset.i]=i.value;save()});
  v.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{const c=b.dataset.c;if(S.cats.includes(c)){if(S.cats.length>3)S.cats=S.cats.filter(x=>x!==c)}else if(S.cats.length<10)S.cats.push(c);save();setup()});
  v.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{S.time=+b.dataset.t;save();setup()});$('#rd').onclick=()=>{S.rand=!S.rand;save();setup()};$('#ex').onclick=()=>{S.ex=!S.ex;S.used=[];save();setup()};$('#snd').onclick=()=>{S.sound=!S.sound;save();setup()};
- $('#go').onclick=()=>{if(S.rand)S.cats=P.pickCats(6);S.letter=P.pickLetter(S.used,null,S.ex);S.used=(S.used.length>=P.pool(S.ex).length-1?[]:S.used).concat(S.letter);S.marks={};S.cats.forEach(c=>{S.marks[c]=Array(S.n).fill(0)});ph='play';save();draw()};
+ $('#go').onclick=()=>{if(S.rand)S.cats=P.pickCats(6);const nl=P.nextLetter(S.used,null,S.ex);S.letter=nl.letter;S.used=nl.used;S.marks={};S.cats.forEach(c=>{S.marks[c]=Array(S.n).fill(0)});ph='play';save();draw()};
  const r=$('#rs');if(r)r.onclick=()=>{S.tot=null;S.rounds=0;save();setup()}}
 function play(){
  v.innerHTML='<div class="uc"><div class="card"><p>La lettre est</p><div class="word" id="lt">'+S.letter+'</div><p id="tm" class="timer"></p></div><p>Écrivez un mot par catégorie sur papier :</p><div class="themes">'+S.cats.map(c=>'<span class="cat">'+P.CATS[c]+'</span>').join('')+'</div><button id="stop" class="primary big">STOP, j&#39;ai fini</button></div>';

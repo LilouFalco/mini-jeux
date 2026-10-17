@@ -4,6 +4,7 @@ const seen=new Set();let used=[];for(let i=0;i<P.LETTERS.length;i++){const l=P.p
 assert.deepEqual(P.totals(3,{a:[10,5,0],b:[5,5,10]}),[15,10,10]);assert.deepEqual(P.leaders([15,10,15]),[0,2]);
 assert.equal(P.pool(false).length,26);{let us=[];const sn=new Set();for(let i=0;i<26;i++){const l=P.pickLetter(us,null,false);assert(!sn.has(l));sn.add(l);us.push(l)}assert.equal(sn.size,26)}
 for(let i=0;i<300;i++)assert(!/[KWXYZ]/.test(P.pickLetter([],null,true)));
+for(const ex of [true,false])for(const rnd of [()=>0,()=>0.999999,Math.random]){const N=P.pool(ex).length;let us=[];for(let c=0;c<3;c++){const sn=new Set();for(let i=0;i<N;i++){const x=P.nextLetter(us,rnd,ex);us=x.used;assert(!sn.has(x.letter),'early repeat '+ex+' c'+c+' i'+i);sn.add(x.letter)}assert.equal(sn.size,N)}}
 const K='lilou-petitbac-v1';
 (async()=>{for(const [n,t] of [['webkit',pw.webkit],['chromium',pw.chromium]])for(const [w,h] of [[360,640],[390,844]]){const br=await t.launch(n==='chromium'?{executablePath:'/opt/hako/bin/google-chrome',args:['--no-sandbox']}:{});
 const c=await br.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:true});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
