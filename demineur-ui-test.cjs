@@ -47,7 +47,7 @@ const st=p=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),K);
   await p.waitForSelector('#win[open]');g=await st(p);assert(g.over&&!g.won);assert.match(await p.textContent('#win-title'),/Pas cette fois/);await p.click('#stay');
   assert((await cell(m).getAttribute('class')).includes('boom'));
   // wrong flag + chord loses
-  await p.click('#new');await p.waitForFunction(()=>!JSON.parse(localStorage.getItem('lilou-demineur-v1')).over);
+  await p.click('#new');if(await p.locator('#confirm[open]').count())await p.click('#replace');await p.waitForFunction(()=>!JSON.parse(localStorage.getItem('lilou-demineur-v1')).over);
   await cell(40).click();g=await st(p);
   const num2=g.state.findIndex((v,i)=>v===1&&counts0(g,i)>0&&nbs(i).some(j=>g.state[j]===0));
   function nbs(i){const r=Math.floor(i/9),cc=i%9,o=[];for(let a=-1;a<=1;a++)for(let d=-1;d<=1;d++){if(!a&&!d)continue;const rr=r+a,c2=cc+d;if(rr>=0&&c2>=0&&rr<9&&c2<9)o.push(rr*9+c2)}return o}
@@ -55,7 +55,7 @@ const st=p=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),K);
   if(num2>=0){const n=counts0(g,num2);const hid=nbs(num2).filter(j=>g.state[j]===0);const safeHid=hid.filter(j=>!g.mines[j]);
    if(safeHid.length>=n&&hid.some(j=>g.mines[j])){for(const j of safeHid.slice(0,n))await cell(j).dispatchEvent('contextmenu');await cell(num2).click();await p.waitForSelector('#win[open]');g=await st(p);assert(g.over&&!g.won,'wrong flags lose');await p.click('#stay')}}
   // keyboard
-  await p.click('#new');await p.waitForFunction(()=>!JSON.parse(localStorage.getItem('lilou-demineur-v1')).over);await cell(39).focus();await p.keyboard.press('ArrowRight');await p.keyboard.press('f');
+  await p.click('#new');if(await p.locator('#confirm[open]').count())await p.click('#replace');await p.waitForFunction(()=>!JSON.parse(localStorage.getItem('lilou-demineur-v1')).over&&!JSON.parse(localStorage.getItem('lilou-demineur-v1')).mines);await cell(39).focus();await p.keyboard.press('ArrowRight');await p.keyboard.press('f');
   g=await st(p);assert.equal(g.state[40],2);await p.keyboard.press('f');
   // compact toggle + overflow of page
   await p.click('#zoom');assert((await p.locator('#board').getAttribute('class')).includes('compact'));await p.click('#zoom');
