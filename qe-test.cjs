@@ -2,7 +2,7 @@ const pw=require('/tmp/qa/node_modules/playwright');const assert=require('assert
 const E=require('./qe-engine.js');const fs=require('fs');
 assert.equal(E.ROSTER.length,173);for(const c of E.ROSTER)assert(fs.existsSync('lol/'+c.id+'.webp'),c.id);
 for(let k=0;k<200;k++){const a=E.pick(24);assert.equal(new Set(a).size,24)}
-assert.equal(E.judge(['a','b'],['a','b'],0,1),0);assert.equal(E.judge(['a','b'],['a','b'],0,0),1);
+for(const g of [0,1]){assert.equal(E.judge(E.pick(24),[3,5],g,g===0?5:3),g,'correct wins');assert.equal(E.judge(E.pick(24),[3,5],g,g===0?3:5),1-g,'self idx wrong');assert.equal(E.judge(E.pick(24),[3,5],g,7),1-g,'wrong loses')}
 (async()=>{for(const [n,t] of [['webkit',pw.webkit],['chromium',pw.chromium]])for(const [w,h] of [[360,640],[390,844]]){const br=await t.launch(n==='chromium'?{executablePath:'/opt/hako/bin/google-chrome',args:['--no-sandbox']}:{});
 const c=await br.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:true});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
 const fit=async tag=>{const r=await p.evaluate(()=>{const b=document.querySelector('.mbar').getBoundingClientRect().top;let out=[];document.querySelectorAll('#v button,#v .qc,#v input').forEach(e=>{const r=e.getBoundingClientRect();if(r.width&&(r.bottom>b+.5||r.right>innerWidth+.5||r.left<-.5))out.push(e.className||e.id)});const q=document.querySelector('.qc img');return{sh:document.documentElement.scrollHeight-innerHeight,out,img:q?Math.round(q.getBoundingClientRect().width):0}});assert.equal(r.sh,0,tag+' scroll');assert.equal(r.out.length,0,tag+' out '+r.out);return r};
