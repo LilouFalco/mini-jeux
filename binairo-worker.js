@@ -1,0 +1,1 @@
+importScripts('binairo-engine.js');onmessage=e=>{try{postMessage({puzzle:Binairo.generate(e.data)})}catch(err){postMessage({error:err.message})}};

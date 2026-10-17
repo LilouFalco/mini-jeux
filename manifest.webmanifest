@@ -1,9 +1,9 @@
 {
   "id": "./",
-  "name": "Yakazu · la pause de Lilou",
-  "short_name": "Yakazu",
+  "name": "Pause de Lilou · Yakazu, Sudoku, Mots fléchés",
+  "short_name": "Pause jeux",
   "lang": "fr",
-  "description": "Des grilles Yakazu uniques et une petite pause toute douce, même hors connexion.",
+  "description": "Yakazu, Sudoku et mots fléchés en grilles infinies, jouables hors connexion.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -21,6 +21,16 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Sudoku",
+      "url": "sudoku.html"
+    },
+    {
+      "name": "Mots fléchés",
+      "url": "mots-fleches.html"
     }
   ]
 }

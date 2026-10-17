@@ -1,0 +1,1 @@
+importScripts('sudoku-engine.js');onmessage=e=>{try{postMessage({puzzle:Sudoku.generate(e.data)})}catch(err){postMessage({error:err.message})}};

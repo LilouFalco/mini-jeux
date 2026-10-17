@@ -1,0 +1,1 @@
+importScripts('mf-words.js','mf-engine.js');onmessage=e=>{try{postMessage({grid:MotsFleches.generate(e.data)})}catch(err){postMessage({error:err.message})}};
