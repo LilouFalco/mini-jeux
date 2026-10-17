@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='lilou-yakazu-v1';
+const CACHE='lilou-yakazu-v2';
 const FILES=['./','index.html','style.css','fonts.css','app.js','engine.js','worker.js','icon.svg','symbols.woff2','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png',...Array.from({length:6},(_,i)=>'fonts/font-'+i+'.ttf')];
 const ROOT=new URL('./',self.location).href;
 self.addEventListener('install',event=>{
