@@ -14,4 +14,10 @@ function draw(){
 }
 $('#pm').onclick=()=>{players=Math.max(3,players-1);draw()};$('#pp').onclick=()=>{players=Math.min(12,players+1);draw()};
 draw();
+// Service worker: register from the home page itself, announce only once active (precache finished)
+(function(){if(!('serviceWorker' in navigator))return;
+ const ready=()=>{let n=document.getElementById('offline-ready');if(!n){const f=document.querySelector('footer');if(!f)return;n=document.createElement('p');n.id='offline-ready';n.setAttribute('role','status');n.style.cssText='margin:6px 0 0;font-size:12px;opacity:.8';f.appendChild(n)}n.textContent='♡ Prêt hors connexion.'};
+ const go=()=>navigator.serviceWorker.register('sw.js',{scope:'./'}).then(reg=>{const w=reg.installing||reg.waiting;const done=()=>navigator.serviceWorker.ready.then(r=>{if(r.active&&r.active.state==='activated')ready();else if(r.active)r.active.addEventListener('statechange',e=>{if(e.target.state==='activated')ready()})});if(w&&w.state!=='activated')w.addEventListener('statechange',()=>{if(w.state==='activated')done()});done()}).catch(()=>{});
+ if(document.readyState==='complete')go();else addEventListener('load',go,{once:true});
+})();
 })();
