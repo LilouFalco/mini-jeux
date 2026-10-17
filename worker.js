@@ -1,0 +1,1 @@
+importScripts('engine.js');onmessage=e=>{try{postMessage({puzzle:Yakazu.generate(e.data)})}catch(err){postMessage({error:err.message})}};

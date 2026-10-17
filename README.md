@@ -1,0 +1,13 @@
+# Yakazu de Lilou
+
+Jeu statique en français, sans compte et sans dépendance JavaScript.
+
+Les grilles sont produites dans un Web Worker. Le moteur crée un motif de cases noires, trouve une solution par recherche avec contraintes, puis retire des indices seulement si un dénombrement confirme exactement une solution. Un plafond de recherche conserve les indices plutôt que de risquer une ambiguïté. Chaque case appartient à au moins un segment de deux cases ; les segments isolés ne contraignent pas leur direction. Les quatre niveaux changent la taille et la cible de retrait des indices, pas une classification par techniques humaines.
+
+La partie est conservée dans le stockage local du navigateur. Le chronomètre se met en pause lorsque la page n’est pas visible. Les erreurs sont comparées à l’unique solution ; un indice signale d’abord une erreur, sinon révèle une case.
+
+Lancer en local avec `python3 -m http.server 28461`.
+
+Tests moteur avec `node test.cjs`. Tests navigateur avec `node ui-test.cjs` (Playwright et Chrome requis ; chemins de lancement à adapter). Les tests comprennent l’exemple officiel de yakazu-gratuit.fr, le cas des segments isolés, 40 générations vérifiées uniques et les interactions aux largeurs 1440, 390 et 360.
+
+Publication GitHub Pages depuis main, racine.
