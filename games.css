@@ -32,7 +32,7 @@ body.mf h1{font-size:60px;letter-spacing:-4px}body.mf h1 span{display:inline-blo
 .puissance4 #board{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:6px;background:#d58b9f;border:3px solid var(--outline);border-radius:8px;box-shadow:3px 3px 0 #edd5da;width:100%;aspect-ratio:7/6}
 .puissance4 .pcell{aspect-ratio:1;border-radius:50%;background:#fff9ee;border:2px solid #b77288;display:flex;align-items:center;justify-content:center;font-size:clamp(14px,5vw,24px);color:#fff;line-height:1}
 .puissance4 .pcell.p1{background:#c8466e}.puissance4 .pcell.p2{background:#e0a92f}.puissance4 .pcell.last{animation:pdrop .3s ease-out}.puissance4 .pcell.win{outline:3px solid var(--ink);outline-offset:1px}
-@keyframes pdrop{from{transform:translateY(-120%);opacity:.3}to{transform:none;opacity:1}}@media(prefers-reduced-motion:reduce){.puissance4 .pcell.last{animation:none}}
+@keyframes pdrop{from{opacity:.25}to{opacity:1}}@media(prefers-reduced-motion:reduce){.puissance4 .pcell.last{animation:none}}
 .puissance4 .names,.morpion .names{display:grid;gap:8px;margin:12px 0}.puissance4 .names input{width:100%;font:inherit;padding:6px;border:2px solid var(--outline);background:#fff9ee;border-radius:4px}.puissance4 .names input:disabled{opacity:.5}.puissance4 .controls{min-width:210px}.puissance4 .play-area{align-items:start}
 #score{display:flex;flex-direction:column;gap:2px;margin:6px 0}
 .games{max-width:100%;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.games::-webkit-scrollbar{display:none}.games a{white-space:nowrap;flex:none}
@@ -48,3 +48,10 @@ body.mf h1{font-size:60px;letter-spacing:-4px}body.mf h1 span{display:inline-blo
 .naval .nc.ship{background:#8f6a80}.naval .nc.miss{background:#e9f3f7;color:#6aa0b8}.naval .nc.hit{background:#c8466e}.naval .nc.prev{background:#f3b6c6}.naval .nc.bad{background:#e08b7a}.naval .nc:disabled{opacity:1}
 .naval .fleet{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px;font-size:12px;letter-spacing:1px;color:var(--muted)}.naval .fleet .cur{color:#c8466e;font-weight:700}.naval .fleet .done{opacity:.35}
 .naval #cover{text-align:center;padding:48px 12px;background:#f9e4e8;border:3px solid var(--outline);border-radius:6px}.naval #cover p{margin:0 0 16px;line-height:1.5}
+/* board cells never move, scale or shift on hover/focus/active; only the mark may fade in */
+#board button,#board .cell,.mcell,.pcell,.pcol,.nc{transition:background-color .12s,color .12s,opacity .12s!important}
+#board button:active,#board .cell:active,.mcell:active,.pcell:active,.pcol:active,.nc:active,.board-wrap button:active{transform:none!important}
+#board button:hover,#board button:focus,#board button:focus-visible,.mcell:hover,.mcell:focus,.pcol:hover{transform:none!important}
+.mcell.p1,.mcell.p2{animation:mmark .18s ease-out}
+@keyframes mmark{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.mcell.p1,.mcell.p2{animation:none}}
