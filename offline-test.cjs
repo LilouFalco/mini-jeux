@@ -4,7 +4,7 @@ const {chromium}=require('/tmp/qa/node_modules/playwright'),assert=require('node
  for(const width of [1440,390]){
  const c=await b.newContext({viewport:{width,height:900},isMobile:width<600,hasTouch:width<600});
  const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
- await p.goto(process.env.BASE||'http://localhost:28461/');
+ await p.goto((process.env.BASE||'http://localhost:28461/')+'yakazu.html');
  await p.evaluate(()=>navigator.serviceWorker.ready);
  await p.waitForFunction(()=>!!navigator.serviceWorker.controller);
  const resources=await p.evaluate(async()=>{

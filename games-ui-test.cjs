@@ -6,7 +6,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   const c=await b.newContext({viewport:{width,height:900},isMobile:width<600,hasTouch:width<600});
   const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
   // links between games
-  await p.goto(BASE);assert(await p.locator('.games a').count()>=5);
+  await p.goto(BASE+'yakazu.html');assert(await p.locator('.games a').count()>=5);
   assert.equal(await p.locator('a[href*="portfolio"],a[href*="liloufalco.github.io"]').count(),0);
   await p.click('.games a[href="sudoku.html"]');await p.waitForURL(/sudoku\.html/);
   // SUDOKU
@@ -103,7 +103,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   await p.click('#new');await p.waitForFunction(()=>document.querySelector('#loading').hidden&&!JSON.parse(localStorage.getItem('lilou-binairo-v1')).won);
   await p.screenshot({path:'/tmp/binairo-'+width+'.png',fullPage:true});
   // yakazu untouched
-  await p.click('.games a[href="./"]');await p.waitForFunction(()=>document.querySelector('#board .cell'));
+  await p.click('.games a[href="yakazu.html"]');await p.waitForFunction(()=>document.querySelector('#board .cell'));
   assert.equal(errors.length,0,errors.join('\n'));
   console.log(width+' yakazu link + sudoku (4 levels, errors, notes, hint, win, save) + mots fléchés + binairo (4 sizes, cycle, errors, hint, win, save) PASS');
   await c.close();

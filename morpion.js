@@ -2,6 +2,7 @@
 const $=s=>document.querySelector(s),M=Morpion,KEY='lilou-morpion-v1',SY={1:'♥',2:'✦'};
 let st={mode:'easy',b:Array(9).fill(0),turn:1,first:1,over:false,line:null,scores:{easy:[0,0,0],hard:[0,0,0],two:[0,0,0]},n1:'Lilou',n2:'Lulu'};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.b)&&s.b.length===9&&s.scores)st={...st,...s}}catch{}
+{const q=new URLSearchParams(location.search).get('mode');const want=q==='duo'?'two':(q==='solo'&&st.mode==='two'?'easy':null);if(want&&want!==st.mode){st.mode=want;st.b=Array(9).fill(0);st.turn=1;st.first=1;st.over=false;st.line=null}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch{}};
 const name=p=>st.mode==='two'?(p===1?st.n1:st.n2):(p===1?st.n1:'Ordi');
 function render(){

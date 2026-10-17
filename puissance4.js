@@ -2,6 +2,7 @@
 const $=s=>document.querySelector(s),P=Puissance4,KEY='lilou-puissance4-v1',R=P.R,C=P.C;
 let st={mode:'easy',b:P.empty(),turn:1,first:1,over:false,line:null,last:-1,sel:3,busy:false,scores:{easy:[0,0,0],hard:[0,0,0],two:[0,0,0]},n1:'Lilou',n2:'Lulu'};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.b)&&s.b.length===R*C&&s.scores)st={...st,...s,busy:false}}catch{}
+{const q=new URLSearchParams(location.search).get('mode');const want=q==='duo'?'two':(q==='solo'&&st.mode==='two'?'easy':null);if(want&&want!==st.mode){st.mode=want;st.b=P.empty();st.turn=1;st.first=1;st.over=false;st.line=null,st.last=-1}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch{}};
 const name=p=>st.mode==='two'?(p===1?st.n1:st.n2):(p===1?st.n1:'Ordi');
 const SY={1:'♥',2:'✦'};

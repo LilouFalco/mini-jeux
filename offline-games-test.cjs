@@ -22,7 +22,7 @@ const pages=[['sudoku.html','lilou-sudoku-v1'],['mots-fleches.html','lilou-motsf
   // saves are separate
   const keys=await p.evaluate(()=>Object.keys(localStorage).filter(k=>k.startsWith('lilou-')));
   assert(['lilou-sudoku-v1','lilou-motsfleches-v1','lilou-binairo-v1'].every(k=>keys.includes(k)));
-  await p.goto(BASE);await p.waitForFunction(()=>document.querySelector('#board .cell'));
+  await p.goto(BASE+'yakazu.html');await p.waitForFunction(()=>document.querySelector('#board .cell'));
   assert.equal(errors.length,0,errors.join('\n'));
   console.log(width+' offline: 3 new pages cached, fresh generation x4 levels each, reload keeps separate saves PASS');await c.close();}
  await b.close()})().catch(e=>{console.error(e);process.exit(1)});

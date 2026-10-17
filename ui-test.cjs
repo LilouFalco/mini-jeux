@@ -4,7 +4,7 @@ const browser=await chromium.launch({executablePath:'/opt/hako/bin/google-chrome
 for(const width of [1440,390,360]){
  const page=await browser.newPage({viewport:{width,height:900},isMobile:width<600,hasTouch:width<600});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto(process.env.BASE||'http://localhost:28461');await page.waitForFunction(()=>!!document.querySelector('#board .cell'));
+ await page.goto((process.env.BASE||'http://localhost:28461')+'/yakazu.html');await page.waitForFunction(()=>!!document.querySelector('#board .cell'));
  await page.waitForFunction(()=>document.querySelector('#loading').hidden);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  const state=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('lilou-yakazu-v1')));
