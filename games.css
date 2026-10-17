@@ -86,3 +86,9 @@ body.mf h1{font-size:60px;letter-spacing:-4px}body.mf h1 span{display:inline-blo
 .champdle .cd img{width:32px;height:32px;border-radius:4px}.champdle .c-ok{background:#a9dcb0}.champdle .c-part{background:#f7e08f}.champdle .c-no,.champdle .c-up,.champdle .c-down{background:#f2b3c3}.champdle .c-up,.champdle .c-down{font-weight:700}
 .champdle .cdone{display:flex;gap:8px;align-items:center;justify-content:space-between;background:#f9e4e8;border:3px solid var(--outline);border-radius:6px;padding:8px 10px}
 .champdle footer small{display:block;margin-top:6px;font-size:10px;line-height:1.4;opacity:.75}
+.petitbac .word.spin{animation:pbspin .18s linear infinite}
+@keyframes pbspin{0%{transform:translateY(-6px);opacity:.55}50%{transform:translateY(0);opacity:1}100%{transform:translateY(6px);opacity:.55}}
+@media (prefers-reduced-motion:reduce){.petitbac .word.spin{animation:none}}
+.petitbac .uc .cat{display:inline-block;padding:6px 10px;border:2px solid var(--outline);border-radius:6px;background:#fff9ee;font-size:13px}
+.petitbac .uc .word{font-size:48px}
+.petitbac .scrow{display:grid;gap:4px}.petitbac .scrow .plist{grid-template-columns:repeat(2,1fr)}
