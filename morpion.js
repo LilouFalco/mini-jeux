@@ -8,7 +8,7 @@ function render(){
  const b=$('#board');b.innerHTML='';
  st.b.forEach((v,i)=>{const c=document.createElement('button');c.className='mcell'+(v?' p'+v:'')+(st.line?.includes(i)?' win':'');c.textContent=v?SY[v]:'';c.setAttribute('role','gridcell');c.setAttribute('aria-label','Case '+(i+1)+(v?' '+SY[v]:' vide'));c.disabled=!!v||st.over;c.onclick=()=>play(i);b.appendChild(c)});
  document.querySelectorAll('[data-mode]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.mode===st.mode)));
- const s=st.scores[st.mode];$('#score').textContent=name(1)+' '+s[0]+' · nuls '+s[2]+' · '+name(2)+' '+s[1];
+ const s=st.scores[st.mode];$('#score').innerHTML=[name(1)+' '+s[0],name(2)+' '+s[1],'nuls '+s[2]].map(t=>'<span></span>').join('');[...$('#score').children].forEach((e,i)=>e.textContent=[name(1)+' '+s[0],name(2)+' '+s[1],'nuls '+s[2]][i]);
  $('#n2').disabled=st.mode!=='two';
  $('#status').textContent=st.over?(st.line?name(st.b[st.line[0]])+' a gagné ! ✦':'Match nul, bien joué toutes les deux.'):'À '+name(st.turn)+' de jouer '+SY[st.turn];
 }
