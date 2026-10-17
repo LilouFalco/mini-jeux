@@ -30,3 +30,59 @@ html.msheet-open,html.msheet-open body{overflow:hidden}
 .has-mnav .intro,.has-mnav main{max-width:100%}.has-mnav{overflow-x:hidden}
 }
 @media(display-mode:standalone) and (max-width:700px){body.has-mnav{-webkit-user-select:none;user-select:none}.has-mnav input{-webkit-user-select:text;user-select:text}}
+
+/* ===== no-scroll app shell (<=700px): page fixed, only internal lists/grids may pan ===== */
+@media(max-width:700px){
+html,body.has-mnav{height:100%;overflow:hidden;overscroll-behavior:none;touch-action:manipulation}
+body.has-mnav{position:fixed;inset:0;width:100%;padding:0}
+@supports(height:100dvh){html,body.has-mnav{height:100dvh}}
+.has-mnav main{position:absolute;left:0;right:0;top:calc(52px + env(safe-area-inset-top));bottom:calc(68px + env(safe-area-inset-bottom));margin:0;padding:6px 8px;display:flex;flex-direction:column;overflow:hidden;max-width:none}
+.has-mnav footer,.has-mnav .windowbar,.has-mnav .autosave,.has-mnav #meter,.has-mnav #selection,.has-mnav .scroll-hint,.has-mnav .rules{display:none!important}
+.has-mnav .progress-label{display:none}.has-mnav.demineur .progress-label{display:flex;margin:0}.has-mnav.demineur .progress-label span{display:none}
+.has-mnav .game-window{flex:1;min-height:0;display:flex;flex-direction:column;box-shadow:3px 3px 0 #eac4ce;border-radius:8px}
+.has-mnav .game-body{flex:1;min-height:0;display:flex;flex-direction:column;padding:6px 8px;gap:6px}
+.has-mnav .topline{margin:0;flex:none;gap:6px}
+.has-mnav .levels{min-height:0}.has-mnav .levels button{min-height:44px}
+.has-mnav #status{flex:none;margin:0;font-size:12px;line-height:1.25;min-height:15px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center}
+.has-mnav .play-area{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;align-items:stretch}
+.has-mnav .board-wrap{flex:1;min-height:0;width:100%;max-width:none;margin:0;container-type:size;display:flex;align-items:center;justify-content:center}
+.has-mnav .board-wrap #board{width:min(100cqw,100cqh);height:min(100cqw,100cqh);max-width:none;flex:none}
+.has-mnav .controls{flex:none;width:100%;max-width:none;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0;align-self:stretch}
+.has-mnav .controls .pad,.has-mnav .controls .tools,.has-mnav .controls .keys{grid-column:1/-1;margin:0}
+.has-mnav .pad{display:grid;grid-template-columns:repeat(auto-fit,minmax(30px,1fr));gap:4px}
+.has-mnav .pad button{width:auto;max-width:none;aspect-ratio:auto;min-height:40px;height:40px;font-size:17px;padding:0}
+.has-mnav .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.has-mnav .tools button{min-height:44px;height:44px;padding:0 4px;font-size:12px}
+.has-mnav .check-label{font-size:11px;min-height:44px}.has-mnav #new{min-height:44px;padding:6px 8px;font-size:12px;box-shadow:0 2px 0 var(--outline)}
+.has-mnav .controls #new{grid-column:auto}.has-mnav .controls>#new:only-of-type{grid-column:1/-1}
+.has-mnav.sudoku .pad{grid-template-columns:repeat(9,1fr)}
+/* mots fleches */
+.has-mnav.mf .board-wrap{container-type:normal;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:4px;overflow:hidden}
+.has-mnav.mf #clue-bar{flex:none;min-height:34px;height:auto}
+.has-mnav.mf .board-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;max-height:none}
+.has-mnav.mf .keys{display:flex;flex-direction:column;gap:3px;align-items:stretch}.has-mnav.mf .keys>*{display:flex;gap:3px;justify-content:center}.has-mnav.mf .keys button{flex:1;max-width:none;min-width:0;min-height:36px;height:36px;font-size:14px;padding:0}
+.has-mnav.mf .tools button{min-height:40px;height:40px}.has-mnav.mf .check-label,.has-mnav.mf #new{min-height:40px}
+/* demineur */
+.has-mnav.demineur .board-wrap{container-type:normal;display:flex;flex-direction:column;align-items:stretch;gap:0;overflow:hidden}
+.has-mnav.demineur .board-scroll{flex:1;min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain;width:100%}
+.has-mnav.demineur .tools{grid-template-columns:repeat(2,1fr)}
+/* morpion + puissance 4 */
+.has-mnav.morpion .board-wrap,.has-mnav.puissance4 .board-wrap{width:100%}
+.has-mnav.morpion #board{width:min(100cqw,100cqh);height:min(100cqw,100cqh);aspect-ratio:auto}
+.has-mnav.puissance4 .board-wrap{container-type:size;flex-direction:column;justify-content:center;gap:4px}
+.has-mnav.puissance4 #board{width:min(100cqw,calc((100cqh - 50px)*7/6));height:auto;aspect-ratio:7/6}
+.has-mnav.puissance4 #colbtns{width:min(100cqw,calc((100cqh - 50px)*7/6));flex:none}
+.has-mnav.morpion .controls,.has-mnav.puissance4 .controls{grid-template-columns:1fr 1fr}.has-mnav.morpion .controls #score,.has-mnav.puissance4 .controls #score{margin:0;font-size:12px}
+.has-mnav .names{display:grid;gap:4px;margin:0}.has-mnav .names label{font-size:11px}.has-mnav .names input{padding:4px 6px;min-height:30px}
+/* home */
+.has-mnav.home main{overflow-y:auto;overscroll-behavior:contain;padding-bottom:10px}
+.has-mnav.home .mode{min-height:92px;padding:10px 14px}
+.mrules{padding:4px 14px 14px;font-size:13px;line-height:1.5;max-height:60vh;overflow:auto;overscroll-behavior:contain}.mrules details{display:block}.mrules summary{display:none}
+}
+
+@media(max-width:700px){
+.has-mnav.mf .levels button{min-height:36px;height:36px}.has-mnav.mf .topline{min-height:0}
+.has-mnav.mf .keys button{min-height:30px;height:30px;font-size:13px}.has-mnav.mf .keys{gap:2px}
+.has-mnav.mf .controls{gap:3px}.has-mnav.mf .tools button{min-height:44px;height:44px}
+.has-mnav.mf .check-label,.has-mnav.mf #new{min-height:44px}
+.has-mnav.mf .board-scroll{min-height:150px}
+}
