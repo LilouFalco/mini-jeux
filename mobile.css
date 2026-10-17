@@ -115,3 +115,4 @@ body.has-mnav{position:fixed;inset:0;width:100%;padding:0}
 .has-mnav.naval #again{grid-area:again;min-height:44px}.has-mnav.naval #again[hidden]{display:none}
 .has-mnav.naval #cover{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px}.has-mnav.naval #cover[hidden]{display:none}
 }
+@media(max-width:700px){.has-mnav.undercover .game-body{overflow:hidden;display:flex;flex-direction:column}.has-mnav.undercover #v{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}.has-mnav.undercover .uc{gap:8px}.has-mnav.undercover .uc .word{font-size:22px}.has-mnav.undercover .uc .card{padding:12px 8px}}

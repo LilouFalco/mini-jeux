@@ -10,7 +10,7 @@ for(const f of pages){const p=await c.newPage();const errs=[];p.on('pageerror',e
  const small=await p.evaluate(()=>[...document.querySelectorAll('.mbar button,.mback,.mclose,.mode')].filter(e=>e.offsetParent&&(e.getBoundingClientRect().height<44||e.getBoundingClientRect().width<44)).length);assert.equal(small,0,'tap size '+f);
  assert(!(await p.locator('.has-mnav>main>header').isVisible()),'old header hidden');
  assert(await p.evaluate(()=>Math.round(document.querySelector('.mbar').getBoundingClientRect().bottom)===innerHeight),'bar fixed');
- const counts={solo:[9,8],duo:[5,3],multi:[3,0]};
+ const counts={solo:[9,8],duo:[5,3],multi:[3,1]};
  for(const k of ['solo','duo','multi']){await p.locator('.mbar button[data-k='+k+']').tap();assert.equal(await p.locator('.msheet:visible .mtile').count(),counts[k][0],k+' tiles');assert.equal(await p.locator('.msheet a.mtile').count(),counts[k][1],k+' links');await p.keyboard.press('Escape');assert(!(await p.locator('.msheet:visible').count()))}
  await p.locator('.mbar button[data-k=solo]').tap();await p.locator('.mbar button[data-k=solo]').tap();assert(!(await p.locator('.msheet:visible').count()));
  assert(/user-scalable=no/.test(await p.evaluate(()=>document.querySelector('meta[name=viewport]').content)));
@@ -18,7 +18,7 @@ for(const f of pages){const p=await c.newPage();const errs=[];p.on('pageerror',e
  assert(!errs.length,errs.join());await p.close()}
 // home choices
 let p=await c.newPage();await p.goto(B);await p.evaluate(()=>localStorage.clear());await p.reload();assert.equal(await p.locator('.mode').count(),3);assert(await p.locator('#glist').isHidden());
-await p.locator('.mode[data-k=multi]').tap();assert.equal(await p.locator('.gtile').count(),3);assert.equal(await p.locator('.gtile a, a.gtile').count(),0);
+await p.locator('.mode[data-k=multi]').tap();assert.equal(await p.locator('.gtile').count(),3);assert.equal(await p.locator('.gtile a, a.gtile').count(),1);
 await p.locator('.mode[data-k=duo]').tap();await p.locator('a.gtile',{hasText:'Morpion'}).tap();await p.waitForURL(/morpion\.html\?mode=duo/);
 assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('lilou-morpion-v1')||'{}').mode||document.querySelector('[data-mode][aria-pressed=true]').dataset.mode),'two');
 assert.equal(await p.locator('.mbar button[aria-current=page]').getAttribute('data-k'),'duo');

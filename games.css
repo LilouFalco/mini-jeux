@@ -55,3 +55,12 @@ body.mf h1{font-size:60px;letter-spacing:-4px}body.mf h1 span{display:inline-blo
 .mcell.p1,.mcell.p2{animation:mmark .18s ease-out}
 @keyframes mmark{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.mcell.p1,.mcell.p2{animation:none}}
+.undercover .uc{display:grid;gap:12px;max-width:460px;margin:0 auto}.undercover .uc h2{margin:0;font-size:16px}.undercover .uc p{margin:0;line-height:1.45;font-size:13px}
+.undercover .uc .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.undercover .uc .big{min-height:52px;font-size:15px}
+.undercover .uc .themes{display:flex;flex-wrap:wrap;gap:6px}.undercover .uc .themes button,.undercover .uc .plist button{min-height:44px;padding:6px 10px}
+.undercover .uc button[aria-pressed=true]{background:var(--rose);color:#fff9ee}
+.undercover .uc .plist{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.undercover .uc .names{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:0;max-width:none}
+.undercover .uc input{width:100%;font:inherit;padding:6px;border:2px solid var(--outline);background:#fff9ee;border-radius:4px;min-height:36px}
+.undercover .uc .card{background:#f9e4e8;border:3px solid var(--outline);border-radius:6px;padding:18px 10px;text-align:center}
+.undercover .uc .word{font-size:26px;font-weight:700;color:#c8466e;margin:8px 0;overflow-wrap:anywhere}.undercover .uc .dead{opacity:.4;text-decoration:line-through}
+.undercover .uc .stepper{display:flex;align-items:center;gap:10px}.undercover .uc .stepper button{width:44px;min-height:44px}
