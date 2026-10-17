@@ -94,3 +94,24 @@ body.has-mnav{position:fixed;inset:0;width:100%;padding:0}
 .has-mnav.mf .tools button .icon{width:16px;height:16px}.has-mnav.mf #new span{display:none}
 .has-mnav.mf .check-label{border:1px solid #dcb9bf;border-radius:5px;background:#fffdf6}.has-mnav.mf .check-label input{margin:0}
 }
+@media(max-width:700px){
+.has-mnav.naval .game-body{overflow:hidden}
+.has-mnav.naval #setup{overflow:auto;overscroll-behavior:contain;min-height:0}
+.has-mnav.naval #stage:not([hidden]){flex:1;min-height:0;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto minmax(0,1fr) auto auto;grid-template-areas:"title title" "tools tools" "main main" "side status" "again again";gap:4px 8px}
+.has-mnav.naval #title{grid-area:title;margin:0;font-size:12px;line-height:1.25}
+.has-mnav.naval #place-tools{grid-area:tools}.has-mnav.naval #place-tools[hidden]{display:none}
+.has-mnav.naval #fleet{margin:0 0 2px;font-size:11px;gap:8px}
+.has-mnav.naval #place-tools .tools{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:0}
+.has-mnav.naval #place-tools .tools button{min-height:44px;height:44px;padding:0 2px;font-size:11px}
+.has-mnav.naval .grids{display:contents}
+.has-mnav.naval .grids>div:first-child{grid-area:main;min-height:0;container-type:size;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.has-mnav.naval #gl-main{display:none}
+.has-mnav.naval #g-main{width:min(100cqw,100cqh);height:min(100cqw,100cqh);gap:1px;padding:2px;flex:none}
+.has-mnav.naval #side{grid-area:side;align-self:end}.has-mnav.naval #side[hidden]{display:none}
+.has-mnav.naval #side .gl{display:none}
+.has-mnav.naval #g-own.small{width:min(26vw,96px);height:min(26vw,96px);gap:1px;padding:1px;border-width:2px}
+.has-mnav.naval .nc{min-height:0!important;min-width:0;height:auto}
+.has-mnav.naval #status{grid-area:status;align-self:end;white-space:normal;text-align:left;font-size:12px;line-height:1.25;overflow:hidden}
+.has-mnav.naval #again{grid-area:again;min-height:44px}.has-mnav.naval #again[hidden]{display:none}
+.has-mnav.naval #cover{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px}.has-mnav.naval #cover[hidden]{display:none}
+}
