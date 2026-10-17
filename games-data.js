@@ -7,7 +7,7 @@ const G=[
  {id:'binairo',n:'Takuzu',i:'M4 4h6v6H4zM14 14h6v6h-6zM14 4h6M4 14v6',m:{solo:'binairo.html'}},
  {id:'mots-fleches',n:'Mots fléchés',i:'M3 3h18v18H3zM3 12h18M12 3v18M6 7.5h3M15 16.5h3',m:{solo:'mots-fleches.html'}},
  {id:'demineur',n:'Démineur',i:'M12 8a4 4 0 100 8 4 4 0 000-8zM12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2 2M16.4 16.4l2 2M18.4 5.6l-2 2M7.6 16.4l-2 2',m:{solo:'demineur.html'}},
- {id:'champdle',n:'Champdle',i:'M12 3l8 4v6c0 4-3 7-8 8-5-1-8-4-8-8V7z',m:{solo:null}},
+ {id:'champdle',n:'Champdle',i:'M12 3l8 4v6c0 4-3 7-8 8-5-1-8-4-8-8V7z',m:{solo:'champdle.html'}},
  {id:'morpion',n:'Morpion',i:'M9 3v18M15 3v18M3 9h18M3 15h18',m:{solo:'morpion.html?mode=solo',duo:'morpion.html?mode=duo'}},
  {id:'puissance4',n:'Puissance 4',i:'M3 5h18v14H3zM8 10a1.5 1.5 0 100 .1M12 14a1.5 1.5 0 100 .1M16 10a1.5 1.5 0 100 .1',m:{solo:'puissance4.html?mode=solo',duo:'puissance4.html?mode=duo'}},
  {id:'naval',n:'Bataille navale',i:'M3 15h18l-3 5H6zM12 4v11M12 5l6 7h-6',m:{solo:'naval.html?mode=solo',duo:'naval.html?mode=duo'}},

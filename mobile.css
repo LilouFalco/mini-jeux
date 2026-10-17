@@ -134,3 +134,7 @@ body.has-mnav{position:fixed;inset:0;width:100%;padding:0}
 .has-mnav.quiestce .qbar{flex:none;gap:6px}.has-mnav.quiestce .qbar button{min-height:44px;padding:4px 6px;font-size:13px}.has-mnav.quiestce .stage-title{flex:none;font-size:12px}.has-mnav.quiestce .secret{flex:none;padding:4px;font-size:12px}
 .has-mnav.quiestce .qe.cover,.has-mnav.quiestce .qe.end{justify-content:center}.has-mnav.quiestce .qe.end .reveal{flex:none}.has-mnav.quiestce .qc.big{width:84px}
 .has-mnav.quiestce footer{display:none}}
+@media(max-width:700px){.has-mnav.champdle .game-body{overflow:hidden;display:flex;flex-direction:column;padding:8px 8px 6px}.has-mnav.champdle #v{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.has-mnav.champdle .cdl{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;width:100%;max-width:none}.has-mnav.champdle .cdl>*{flex:none}.has-mnav.champdle .ct{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+.has-mnav.champdle .ch,.has-mnav.champdle .cr{min-width:0;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px}.has-mnav.champdle .ch span{font-size:7px;padding:0}.has-mnav.champdle .cd{font-size:7.5px;min-height:40px;padding:1px;border-width:1px}.has-mnav.champdle .cd img{width:100%;height:auto;max-width:32px}
+.has-mnav.champdle .levels button{min-height:40px}.has-mnav.champdle .sg{max-height:30vh}.has-mnav.champdle footer{display:none}}
