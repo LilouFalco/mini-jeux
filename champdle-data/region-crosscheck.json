@@ -1,0 +1,1218 @@
+[
+  {
+    "id": "Aatrox",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Ahri",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Akali",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Akshan",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Alistar",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Ambessa",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Amumu",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Anivia",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Annie",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Aphelios",
+    "meraki": "mount-targon",
+    "wiki": [
+      "Targon"
+    ]
+  },
+  {
+    "id": "Ashe",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "AurelionSol",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra",
+      "Targon"
+    ]
+  },
+  {
+    "id": "Aurora",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Azir",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Bard",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Belveth",
+    "meraki": "void",
+    "wiki": [
+      "Void"
+    ]
+  },
+  {
+    "id": "Blitzcrank",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Brand",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Braum",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Briar",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Caitlyn",
+    "meraki": "piltover",
+    "wiki": [
+      "Piltover"
+    ]
+  },
+  {
+    "id": "Camille",
+    "meraki": "piltover",
+    "wiki": [
+      "Piltover"
+    ]
+  },
+  {
+    "id": "Cassiopeia",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Chogath",
+    "meraki": "void",
+    "wiki": [
+      "Void"
+    ]
+  },
+  {
+    "id": "Corki",
+    "meraki": "bandle-city",
+    "wiki": [
+      "Bandle City"
+    ]
+  },
+  {
+    "id": "Darius",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Diana",
+    "meraki": "mount-targon",
+    "wiki": [
+      "Targon"
+    ]
+  },
+  {
+    "id": "DrMundo",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Draven",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Ekko",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Elise",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Noxus",
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "Evelynn",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Ezreal",
+    "meraki": "piltover",
+    "wiki": [
+      "Piltover"
+    ]
+  },
+  {
+    "id": "Fiddlesticks",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Fiora",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Fizz",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Bilgewater"
+    ]
+  },
+  {
+    "id": "Galio",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Gangplank",
+    "meraki": "bilgewater",
+    "wiki": [
+      "Bilgewater"
+    ]
+  },
+  {
+    "id": "Garen",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Gnar",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Gragas",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Graves",
+    "meraki": "bilgewater",
+    "wiki": [
+      "Bilgewater"
+    ]
+  },
+  {
+    "id": "Gwen",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Camavor",
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "Hecarim",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "Heimerdinger",
+    "meraki": "piltover",
+    "wiki": [
+      "Piltover"
+    ]
+  },
+  {
+    "id": "Hwei",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Illaoi",
+    "meraki": "bilgewater",
+    "wiki": [
+      "Bilgewater"
+    ]
+  },
+  {
+    "id": "Irelia",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Ivern",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Janna",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "JarvanIV",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Jax",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Jayce",
+    "meraki": "piltover",
+    "wiki": [
+      "Piltover"
+    ]
+  },
+  {
+    "id": "Jhin",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Jinx",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "KSante",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Kaisa",
+    "meraki": "void",
+    "wiki": [
+      "Void"
+    ]
+  },
+  {
+    "id": "Kalista",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "Karma",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Karthus",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "Kassadin",
+    "meraki": "void",
+    "wiki": [
+      "Void"
+    ]
+  },
+  {
+    "id": "Katarina",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Kayle",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Kayn",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Kennen",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Khazix",
+    "meraki": "void",
+    "wiki": [
+      "Void"
+    ]
+  },
+  {
+    "id": "Kindred",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Kled",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "KogMaw",
+    "meraki": "void",
+    "wiki": [
+      "Void"
+    ]
+  },
+  {
+    "id": "Leblanc",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "LeeSin",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Leona",
+    "meraki": "mount-targon",
+    "wiki": [
+      "Targon"
+    ]
+  },
+  {
+    "id": "Lillia",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Lissandra",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Lucian",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Lulu",
+    "meraki": "bandle-city",
+    "wiki": [
+      "Bandle City"
+    ]
+  },
+  {
+    "id": "Lux",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Malphite",
+    "meraki": "ixtal",
+    "wiki": [
+      "Ixtal"
+    ]
+  },
+  {
+    "id": "Malzahar",
+    "meraki": "void",
+    "wiki": [
+      "Void"
+    ]
+  },
+  {
+    "id": "Maokai",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Blessed Isles",
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "MasterYi",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Mel",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Milio",
+    "meraki": "ixtal",
+    "wiki": [
+      "Ixtal"
+    ]
+  },
+  {
+    "id": "MissFortune",
+    "meraki": "bilgewater",
+    "wiki": [
+      "Bilgewater"
+    ]
+  },
+  {
+    "id": "Mordekaiser",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Morgana",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Naafiri",
+    "meraki": "shurima",
+    "wiki": [
+      "Runeterra",
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Nami",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Nasus",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Nautilus",
+    "meraki": "bilgewater",
+    "wiki": [
+      "Bilgewater"
+    ]
+  },
+  {
+    "id": "Neeko",
+    "meraki": "ixtal",
+    "wiki": [
+      "Ixtal"
+    ]
+  },
+  {
+    "id": "Nidalee",
+    "meraki": "ixtal",
+    "wiki": [
+      "Ixtal"
+    ]
+  },
+  {
+    "id": "Nilah",
+    "meraki": "bilgewater",
+    "wiki": [
+      "Bilgewater",
+      "Kathkan"
+    ]
+  },
+  {
+    "id": "Nocturne",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Nunu",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Olaf",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Orianna",
+    "meraki": "piltover",
+    "wiki": [
+      "Piltover"
+    ]
+  },
+  {
+    "id": "Ornn",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Pantheon",
+    "meraki": "mount-targon",
+    "wiki": [
+      "Targon"
+    ]
+  },
+  {
+    "id": "Poppy",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Pyke",
+    "meraki": "bilgewater",
+    "wiki": [
+      "Bilgewater"
+    ]
+  },
+  {
+    "id": "Qiyana",
+    "meraki": "ixtal",
+    "wiki": [
+      "Ixtal"
+    ]
+  },
+  {
+    "id": "Quinn",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Rakan",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Rammus",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "RekSai",
+    "meraki": "void",
+    "wiki": [
+      "Void"
+    ]
+  },
+  {
+    "id": "Rell",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Renata",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Renekton",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Rengar",
+    "meraki": "ixtal",
+    "wiki": [
+      "Ixtal"
+    ]
+  },
+  {
+    "id": "Riven",
+    "meraki": "noxus",
+    "wiki": [
+      "Ionia",
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Rumble",
+    "meraki": "bandle-city",
+    "wiki": [
+      "Bandle City"
+    ]
+  },
+  {
+    "id": "Ryze",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Samira",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus",
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Sejuani",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Senna",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Seraphine",
+    "meraki": "piltover",
+    "wiki": [
+      "Piltover",
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Sett",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Shaco",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Shen",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Shyvana",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Singed",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Sion",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Sivir",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Skarner",
+    "meraki": "ixtal",
+    "wiki": [
+      "Ixtal"
+    ]
+  },
+  {
+    "id": "Smolder",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Camavor",
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Sona",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Soraka",
+    "meraki": "mount-targon",
+    "wiki": [
+      "Ionia",
+      "Targon"
+    ]
+  },
+  {
+    "id": "Swain",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Sylas",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Syndra",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "TahmKench",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Taliyah",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "Talon",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Taric",
+    "meraki": "mount-targon",
+    "wiki": [
+      "Targon"
+    ]
+  },
+  {
+    "id": "Teemo",
+    "meraki": "bandle-city",
+    "wiki": [
+      "Bandle City"
+    ]
+  },
+  {
+    "id": "Thresh",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "Tristana",
+    "meraki": "bandle-city",
+    "wiki": [
+      "Bandle City"
+    ]
+  },
+  {
+    "id": "Trundle",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Tryndamere",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "TwistedFate",
+    "meraki": "bilgewater",
+    "wiki": [
+      "Bilgewater"
+    ]
+  },
+  {
+    "id": "Twitch",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Udyr",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord",
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Urgot",
+    "meraki": "zaun",
+    "wiki": [
+      "Noxus",
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Varus",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Vayne",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Veigar",
+    "meraki": "bandle-city",
+    "wiki": [
+      "Bandle City",
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Velkoz",
+    "meraki": "void",
+    "wiki": [
+      "Void"
+    ]
+  },
+  {
+    "id": "Vex",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Bandle City",
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "Vi",
+    "meraki": "piltover",
+    "wiki": [
+      "Piltover",
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Viego",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "Viktor",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Vladimir",
+    "meraki": "noxus",
+    "wiki": [
+      "Noxus"
+    ]
+  },
+  {
+    "id": "Volibear",
+    "meraki": "freljord",
+    "wiki": [
+      "Freljord"
+    ]
+  },
+  {
+    "id": "Warwick",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "MonkeyKing",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Xayah",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Xerath",
+    "meraki": "shurima",
+    "wiki": [
+      "Shurima"
+    ]
+  },
+  {
+    "id": "XinZhao",
+    "meraki": "demacia",
+    "wiki": [
+      "Demacia"
+    ]
+  },
+  {
+    "id": "Yasuo",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Yone",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Yorick",
+    "meraki": "shadow-isles",
+    "wiki": [
+      "Blessed Isles",
+      "Shadow Isles"
+    ]
+  },
+  {
+    "id": "Yunara",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia",
+      "Spirit Realm"
+    ]
+  },
+  {
+    "id": "Yuumi",
+    "meraki": "bandle-city",
+    "wiki": [
+      "Bandle City"
+    ]
+  },
+  {
+    "id": "Zac",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Zed",
+    "meraki": "ionia",
+    "wiki": [
+      "Ionia"
+    ]
+  },
+  {
+    "id": "Zeri",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Ziggs",
+    "meraki": "zaun",
+    "wiki": [
+      "Zaun"
+    ]
+  },
+  {
+    "id": "Zilean",
+    "meraki": "unaffiliated",
+    "wiki": [
+      "Icathia",
+      "Runeterra"
+    ]
+  },
+  {
+    "id": "Zoe",
+    "meraki": "mount-targon",
+    "wiki": [
+      "Targon"
+    ]
+  },
+  {
+    "id": "Zyra",
+    "meraki": "ixtal",
+    "wiki": [
+      "Ixtal"
+    ]
+  }
+]

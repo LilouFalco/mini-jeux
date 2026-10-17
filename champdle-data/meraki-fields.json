@@ -1,0 +1,2294 @@
+{
+  "Aatrox": {
+    "id": 266,
+    "key": "Aatrox",
+    "name": "Aatrox",
+    "resource": "BLOOD_WELL",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2013-06-13",
+    "patchLastChanged": "25.12",
+    "faction": "unaffiliated"
+  },
+  "Ahri": {
+    "id": 103,
+    "key": "Ahri",
+    "name": "Ahri",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2011-12-14",
+    "patchLastChanged": "25.13",
+    "faction": "ionia"
+  },
+  "Akali": {
+    "id": 84,
+    "key": "Akali",
+    "name": "Akali",
+    "resource": "ENERGY",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2010-05-11",
+    "patchLastChanged": "25.12",
+    "faction": "ionia"
+  },
+  "Akshan": {
+    "id": 166,
+    "key": "Akshan",
+    "name": "Akshan",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2021-07-22",
+    "patchLastChanged": "14.22",
+    "faction": "shurima"
+  },
+  "Alistar": {
+    "id": 12,
+    "key": "Alistar",
+    "name": "Alistar",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.15",
+    "faction": "unaffiliated"
+  },
+  "Ambessa": {
+    "id": 799,
+    "key": "Ambessa",
+    "name": "Ambessa",
+    "resource": "ENERGY",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2024-11-06",
+    "patchLastChanged": "25.11",
+    "faction": "noxus"
+  },
+  "Amumu": {
+    "id": 32,
+    "key": "Amumu",
+    "name": "Amumu",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-06-26",
+    "patchLastChanged": "14.9",
+    "faction": "shurima"
+  },
+  "Anivia": {
+    "id": 34,
+    "key": "Anivia",
+    "name": "Anivia",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2009-07-10",
+    "patchLastChanged": "25.13",
+    "faction": "freljord"
+  },
+  "Annie": {
+    "id": 1,
+    "key": "Annie",
+    "name": "Annie",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.11",
+    "faction": "unaffiliated"
+  },
+  "Aphelios": {
+    "id": 523,
+    "key": "Aphelios",
+    "name": "Aphelios",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2019-12-11",
+    "patchLastChanged": "25.12",
+    "faction": "mount-targon"
+  },
+  "Ashe": {
+    "id": 22,
+    "key": "Ashe",
+    "name": "Ashe",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.11",
+    "faction": "freljord"
+  },
+  "AurelionSol": {
+    "id": 136,
+    "key": "AurelionSol",
+    "name": "Aurelion Sol",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2016-03-24",
+    "patchLastChanged": "25.12",
+    "faction": "unaffiliated"
+  },
+  "Aurora": {
+    "id": 893,
+    "key": "Aurora",
+    "name": "Aurora",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2024-07-17",
+    "patchLastChanged": "25.14",
+    "faction": "freljord"
+  },
+  "Azir": {
+    "id": 268,
+    "key": "Azir",
+    "name": "Azir",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2014-09-16",
+    "patchLastChanged": "25.14",
+    "faction": "shurima"
+  },
+  "Bard": {
+    "id": 432,
+    "key": "Bard",
+    "name": "Bard",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2015-03-12",
+    "patchLastChanged": "25.12",
+    "faction": "unaffiliated"
+  },
+  "Belveth": {
+    "id": 200,
+    "key": "Belveth",
+    "name": "Bel'Veth",
+    "resource": "NONE",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2022-06-09",
+    "patchLastChanged": "25.15",
+    "faction": "void"
+  },
+  "Blitzcrank": {
+    "id": 53,
+    "key": "Blitzcrank",
+    "name": "Blitzcrank",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-09-02",
+    "patchLastChanged": "25.08",
+    "faction": "zaun"
+  },
+  "Brand": {
+    "id": 63,
+    "key": "Brand",
+    "name": "Brand",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE",
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2011-04-12",
+    "patchLastChanged": "25.12",
+    "faction": "unaffiliated"
+  },
+  "Braum": {
+    "id": 201,
+    "key": "Braum",
+    "name": "Braum",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2014-05-12",
+    "patchLastChanged": "25.15",
+    "faction": "freljord"
+  },
+  "Briar": {
+    "id": 233,
+    "key": "Briar",
+    "name": "Briar",
+    "resource": "FRENZY",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2023-09-14",
+    "patchLastChanged": "25.14",
+    "faction": "noxus"
+  },
+  "Caitlyn": {
+    "id": 51,
+    "key": "Caitlyn",
+    "name": "Caitlyn",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2011-01-04",
+    "patchLastChanged": "25.06",
+    "faction": "piltover"
+  },
+  "Camille": {
+    "id": 164,
+    "key": "Camille",
+    "name": "Camille",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT",
+      "TOP"
+    ],
+    "releaseDate": "2016-12-07",
+    "patchLastChanged": "14.21",
+    "faction": "piltover"
+  },
+  "Cassiopeia": {
+    "id": 69,
+    "key": "Cassiopeia",
+    "name": "Cassiopeia",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2010-12-14",
+    "patchLastChanged": "25.03",
+    "faction": "noxus"
+  },
+  "Chogath": {
+    "id": 31,
+    "key": "Chogath",
+    "name": "Cho'Gath",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2009-06-26",
+    "patchLastChanged": "25.11",
+    "faction": "void"
+  },
+  "Corki": {
+    "id": 42,
+    "key": "Corki",
+    "name": "Corki",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2009-09-19",
+    "patchLastChanged": "25.15",
+    "faction": "bandle-city"
+  },
+  "Darius": {
+    "id": 122,
+    "key": "Darius",
+    "name": "Darius",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2012-05-23",
+    "patchLastChanged": "25.14",
+    "faction": "noxus"
+  },
+  "Diana": {
+    "id": 131,
+    "key": "Diana",
+    "name": "Diana",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "MIDDLE"
+    ],
+    "releaseDate": "2012-08-07",
+    "patchLastChanged": "25.11",
+    "faction": "mount-targon"
+  },
+  "DrMundo": {
+    "id": 36,
+    "key": "DrMundo",
+    "name": "Dr. Mundo",
+    "resource": "HEALTH",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2009-09-02",
+    "patchLastChanged": "25.05",
+    "faction": "zaun"
+  },
+  "Draven": {
+    "id": 119,
+    "key": "Draven",
+    "name": "Draven",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2012-06-06",
+    "patchLastChanged": "25.06",
+    "faction": "noxus"
+  },
+  "Ekko": {
+    "id": 245,
+    "key": "Ekko",
+    "name": "Ekko",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "MIDDLE"
+    ],
+    "releaseDate": "2015-05-29",
+    "patchLastChanged": "25.04",
+    "faction": "zaun"
+  },
+  "Elise": {
+    "id": 60,
+    "key": "Elise",
+    "name": "Elise",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2012-10-26",
+    "patchLastChanged": "25.14",
+    "faction": "shadow-isles"
+  },
+  "Evelynn": {
+    "id": 28,
+    "key": "Evelynn",
+    "name": "Evelynn",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2009-05-01",
+    "patchLastChanged": "25.14",
+    "faction": "unaffiliated"
+  },
+  "Ezreal": {
+    "id": 81,
+    "key": "Ezreal",
+    "name": "Ezreal",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2010-03-16",
+    "patchLastChanged": "25.06",
+    "faction": "piltover"
+  },
+  "Fiddlesticks": {
+    "id": 9,
+    "key": "Fiddlesticks",
+    "name": "Fiddlesticks",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.13",
+    "faction": "unaffiliated"
+  },
+  "Fiora": {
+    "id": 114,
+    "key": "Fiora",
+    "name": "Fiora",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2012-02-29",
+    "patchLastChanged": "25.14",
+    "faction": "demacia"
+  },
+  "Fizz": {
+    "id": 105,
+    "key": "Fizz",
+    "name": "Fizz",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2011-11-15",
+    "patchLastChanged": "25.14",
+    "faction": "unaffiliated"
+  },
+  "Galio": {
+    "id": 3,
+    "key": "Galio",
+    "name": "Galio",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2010-08-10",
+    "patchLastChanged": "25.03",
+    "faction": "demacia"
+  },
+  "Gangplank": {
+    "id": 41,
+    "key": "Gangplank",
+    "name": "Gangplank",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2009-08-19",
+    "patchLastChanged": "25.14",
+    "faction": "bilgewater"
+  },
+  "Garen": {
+    "id": 86,
+    "key": "Garen",
+    "name": "Garen",
+    "resource": "NONE",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2010-04-27",
+    "patchLastChanged": "25.12",
+    "faction": "demacia"
+  },
+  "Gnar": {
+    "id": 150,
+    "key": "Gnar",
+    "name": "Gnar",
+    "resource": "RAGE",
+    "attackType": "RANGED",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2014-08-14",
+    "patchLastChanged": "14.18",
+    "faction": "freljord"
+  },
+  "Gragas": {
+    "id": 79,
+    "key": "Gragas",
+    "name": "Gragas",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2010-02-02",
+    "patchLastChanged": "25.09",
+    "faction": "freljord"
+  },
+  "Graves": {
+    "id": 104,
+    "key": "Graves",
+    "name": "Graves",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2011-10-19",
+    "patchLastChanged": "25.14",
+    "faction": "bilgewater"
+  },
+  "Gwen": {
+    "id": 887,
+    "key": "Gwen",
+    "name": "Gwen",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2021-04-15",
+    "patchLastChanged": "25.12",
+    "faction": "shadow-isles"
+  },
+  "Hecarim": {
+    "id": 120,
+    "key": "Hecarim",
+    "name": "Hecarim",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2012-04-18",
+    "patchLastChanged": "14.24",
+    "faction": "shadow-isles"
+  },
+  "Heimerdinger": {
+    "id": 74,
+    "key": "Heimerdinger",
+    "name": "Heimerdinger",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT",
+      "TOP"
+    ],
+    "releaseDate": "2009-10-10",
+    "patchLastChanged": "25.14",
+    "faction": "piltover"
+  },
+  "Hwei": {
+    "id": 910,
+    "key": "Hwei",
+    "name": "Hwei",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2023-12-05",
+    "patchLastChanged": "25.13",
+    "faction": "ionia"
+  },
+  "Illaoi": {
+    "id": 420,
+    "key": "Illaoi",
+    "name": "Illaoi",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2015-11-24",
+    "patchLastChanged": "25.15",
+    "faction": "bilgewater"
+  },
+  "Irelia": {
+    "id": 39,
+    "key": "Irelia",
+    "name": "Irelia",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2010-11-16",
+    "patchLastChanged": "25.15",
+    "faction": "ionia"
+  },
+  "Ivern": {
+    "id": 427,
+    "key": "Ivern",
+    "name": "Ivern",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2016-10-05",
+    "patchLastChanged": "25.12",
+    "faction": "ionia"
+  },
+  "Janna": {
+    "id": 40,
+    "key": "Janna",
+    "name": "Janna",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-09-02",
+    "patchLastChanged": "14.20",
+    "faction": "zaun"
+  },
+  "JarvanIV": {
+    "id": 59,
+    "key": "JarvanIV",
+    "name": "Jarvan IV",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2011-03-01",
+    "patchLastChanged": "25.06",
+    "faction": "demacia"
+  },
+  "Jax": {
+    "id": 24,
+    "key": "Jax",
+    "name": "Jax",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.12",
+    "faction": "unaffiliated"
+  },
+  "Jayce": {
+    "id": 126,
+    "key": "Jayce",
+    "name": "Jayce",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2012-07-07",
+    "patchLastChanged": "25.14",
+    "faction": "piltover"
+  },
+  "Jhin": {
+    "id": 202,
+    "key": "Jhin",
+    "name": "Jhin",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2016-02-01",
+    "patchLastChanged": "25.14",
+    "faction": "ionia"
+  },
+  "Jinx": {
+    "id": 222,
+    "key": "Jinx",
+    "name": "Jinx",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2013-10-10",
+    "patchLastChanged": "25.06",
+    "faction": "zaun"
+  },
+  "KSante": {
+    "id": 897,
+    "key": "KSante",
+    "name": "K'Sante",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2022-11-02",
+    "patchLastChanged": "25.11",
+    "faction": "shurima"
+  },
+  "Kaisa": {
+    "id": 145,
+    "key": "Kaisa",
+    "name": "Kai'Sa",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2018-03-07",
+    "patchLastChanged": "25.14",
+    "faction": "void"
+  },
+  "Kalista": {
+    "id": 429,
+    "key": "Kalista",
+    "name": "Kalista",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2014-11-20",
+    "patchLastChanged": "25.12",
+    "faction": "shadow-isles"
+  },
+  "Karma": {
+    "id": 43,
+    "key": "Karma",
+    "name": "Karma",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT",
+      "TOP"
+    ],
+    "releaseDate": "2011-02-01",
+    "patchLastChanged": "25.13",
+    "faction": "ionia"
+  },
+  "Karthus": {
+    "id": 30,
+    "key": "Karthus",
+    "name": "Karthus",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2009-06-12",
+    "patchLastChanged": "14.24",
+    "faction": "shadow-isles"
+  },
+  "Kassadin": {
+    "id": 38,
+    "key": "Kassadin",
+    "name": "Kassadin",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2009-08-07",
+    "patchLastChanged": "25.11",
+    "faction": "void"
+  },
+  "Katarina": {
+    "id": 55,
+    "key": "Katarina",
+    "name": "Katarina",
+    "resource": "NONE",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2009-09-19",
+    "patchLastChanged": "25.13",
+    "faction": "noxus"
+  },
+  "Kayle": {
+    "id": 10,
+    "key": "Kayle",
+    "name": "Kayle",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.14",
+    "faction": "demacia"
+  },
+  "Kayn": {
+    "id": 141,
+    "key": "Kayn",
+    "name": "Kayn",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2017-07-12",
+    "patchLastChanged": "25.10",
+    "faction": "ionia"
+  },
+  "Kennen": {
+    "id": 85,
+    "key": "Kennen",
+    "name": "Kennen",
+    "resource": "ENERGY",
+    "attackType": "RANGED",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2010-04-08",
+    "patchLastChanged": "25.14",
+    "faction": "ionia"
+  },
+  "Khazix": {
+    "id": 121,
+    "key": "Khazix",
+    "name": "Kha'Zix",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2012-09-27",
+    "patchLastChanged": "25.06",
+    "faction": "void"
+  },
+  "Kindred": {
+    "id": 203,
+    "key": "Kindred",
+    "name": "Kindred",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2015-10-14",
+    "patchLastChanged": "25.13",
+    "faction": "unaffiliated"
+  },
+  "Kled": {
+    "id": 240,
+    "key": "Kled",
+    "name": "Kled",
+    "resource": "COURAGE",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2016-08-10",
+    "patchLastChanged": "25.15",
+    "faction": "noxus"
+  },
+  "KogMaw": {
+    "id": 96,
+    "key": "KogMaw",
+    "name": "Kog'Maw",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2010-06-24",
+    "patchLastChanged": "25.04",
+    "faction": "void"
+  },
+  "Leblanc": {
+    "id": 7,
+    "key": "Leblanc",
+    "name": "LeBlanc",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2010-11-02",
+    "patchLastChanged": "25.12",
+    "faction": "noxus"
+  },
+  "LeeSin": {
+    "id": 64,
+    "key": "LeeSin",
+    "name": "Lee Sin",
+    "resource": "ENERGY",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2011-04-01",
+    "patchLastChanged": "25.14",
+    "faction": "ionia"
+  },
+  "Leona": {
+    "id": 89,
+    "key": "Leona",
+    "name": "Leona",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2011-07-13",
+    "patchLastChanged": "25.09",
+    "faction": "mount-targon"
+  },
+  "Lillia": {
+    "id": 876,
+    "key": "Lillia",
+    "name": "Lillia",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2020-07-22",
+    "patchLastChanged": "25.07",
+    "faction": "ionia"
+  },
+  "Lissandra": {
+    "id": 127,
+    "key": "Lissandra",
+    "name": "Lissandra",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2013-04-30",
+    "patchLastChanged": "25.06",
+    "faction": "freljord"
+  },
+  "Lucian": {
+    "id": 236,
+    "key": "Lucian",
+    "name": "Lucian",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2013-08-22",
+    "patchLastChanged": "25.11",
+    "faction": "unaffiliated"
+  },
+  "Lulu": {
+    "id": 117,
+    "key": "Lulu",
+    "name": "Lulu",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2012-03-20",
+    "patchLastChanged": "25.14",
+    "faction": "bandle-city"
+  },
+  "Lux": {
+    "id": 99,
+    "key": "Lux",
+    "name": "Lux",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2010-10-19",
+    "patchLastChanged": "14.10",
+    "faction": "demacia"
+  },
+  "Malphite": {
+    "id": 54,
+    "key": "Malphite",
+    "name": "Malphite",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT",
+      "TOP"
+    ],
+    "releaseDate": "2009-09-02",
+    "patchLastChanged": "14.21",
+    "faction": "ixtal"
+  },
+  "Malzahar": {
+    "id": 90,
+    "key": "Malzahar",
+    "name": "Malzahar",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2010-06-01",
+    "patchLastChanged": "25.04",
+    "faction": "void"
+  },
+  "Maokai": {
+    "id": 57,
+    "key": "Maokai",
+    "name": "Maokai",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2011-02-16",
+    "patchLastChanged": "14.22",
+    "faction": "shadow-isles"
+  },
+  "MasterYi": {
+    "id": 11,
+    "key": "MasterYi",
+    "name": "Master Yi",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.15",
+    "faction": "ionia"
+  },
+  "Mel": {
+    "id": 800,
+    "key": "Mel",
+    "name": "Mel",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2025-01-23",
+    "patchLastChanged": "25.14",
+    "faction": "noxus"
+  },
+  "Milio": {
+    "id": 902,
+    "key": "Milio",
+    "name": "Milio",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2023-03-23",
+    "patchLastChanged": "25.13",
+    "faction": "ixtal"
+  },
+  "MissFortune": {
+    "id": 21,
+    "key": "MissFortune",
+    "name": "Miss Fortune",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2010-09-08",
+    "patchLastChanged": "25.03",
+    "faction": "bilgewater"
+  },
+  "Mordekaiser": {
+    "id": 82,
+    "key": "Mordekaiser",
+    "name": "Mordekaiser",
+    "resource": "SHIELD",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2010-02-24",
+    "patchLastChanged": "25.12",
+    "faction": "noxus"
+  },
+  "Morgana": {
+    "id": 25,
+    "key": "Morgana",
+    "name": "Morgana",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.09",
+    "faction": "demacia"
+  },
+  "Naafiri": {
+    "id": 950,
+    "key": "Naafiri",
+    "name": "Naafiri",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2023-07-19",
+    "patchLastChanged": "25.11",
+    "faction": "shurima"
+  },
+  "Nami": {
+    "id": 267,
+    "key": "Nami",
+    "name": "Nami",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2012-12-07",
+    "patchLastChanged": "14.24",
+    "faction": "unaffiliated"
+  },
+  "Nasus": {
+    "id": 75,
+    "key": "Nasus",
+    "name": "Nasus",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2009-10-01",
+    "patchLastChanged": "25.03",
+    "faction": "shurima"
+  },
+  "Nautilus": {
+    "id": 111,
+    "key": "Nautilus",
+    "name": "Nautilus",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2012-02-14",
+    "patchLastChanged": "25.04",
+    "faction": "bilgewater"
+  },
+  "Neeko": {
+    "id": 518,
+    "key": "Neeko",
+    "name": "Neeko",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2018-12-05",
+    "patchLastChanged": "25.14",
+    "faction": "ixtal"
+  },
+  "Nidalee": {
+    "id": 76,
+    "key": "Nidalee",
+    "name": "Nidalee",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2009-12-17",
+    "patchLastChanged": "25.14",
+    "faction": "ixtal"
+  },
+  "Nilah": {
+    "id": 895,
+    "key": "Nilah",
+    "name": "Nilah",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2022-07-13",
+    "patchLastChanged": "25.15",
+    "faction": "bilgewater"
+  },
+  "Nocturne": {
+    "id": 56,
+    "key": "Nocturne",
+    "name": "Nocturne",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2011-03-15",
+    "patchLastChanged": "25.10",
+    "faction": "unaffiliated"
+  },
+  "Nunu": {
+    "id": 20,
+    "key": "Nunu",
+    "name": "Nunu & Willump",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.09",
+    "faction": "freljord"
+  },
+  "Olaf": {
+    "id": 2,
+    "key": "Olaf",
+    "name": "Olaf",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2010-06-09",
+    "patchLastChanged": "25.07",
+    "faction": "freljord"
+  },
+  "Orianna": {
+    "id": 61,
+    "key": "Orianna",
+    "name": "Orianna",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2011-06-01",
+    "patchLastChanged": "25.09",
+    "faction": "piltover"
+  },
+  "Ornn": {
+    "id": 516,
+    "key": "Ornn",
+    "name": "Ornn",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2017-08-23",
+    "patchLastChanged": "25.02",
+    "faction": "freljord"
+  },
+  "Pantheon": {
+    "id": 80,
+    "key": "Pantheon",
+    "name": "Pantheon",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "MIDDLE",
+      "SUPPORT",
+      "TOP"
+    ],
+    "releaseDate": "2010-02-02",
+    "patchLastChanged": "25.15",
+    "faction": "mount-targon"
+  },
+  "Poppy": {
+    "id": 78,
+    "key": "Poppy",
+    "name": "Poppy",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2010-01-13",
+    "patchLastChanged": "25.09",
+    "faction": "demacia"
+  },
+  "Pyke": {
+    "id": 555,
+    "key": "Pyke",
+    "name": "Pyke",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2018-05-31",
+    "patchLastChanged": "25.11",
+    "faction": "bilgewater"
+  },
+  "Qiyana": {
+    "id": 246,
+    "key": "Qiyana",
+    "name": "Qiyana",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2019-06-28",
+    "patchLastChanged": "14.21",
+    "faction": "ixtal"
+  },
+  "Quinn": {
+    "id": 133,
+    "key": "Quinn",
+    "name": "Quinn",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2013-03-01",
+    "patchLastChanged": "25.15",
+    "faction": "demacia"
+  },
+  "Rakan": {
+    "id": 497,
+    "key": "Rakan",
+    "name": "Rakan",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2017-04-19",
+    "patchLastChanged": "25.03",
+    "faction": "ionia"
+  },
+  "Rammus": {
+    "id": 33,
+    "key": "Rammus",
+    "name": "Rammus",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2009-07-10",
+    "patchLastChanged": "25.13",
+    "faction": "shurima"
+  },
+  "RekSai": {
+    "id": 421,
+    "key": "RekSai",
+    "name": "Rek'Sai",
+    "resource": "RAGE",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2014-12-11",
+    "patchLastChanged": "25.15",
+    "faction": "void"
+  },
+  "Rell": {
+    "id": 526,
+    "key": "Rell",
+    "name": "Rell",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2020-12-10",
+    "patchLastChanged": "25.15",
+    "faction": "noxus"
+  },
+  "Renata": {
+    "id": 888,
+    "key": "Renata",
+    "name": "Renata Glasc",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2022-02-17",
+    "patchLastChanged": "25.14",
+    "faction": "zaun"
+  },
+  "Renekton": {
+    "id": 58,
+    "key": "Renekton",
+    "name": "Renekton",
+    "resource": "FURY",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2011-01-18",
+    "patchLastChanged": "25.08",
+    "faction": "shurima"
+  },
+  "Rengar": {
+    "id": 107,
+    "key": "Rengar",
+    "name": "Rengar",
+    "resource": "FEROCITY",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2012-08-21",
+    "patchLastChanged": "25.14",
+    "faction": "ixtal"
+  },
+  "Riven": {
+    "id": 92,
+    "key": "Riven",
+    "name": "Riven",
+    "resource": "NONE",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2011-09-14",
+    "patchLastChanged": "25.14",
+    "faction": "noxus"
+  },
+  "Rumble": {
+    "id": 68,
+    "key": "Rumble",
+    "name": "Rumble",
+    "resource": "HEAT",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2011-04-26",
+    "patchLastChanged": "25.12",
+    "faction": "bandle-city"
+  },
+  "Ryze": {
+    "id": 13,
+    "key": "Ryze",
+    "name": "Ryze",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.13",
+    "faction": "unaffiliated"
+  },
+  "Samira": {
+    "id": 360,
+    "key": "Samira",
+    "name": "Samira",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2020-09-21",
+    "patchLastChanged": "25.14",
+    "faction": "noxus"
+  },
+  "Sejuani": {
+    "id": 113,
+    "key": "Sejuani",
+    "name": "Sejuani",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2012-01-17",
+    "patchLastChanged": "14.15",
+    "faction": "freljord"
+  },
+  "Senna": {
+    "id": 235,
+    "key": "Senna",
+    "name": "Senna",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "SUPPORT"
+    ],
+    "releaseDate": "2019-11-10",
+    "patchLastChanged": "25.12",
+    "faction": "unaffiliated"
+  },
+  "Seraphine": {
+    "id": 147,
+    "key": "Seraphine",
+    "name": "Seraphine",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "SUPPORT"
+    ],
+    "releaseDate": "2020-10-29",
+    "patchLastChanged": "25.05",
+    "faction": "piltover"
+  },
+  "Sett": {
+    "id": 875,
+    "key": "Sett",
+    "name": "Sett",
+    "resource": "GRIT",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2020-01-14",
+    "patchLastChanged": "25.14",
+    "faction": "ionia"
+  },
+  "Shaco": {
+    "id": 35,
+    "key": "Shaco",
+    "name": "Shaco",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-10-10",
+    "patchLastChanged": "25.07",
+    "faction": "unaffiliated"
+  },
+  "Shen": {
+    "id": 98,
+    "key": "Shen",
+    "name": "Shen",
+    "resource": "ENERGY",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT",
+      "TOP"
+    ],
+    "releaseDate": "2010-03-24",
+    "patchLastChanged": "25.12",
+    "faction": "ionia"
+  },
+  "Shyvana": {
+    "id": 102,
+    "key": "Shyvana",
+    "name": "Shyvana",
+    "resource": "FURY",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2011-11-01",
+    "patchLastChanged": "14.23",
+    "faction": "demacia"
+  },
+  "Singed": {
+    "id": 27,
+    "key": "Singed",
+    "name": "Singed",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2009-04-18",
+    "patchLastChanged": "25.08",
+    "faction": "zaun"
+  },
+  "Sion": {
+    "id": 14,
+    "key": "Sion",
+    "name": "Sion",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.11",
+    "faction": "noxus"
+  },
+  "Sivir": {
+    "id": 15,
+    "key": "Sivir",
+    "name": "Sivir",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.11",
+    "faction": "shurima"
+  },
+  "Skarner": {
+    "id": 72,
+    "key": "Skarner",
+    "name": "Skarner",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2011-08-09",
+    "patchLastChanged": "25.09",
+    "faction": "ixtal"
+  },
+  "Smolder": {
+    "id": 901,
+    "key": "Smolder",
+    "name": "Smolder",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2024-01-31",
+    "patchLastChanged": "25.11",
+    "faction": "unaffiliated"
+  },
+  "Sona": {
+    "id": 37,
+    "key": "Sona",
+    "name": "Sona",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2010-09-21",
+    "patchLastChanged": "25.08",
+    "faction": "demacia"
+  },
+  "Soraka": {
+    "id": 16,
+    "key": "Soraka",
+    "name": "Soraka",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "14.24",
+    "faction": "mount-targon"
+  },
+  "Swain": {
+    "id": 50,
+    "key": "Swain",
+    "name": "Swain",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2010-10-05",
+    "patchLastChanged": "25.12",
+    "faction": "noxus"
+  },
+  "Sylas": {
+    "id": 517,
+    "key": "Sylas",
+    "name": "Sylas",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2019-01-25",
+    "patchLastChanged": "25.13",
+    "faction": "demacia"
+  },
+  "Syndra": {
+    "id": 134,
+    "key": "Syndra",
+    "name": "Syndra",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2012-09-13",
+    "patchLastChanged": "25.08",
+    "faction": "ionia"
+  },
+  "TahmKench": {
+    "id": 223,
+    "key": "TahmKench",
+    "name": "Tahm Kench",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "SUPPORT",
+      "TOP"
+    ],
+    "releaseDate": "2015-07-09",
+    "patchLastChanged": "25.02",
+    "faction": "unaffiliated"
+  },
+  "Taliyah": {
+    "id": 163,
+    "key": "Taliyah",
+    "name": "Taliyah",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE",
+      "MIDDLE"
+    ],
+    "releaseDate": "2016-05-18",
+    "patchLastChanged": "25.12",
+    "faction": "shurima"
+  },
+  "Talon": {
+    "id": 91,
+    "key": "Talon",
+    "name": "Talon",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2011-08-24",
+    "patchLastChanged": "25.11",
+    "faction": "noxus"
+  },
+  "Taric": {
+    "id": 44,
+    "key": "Taric",
+    "name": "Taric",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-08-19",
+    "patchLastChanged": "14.21",
+    "faction": "mount-targon"
+  },
+  "Teemo": {
+    "id": 17,
+    "key": "Teemo",
+    "name": "Teemo",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "JUNGLE",
+      "SUPPORT",
+      "TOP"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.04",
+    "faction": "bandle-city"
+  },
+  "Thresh": {
+    "id": 412,
+    "key": "Thresh",
+    "name": "Thresh",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2013-01-23",
+    "patchLastChanged": "25.03",
+    "faction": "shadow-isles"
+  },
+  "Tristana": {
+    "id": 18,
+    "key": "Tristana",
+    "name": "Tristana",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "MIDDLE"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.08",
+    "faction": "bandle-city"
+  },
+  "Trundle": {
+    "id": 48,
+    "key": "Trundle",
+    "name": "Trundle",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2010-12-01",
+    "patchLastChanged": "25.07",
+    "faction": "freljord"
+  },
+  "Tryndamere": {
+    "id": 23,
+    "key": "Tryndamere",
+    "name": "Tryndamere",
+    "resource": "FURY",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2009-05-01",
+    "patchLastChanged": "14.20",
+    "faction": "freljord"
+  },
+  "TwistedFate": {
+    "id": 4,
+    "key": "TwistedFate",
+    "name": "Twisted Fate",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.14",
+    "faction": "bilgewater"
+  },
+  "Twitch": {
+    "id": 29,
+    "key": "Twitch",
+    "name": "Twitch",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-05-01",
+    "patchLastChanged": "25.13",
+    "faction": "zaun"
+  },
+  "Udyr": {
+    "id": 77,
+    "key": "Udyr",
+    "name": "Udyr",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2009-12-02",
+    "patchLastChanged": "25.11",
+    "faction": "freljord"
+  },
+  "Urgot": {
+    "id": 6,
+    "key": "Urgot",
+    "name": "Urgot",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2010-08-24",
+    "patchLastChanged": "25.06",
+    "faction": "zaun"
+  },
+  "Varus": {
+    "id": 110,
+    "key": "Varus",
+    "name": "Varus",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2012-05-08",
+    "patchLastChanged": "25.12",
+    "faction": "ionia"
+  },
+  "Vayne": {
+    "id": 67,
+    "key": "Vayne",
+    "name": "Vayne",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "TOP"
+    ],
+    "releaseDate": "2011-05-10",
+    "patchLastChanged": "14.22",
+    "faction": "demacia"
+  },
+  "Veigar": {
+    "id": 45,
+    "key": "Veigar",
+    "name": "Veigar",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-07-24",
+    "patchLastChanged": "25.09",
+    "faction": "bandle-city"
+  },
+  "Velkoz": {
+    "id": 161,
+    "key": "Velkoz",
+    "name": "Vel'Koz",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2014-02-27",
+    "patchLastChanged": "25.14",
+    "faction": "void"
+  },
+  "Vex": {
+    "id": 711,
+    "key": "Vex",
+    "name": "Vex",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2021-09-23",
+    "patchLastChanged": "25.09",
+    "faction": "shadow-isles"
+  },
+  "Vi": {
+    "id": 254,
+    "key": "Vi",
+    "name": "Vi",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2012-12-19",
+    "patchLastChanged": "25.13",
+    "faction": "piltover"
+  },
+  "Viego": {
+    "id": 234,
+    "key": "Viego",
+    "name": "Viego",
+    "resource": "NONE",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2021-01-21",
+    "patchLastChanged": "25.14",
+    "faction": "shadow-isles"
+  },
+  "Viktor": {
+    "id": 112,
+    "key": "Viktor",
+    "name": "Viktor",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2011-12-29",
+    "patchLastChanged": "25.06",
+    "faction": "zaun"
+  },
+  "Vladimir": {
+    "id": 8,
+    "key": "Vladimir",
+    "name": "Vladimir",
+    "resource": "CRIMSON_RUSH",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2010-07-27",
+    "patchLastChanged": "25.11",
+    "faction": "noxus"
+  },
+  "Volibear": {
+    "id": 106,
+    "key": "Volibear",
+    "name": "Volibear",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2011-11-29",
+    "patchLastChanged": "25.07",
+    "faction": "freljord"
+  },
+  "Warwick": {
+    "id": 19,
+    "key": "Warwick",
+    "name": "Warwick",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2009-02-21",
+    "patchLastChanged": "25.08",
+    "faction": "zaun"
+  },
+  "MonkeyKing": {
+    "id": 62,
+    "key": "MonkeyKing",
+    "name": "Wukong",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "TOP"
+    ],
+    "releaseDate": "2011-07-26",
+    "patchLastChanged": "25.03",
+    "faction": "ionia"
+  },
+  "Xayah": {
+    "id": 498,
+    "key": "Xayah",
+    "name": "Xayah",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2017-04-19",
+    "patchLastChanged": "14.21",
+    "faction": "ionia"
+  },
+  "Xerath": {
+    "id": 101,
+    "key": "Xerath",
+    "name": "Xerath",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE",
+      "SUPPORT"
+    ],
+    "releaseDate": "2011-10-05",
+    "patchLastChanged": "25.08",
+    "faction": "shurima"
+  },
+  "XinZhao": {
+    "id": 5,
+    "key": "XinZhao",
+    "name": "Xin Zhao",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE"
+    ],
+    "releaseDate": "2010-07-13",
+    "patchLastChanged": "25.14",
+    "faction": "demacia"
+  },
+  "Yasuo": {
+    "id": 157,
+    "key": "Yasuo",
+    "name": "Yasuo",
+    "resource": "FLOW",
+    "attackType": "MELEE",
+    "positions": [
+      "BOTTOM",
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2013-12-13",
+    "patchLastChanged": "25.14",
+    "faction": "ionia"
+  },
+  "Yone": {
+    "id": 777,
+    "key": "Yone",
+    "name": "Yone",
+    "resource": "FLOW",
+    "attackType": "MELEE",
+    "positions": [
+      "MIDDLE",
+      "TOP"
+    ],
+    "releaseDate": "2020-08-06",
+    "patchLastChanged": "25.09",
+    "faction": "ionia"
+  },
+  "Yorick": {
+    "id": 83,
+    "key": "Yorick",
+    "name": "Yorick",
+    "resource": "MANA",
+    "attackType": "MELEE",
+    "positions": [
+      "TOP"
+    ],
+    "releaseDate": "2011-06-22",
+    "patchLastChanged": "25.13",
+    "faction": "shadow-isles"
+  },
+  "Yunara": {
+    "id": 804,
+    "key": "Yunara",
+    "name": "Yunara",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2025-07-16",
+    "patchLastChanged": "25.14",
+    "faction": "ionia"
+  },
+  "Yuumi": {
+    "id": 350,
+    "key": "Yuumi",
+    "name": "Yuumi",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2019-05-14",
+    "patchLastChanged": "25.14",
+    "faction": "bandle-city"
+  },
+  "Zac": {
+    "id": 154,
+    "key": "Zac",
+    "name": "Zac",
+    "resource": "HEALTH",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "SUPPORT",
+      "TOP"
+    ],
+    "releaseDate": "2013-03-29",
+    "patchLastChanged": "25.13",
+    "faction": "zaun"
+  },
+  "Zed": {
+    "id": 238,
+    "key": "Zed",
+    "name": "Zed",
+    "resource": "ENERGY",
+    "attackType": "MELEE",
+    "positions": [
+      "JUNGLE",
+      "MIDDLE"
+    ],
+    "releaseDate": "2012-11-13",
+    "patchLastChanged": "25.08",
+    "faction": "ionia"
+  },
+  "Zeri": {
+    "id": 221,
+    "key": "Zeri",
+    "name": "Zeri",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM"
+    ],
+    "releaseDate": "2022-01-20",
+    "patchLastChanged": "25.12",
+    "faction": "zaun"
+  },
+  "Ziggs": {
+    "id": 115,
+    "key": "Ziggs",
+    "name": "Ziggs",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "BOTTOM",
+      "MIDDLE"
+    ],
+    "releaseDate": "2012-02-01",
+    "patchLastChanged": "25.14",
+    "faction": "zaun"
+  },
+  "Zilean": {
+    "id": 26,
+    "key": "Zilean",
+    "name": "Zilean",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2009-04-18",
+    "patchLastChanged": "25.13",
+    "faction": "unaffiliated"
+  },
+  "Zoe": {
+    "id": 142,
+    "key": "Zoe",
+    "name": "Zoe",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "MIDDLE"
+    ],
+    "releaseDate": "2017-11-21",
+    "patchLastChanged": "25.14",
+    "faction": "mount-targon"
+  },
+  "Zyra": {
+    "id": 143,
+    "key": "Zyra",
+    "name": "Zyra",
+    "resource": "MANA",
+    "attackType": "RANGED",
+    "positions": [
+      "SUPPORT"
+    ],
+    "releaseDate": "2012-07-24",
+    "patchLastChanged": "14.24",
+    "faction": "ixtal"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "valid": true,
+  "count": 173,
+  "merakiCount": 171,
+  "missingFromMeraki": [
+    "Locke",
+    "Zaahen"
+  ],
+  "unknownSpecies": [
+    "Jax",
+    "Rammus",
+    "Shaco",
+    "Zyra"
+  ],
+  "distinctCounts": {
+    "gender": 3,
+    "positions": 5,
+    "species": 35,
+    "resource": 15,
+    "range": 2,
+    "regions": 19,
+    "year": 18
+  }
+}

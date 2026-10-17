@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-10-17T18:47:30+02:00",
+  "ddragonVersion": "16.20.1",
+  "ddragonRosterCount": 173,
+  "communityDragonVersion": "16.20.8248524+branch.releases-16-20.content.release",
+  "merakiCount": 171,
+  "urls": {
+    "versions": "https://ddragon.leagueoflegends.com/api/versions.json",
+    "ddragon": "https://ddragon.leagueoflegends.com/cdn/16.20.1/data/en_US/champion.json",
+    "meraki": "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json",
+    "communityDragon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json",
+    "communityDragonVersion": "https://raw.communitydragon.org/latest/content-metadata.json",
+    "wikiGameplay": "https://wiki.leagueoflegends.com/en-us/Module:ChampionData/data"
+  },
+  "fieldSources": {
+    "id": "Data Dragon champion id",
+    "name": "Data Dragon name",
+    "gender": "game grouping based on current lore pronouns; see REPORT.md",
+    "positions": "Wiki client_positions",
+    "species": "Wiki current Species; scoped and normalized as documented",
+    "resource": "Wiki resource with None normalized to Manaless",
+    "range": "Wiki rangetype, standard form",
+    "regions": "Wiki Region(s), current non-struck-through entries",
+    "year": "Wiki date year; checked against Meraki releaseDate"
+  },
+  "excluded": [],
+  "unknownSpecies": [
+    "Jax",
+    "Rammus",
+    "Shaco",
+    "Zyra"
+  ]
+}

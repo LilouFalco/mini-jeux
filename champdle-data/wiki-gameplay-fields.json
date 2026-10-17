@@ -1,0 +1,2184 @@
+{
+  "1": {
+    "name": "Annie",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "2": {
+    "name": "Olaf",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2010-06-09",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "3": {
+    "name": "Galio",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2010-08-10",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support"
+    ]
+  },
+  "4": {
+    "name": "Twisted Fate",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Middle",
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle",
+      "Bottom"
+    ]
+  },
+  "5": {
+    "name": "Xin Zhao",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2010-07-13",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "6": {
+    "name": "Urgot",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-08-24",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "7": {
+    "name": "LeBlanc",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-11-02",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "8": {
+    "name": "Vladimir",
+    "resource": "Crimson Rush",
+    "range": "Ranged",
+    "date": "2010-07-27",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle"
+    ]
+  },
+  "9": {
+    "name": "Fiddlesticks",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "10": {
+    "name": "Kayle",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-02-21",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "11": {
+    "name": "Master Yi",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-02-21",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "12": {
+    "name": "Alistar",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-02-21",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "13": {
+    "name": "Ryze",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "14": {
+    "name": "Sion",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-02-21",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "15": {
+    "name": "Sivir",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "16": {
+    "name": "Soraka",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "17": {
+    "name": "Teemo",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle",
+      "Support"
+    ]
+  },
+  "18": {
+    "name": "Tristana",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Bottom"
+    ]
+  },
+  "19": {
+    "name": "Warwick",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-02-21",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "20": {
+    "name": "Nunu & Willump",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-02-21",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "21": {
+    "name": "Miss Fortune",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-09-08",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "22": {
+    "name": "Ashe",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Bottom",
+      "Support"
+    ],
+    "externalPositions": [
+      "Bottom",
+      "Support"
+    ]
+  },
+  "23": {
+    "name": "Tryndamere",
+    "resource": "Fury",
+    "range": "Melee",
+    "date": "2009-05-01",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "24": {
+    "name": "Jax",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-02-21",
+    "positions": [
+      "Top",
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "25": {
+    "name": "Morgana",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-02-21",
+    "positions": [
+      "Support",
+      "Middle"
+    ],
+    "externalPositions": [
+      "Support",
+      "Middle"
+    ]
+  },
+  "26": {
+    "name": "Zilean",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-04-18",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "27": {
+    "name": "Singed",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-04-18",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "28": {
+    "name": "Evelynn",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-05-01",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "29": {
+    "name": "Twitch",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-05-01",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom",
+      "Support"
+    ]
+  },
+  "30": {
+    "name": "Karthus",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-06-12",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "31": {
+    "name": "Cho'Gath",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-06-26",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "32": {
+    "name": "Amumu",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-06-26",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle",
+      "Support"
+    ]
+  },
+  "33": {
+    "name": "Rammus",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-07-10",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "34": {
+    "name": "Anivia",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-07-10",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "35": {
+    "name": "Shaco",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-10-10",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle",
+      "Support"
+    ]
+  },
+  "36": {
+    "name": "Dr. Mundo",
+    "resource": "Health",
+    "range": "Melee",
+    "date": "2009-09-02",
+    "positions": [
+      "Top",
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "37": {
+    "name": "Sona",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-09-21",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "38": {
+    "name": "Kassadin",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-08-07",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "39": {
+    "name": "Irelia",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2010-11-16",
+    "positions": [
+      "Top",
+      "Middle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle"
+    ]
+  },
+  "40": {
+    "name": "Janna",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-09-02",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "41": {
+    "name": "Gangplank",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-08-19",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "42": {
+    "name": "Corki",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-09-19",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Bottom"
+    ]
+  },
+  "43": {
+    "name": "Karma",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2011-02-01",
+    "positions": [
+      "Middle",
+      "Support"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle",
+      "Support"
+    ]
+  },
+  "44": {
+    "name": "Taric",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-08-19",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support"
+    ]
+  },
+  "45": {
+    "name": "Veigar",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-07-24",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support"
+    ]
+  },
+  "48": {
+    "name": "Trundle",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2010-12-01",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "50": {
+    "name": "Swain",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-10-05",
+    "positions": [
+      "Middle",
+      "Support"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support",
+      "Bottom"
+    ]
+  },
+  "51": {
+    "name": "Caitlyn",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2011-01-04",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "53": {
+    "name": "Blitzcrank",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-09-02",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "54": {
+    "name": "Malphite",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-09-02",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle",
+      "Support"
+    ]
+  },
+  "55": {
+    "name": "Katarina",
+    "resource": "None",
+    "range": "Melee",
+    "date": "2009-09-19",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "56": {
+    "name": "Nocturne",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-03-15",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "57": {
+    "name": "Maokai",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-02-16",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle",
+      "Support"
+    ]
+  },
+  "58": {
+    "name": "Renekton",
+    "resource": "Fury",
+    "range": "Melee",
+    "date": "2011-01-18",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "59": {
+    "name": "Jarvan IV",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-03-01",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "60": {
+    "name": "Elise",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2012-10-26",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "61": {
+    "name": "Orianna",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2011-06-01",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "62": {
+    "name": "Wukong",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-07-26",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "63": {
+    "name": "Brand",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2011-04-12",
+    "positions": [
+      "Jungle",
+      "Support"
+    ],
+    "externalPositions": [
+      "Jungle",
+      "Middle",
+      "Support"
+    ]
+  },
+  "64": {
+    "name": "Lee Sin",
+    "resource": "Energy",
+    "range": "Melee",
+    "date": "2011-04-01",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "67": {
+    "name": "Vayne",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2011-05-10",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Top",
+      "Bottom"
+    ]
+  },
+  "68": {
+    "name": "Rumble",
+    "resource": "Heat",
+    "range": "Melee",
+    "date": "2011-04-26",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle"
+    ]
+  },
+  "69": {
+    "name": "Cassiopeia",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-12-14",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "72": {
+    "name": "Skarner",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-08-09",
+    "positions": [
+      "Jungle",
+      "Top"
+    ],
+    "externalPositions": [
+      "Jungle",
+      "Top"
+    ]
+  },
+  "74": {
+    "name": "Heimerdinger",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-10-10",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle",
+      "Support"
+    ]
+  },
+  "75": {
+    "name": "Nasus",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-10-01",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "76": {
+    "name": "Nidalee",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2009-12-17",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "77": {
+    "name": "Udyr",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2009-12-02",
+    "positions": [
+      "Top",
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "78": {
+    "name": "Poppy",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2010-01-13",
+    "positions": [
+      "Top",
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "79": {
+    "name": "Gragas",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2010-02-02",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle",
+      "Middle"
+    ]
+  },
+  "80": {
+    "name": "Pantheon",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2010-02-02",
+    "positions": [
+      "Top",
+      "Support"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle",
+      "Middle",
+      "Support"
+    ]
+  },
+  "81": {
+    "name": "Ezreal",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-03-16",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "82": {
+    "name": "Mordekaiser",
+    "resource": "Shield",
+    "range": "Melee",
+    "date": "2010-02-24",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "83": {
+    "name": "Yorick",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-06-22",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "84": {
+    "name": "Akali",
+    "resource": "Energy",
+    "range": "Melee",
+    "date": "2010-05-11",
+    "positions": [
+      "Top",
+      "Middle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle"
+    ]
+  },
+  "85": {
+    "name": "Kennen",
+    "resource": "Energy",
+    "range": "Ranged",
+    "date": "2010-04-08",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "86": {
+    "name": "Garen",
+    "resource": "None",
+    "range": "Melee",
+    "date": "2010-04-27",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "89": {
+    "name": "Leona",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-07-13",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "90": {
+    "name": "Malzahar",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-06-01",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "91": {
+    "name": "Talon",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-08-24",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "92": {
+    "name": "Riven",
+    "resource": "None",
+    "range": "Melee",
+    "date": "2011-09-14",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "96": {
+    "name": "Kog'Maw",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-06-24",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "98": {
+    "name": "Shen",
+    "resource": "Energy",
+    "range": "Melee",
+    "date": "2010-03-24",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Support"
+    ]
+  },
+  "99": {
+    "name": "Lux",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2010-10-19",
+    "positions": [
+      "Middle",
+      "Support"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support"
+    ]
+  },
+  "101": {
+    "name": "Xerath",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2011-10-05",
+    "positions": [
+      "Middle",
+      "Support"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support"
+    ]
+  },
+  "102": {
+    "name": "Shyvana",
+    "resource": "Fury",
+    "range": "Melee",
+    "date": "2011-11-01",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "103": {
+    "name": "Ahri",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2011-12-14",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "104": {
+    "name": "Graves",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2011-10-19",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "105": {
+    "name": "Fizz",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-11-15",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "106": {
+    "name": "Volibear",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2011-11-29",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "107": {
+    "name": "Rengar",
+    "resource": "Ferocity",
+    "range": "Melee",
+    "date": "2012-08-21",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "110": {
+    "name": "Varus",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2012-05-08",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "111": {
+    "name": "Nautilus",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2012-02-14",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "112": {
+    "name": "Viktor",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2011-12-29",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "113": {
+    "name": "Sejuani",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2012-01-17",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "114": {
+    "name": "Fiora",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2012-02-29",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "115": {
+    "name": "Ziggs",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2012-02-01",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Bottom"
+    ]
+  },
+  "117": {
+    "name": "Lulu",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2012-03-20",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "119": {
+    "name": "Draven",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2012-06-06",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "120": {
+    "name": "Hecarim",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2012-04-18",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "121": {
+    "name": "Kha'Zix",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2012-09-27",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "122": {
+    "name": "Darius",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2012-05-23",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "126": {
+    "name": "Jayce",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2012-07-07",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle"
+    ]
+  },
+  "127": {
+    "name": "Lissandra",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2013-04-30",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "131": {
+    "name": "Diana",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2012-08-07",
+    "positions": [
+      "Jungle",
+      "Middle"
+    ],
+    "externalPositions": [
+      "Jungle",
+      "Middle"
+    ]
+  },
+  "133": {
+    "name": "Quinn",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2013-03-01",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "134": {
+    "name": "Syndra",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2012-09-13",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "136": {
+    "name": "Aurelion Sol",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2016-03-24",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "141": {
+    "name": "Kayn",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2017-07-12",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "142": {
+    "name": "Zoe",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2017-11-21",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "143": {
+    "name": "Zyra",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2012-07-24",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "145": {
+    "name": "Kai'Sa",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2018-03-07",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "147": {
+    "name": "Seraphine",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2020-10-29",
+    "positions": [
+      "Bottom",
+      "Support"
+    ],
+    "externalPositions": [
+      "Bottom",
+      "Support"
+    ]
+  },
+  "150": {
+    "name": "Gnar",
+    "resource": "Rage",
+    "range": "Ranged",
+    "date": "2014-08-14",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "154": {
+    "name": "Zac",
+    "resource": "Health",
+    "range": "Melee",
+    "date": "2013-03-29",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle",
+      "Support"
+    ]
+  },
+  "157": {
+    "name": "Yasuo",
+    "resource": "Flow",
+    "range": "Melee",
+    "date": "2013-12-13",
+    "positions": [
+      "Top",
+      "Middle",
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle",
+      "Bottom"
+    ]
+  },
+  "161": {
+    "name": "Vel'Koz",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2014-02-27",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support"
+    ]
+  },
+  "163": {
+    "name": "Taliyah",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2016-05-18",
+    "positions": [
+      "Jungle",
+      "Middle"
+    ],
+    "externalPositions": [
+      "Jungle",
+      "Middle"
+    ]
+  },
+  "164": {
+    "name": "Camille",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2016-12-07",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Support"
+    ]
+  },
+  "166": {
+    "name": "Akshan",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2021-07-22",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "200": {
+    "name": "Bel'Veth",
+    "resource": "None",
+    "range": "Melee",
+    "date": "2022-06-09",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "201": {
+    "name": "Braum",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2014-05-12",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "202": {
+    "name": "Jhin",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2016-02-01",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "203": {
+    "name": "Kindred",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2015-10-14",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "221": {
+    "name": "Zeri",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2022-01-20",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "222": {
+    "name": "Jinx",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2013-10-10",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "223": {
+    "name": "Tahm Kench",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2015-07-09",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Support"
+    ]
+  },
+  "233": {
+    "name": "Briar",
+    "resource": "Frenzy",
+    "range": "Melee",
+    "date": "2023-09-14",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "234": {
+    "name": "Viego",
+    "resource": "None",
+    "range": "Melee",
+    "date": "2021-01-21",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "235": {
+    "name": "Senna",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2019-11-10",
+    "positions": [
+      "Bottom",
+      "Support"
+    ],
+    "externalPositions": [
+      "Bottom",
+      "Support"
+    ]
+  },
+  "236": {
+    "name": "Lucian",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2013-08-22",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "238": {
+    "name": "Zed",
+    "resource": "Energy",
+    "range": "Melee",
+    "date": "2012-11-13",
+    "positions": [
+      "Jungle",
+      "Middle"
+    ],
+    "externalPositions": [
+      "Jungle",
+      "Middle"
+    ]
+  },
+  "240": {
+    "name": "Kled",
+    "resource": "Courage",
+    "range": "Melee",
+    "date": "2016-08-10",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "245": {
+    "name": "Ekko",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2015-05-29",
+    "positions": [
+      "Jungle",
+      "Middle"
+    ],
+    "externalPositions": [
+      "Jungle",
+      "Middle"
+    ]
+  },
+  "246": {
+    "name": "Qiyana",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2019-06-28",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "254": {
+    "name": "Vi",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2012-12-19",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "266": {
+    "name": "Aatrox",
+    "resource": "Blood Well",
+    "range": "Melee",
+    "date": "2013-06-13",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "267": {
+    "name": "Nami",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2012-12-07",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "268": {
+    "name": "Azir",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2014-09-16",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "350": {
+    "name": "Yuumi",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2019-05-14",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "360": {
+    "name": "Samira",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2020-09-21",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "412": {
+    "name": "Thresh",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2013-01-23",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "420": {
+    "name": "Illaoi",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2015-11-24",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "421": {
+    "name": "Rek'Sai",
+    "resource": "Fury",
+    "range": "Melee",
+    "date": "2014-12-11",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "427": {
+    "name": "Ivern",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2016-10-05",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "429": {
+    "name": "Kalista",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2014-11-20",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "432": {
+    "name": "Bard",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2015-03-12",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "497": {
+    "name": "Rakan",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2017-04-19",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "498": {
+    "name": "Xayah",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2017-04-19",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "516": {
+    "name": "Ornn",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2017-08-23",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "517": {
+    "name": "Sylas",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2019-01-25",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle"
+    ]
+  },
+  "518": {
+    "name": "Neeko",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2018-12-05",
+    "positions": [
+      "Middle",
+      "Support"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support"
+    ]
+  },
+  "523": {
+    "name": "Aphelios",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2019-12-11",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "526": {
+    "name": "Rell",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2020-12-10",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "555": {
+    "name": "Pyke",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2018-05-31",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "711": {
+    "name": "Vex",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2021-09-23",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "777": {
+    "name": "Yone",
+    "resource": "Flow",
+    "range": "Melee",
+    "date": "2020-08-06",
+    "positions": [
+      "Top",
+      "Middle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle"
+    ]
+  },
+  "799": {
+    "name": "Ambessa",
+    "resource": "Energy",
+    "range": "Melee",
+    "date": "2024-11-06",
+    "positions": [
+      "Top",
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "800": {
+    "name": "Mel",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2025-01-23",
+    "positions": [
+      "Middle",
+      "Support"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support"
+    ]
+  },
+  "804": {
+    "name": "Yunara",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2025-07-16",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "805": {
+    "name": "Locke",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2026-06-24",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  },
+  "875": {
+    "name": "Sett",
+    "resource": "Grit",
+    "range": "Melee",
+    "date": "2020-01-14",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "876": {
+    "name": "Lillia",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2020-07-22",
+    "positions": [
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Jungle"
+    ]
+  },
+  "887": {
+    "name": "Gwen",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2021-04-15",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top",
+      "Jungle"
+    ]
+  },
+  "888": {
+    "name": "Renata Glasc",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2022-02-17",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "893": {
+    "name": "Aurora",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2024-07-17",
+    "positions": [
+      "Middle",
+      "Top"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Top"
+    ]
+  },
+  "895": {
+    "name": "Nilah",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2022-07-13",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Bottom"
+    ]
+  },
+  "897": {
+    "name": "K'Sante",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2022-11-02",
+    "positions": [
+      "Top"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "901": {
+    "name": "Smolder",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2024-01-31",
+    "positions": [
+      "Bottom"
+    ],
+    "externalPositions": [
+      "Top",
+      "Middle",
+      "Bottom"
+    ]
+  },
+  "902": {
+    "name": "Milio",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2023-03-23",
+    "positions": [
+      "Support"
+    ],
+    "externalPositions": [
+      "Support"
+    ]
+  },
+  "904": {
+    "name": "Zaahen",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2025-11-19",
+    "positions": [
+      "Top",
+      "Jungle"
+    ],
+    "externalPositions": [
+      "Top"
+    ]
+  },
+  "910": {
+    "name": "Hwei",
+    "resource": "Mana",
+    "range": "Ranged",
+    "date": "2023-12-05",
+    "positions": [
+      "Middle",
+      "Support"
+    ],
+    "externalPositions": [
+      "Middle",
+      "Support"
+    ]
+  },
+  "950": {
+    "name": "Naafiri",
+    "resource": "Mana",
+    "range": "Melee",
+    "date": "2023-07-19",
+    "positions": [
+      "Middle"
+    ],
+    "externalPositions": [
+      "Middle"
+    ]
+  }
+}

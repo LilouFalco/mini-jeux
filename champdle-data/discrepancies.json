@@ -1,0 +1,579 @@
+{
+  "merakiGameplay": [
+    {
+      "id": "Ambessa",
+      "field": "positions",
+      "meraki": [
+        "Top"
+      ],
+      "wiki": [
+        "Jungle",
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Amumu",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Support"
+      ],
+      "wiki": [
+        "Jungle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Brand",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Middle",
+        "Support"
+      ],
+      "wiki": [
+        "Jungle",
+        "Support"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Camille",
+      "field": "positions",
+      "meraki": [
+        "Support",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Corki",
+      "field": "positions",
+      "meraki": [
+        "Middle"
+      ],
+      "wiki": [
+        "Bottom"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "DrMundo",
+      "field": "positions",
+      "meraki": [
+        "Top"
+      ],
+      "wiki": [
+        "Jungle",
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Galio",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Support"
+      ],
+      "wiki": [
+        "Middle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Gragas",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Middle",
+        "Top"
+      ],
+      "wiki": [
+        "Jungle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Gwen",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Heimerdinger",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Support",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Jayce",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Karma",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Support",
+        "Top"
+      ],
+      "wiki": [
+        "Middle",
+        "Support"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Malphite",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Support",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Maokai",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Support"
+      ],
+      "wiki": [
+        "Support"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "MonkeyKing",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Top"
+      ],
+      "wiki": [
+        "Jungle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Morgana",
+      "field": "positions",
+      "meraki": [
+        "Support"
+      ],
+      "wiki": [
+        "Middle",
+        "Support"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Pantheon",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Middle",
+        "Support",
+        "Top"
+      ],
+      "wiki": [
+        "Support",
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "RekSai",
+      "field": "resource",
+      "meraki": "Rage",
+      "wiki": "Fury",
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Rengar",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Top"
+      ],
+      "wiki": [
+        "Jungle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Rumble",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Shaco",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Support"
+      ],
+      "wiki": [
+        "Jungle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Shen",
+      "field": "positions",
+      "meraki": [
+        "Support",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Smolder",
+      "field": "positions",
+      "meraki": [
+        "Bottom",
+        "Middle",
+        "Top"
+      ],
+      "wiki": [
+        "Bottom"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Swain",
+      "field": "positions",
+      "meraki": [
+        "Bottom",
+        "Middle",
+        "Support"
+      ],
+      "wiki": [
+        "Middle",
+        "Support"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Sylas",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Top"
+      ],
+      "wiki": [
+        "Middle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "TahmKench",
+      "field": "positions",
+      "meraki": [
+        "Support",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Talon",
+      "field": "positions",
+      "meraki": [
+        "Jungle"
+      ],
+      "wiki": [
+        "Middle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Taric",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Support"
+      ],
+      "wiki": [
+        "Support"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Teemo",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Support",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Tristana",
+      "field": "positions",
+      "meraki": [
+        "Bottom",
+        "Middle"
+      ],
+      "wiki": [
+        "Bottom"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Trundle",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "TwistedFate",
+      "field": "positions",
+      "meraki": [
+        "Bottom",
+        "Middle",
+        "Top"
+      ],
+      "wiki": [
+        "Bottom",
+        "Middle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Twitch",
+      "field": "positions",
+      "meraki": [
+        "Bottom",
+        "Support"
+      ],
+      "wiki": [
+        "Bottom"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Vayne",
+      "field": "positions",
+      "meraki": [
+        "Bottom",
+        "Top"
+      ],
+      "wiki": [
+        "Bottom"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Veigar",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Support"
+      ],
+      "wiki": [
+        "Middle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Velkoz",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Support"
+      ],
+      "wiki": [
+        "Support"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Vladimir",
+      "field": "positions",
+      "meraki": [
+        "Middle",
+        "Top"
+      ],
+      "wiki": [
+        "Middle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Volibear",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Top"
+      ],
+      "wiki": [
+        "Top"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Warwick",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Top"
+      ],
+      "wiki": [
+        "Jungle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Zac",
+      "field": "positions",
+      "meraki": [
+        "Jungle",
+        "Support",
+        "Top"
+      ],
+      "wiki": [
+        "Jungle"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    },
+    {
+      "id": "Ziggs",
+      "field": "positions",
+      "meraki": [
+        "Bottom",
+        "Middle"
+      ],
+      "wiki": [
+        "Bottom"
+      ],
+      "resolution": "Use current wiki gameplay data"
+    }
+  ],
+  "merakiFactions": [
+    {
+      "id": "Fizz",
+      "meraki": "unaffiliated",
+      "wiki": [
+        "Bilgewater"
+      ],
+      "resolution": "Use current wiki Region(s), excluding struck-through historical affiliations"
+    },
+    {
+      "id": "Smolder",
+      "meraki": "unaffiliated",
+      "wiki": [
+        "Camavor",
+        "Noxus"
+      ],
+      "resolution": "Use current wiki Region(s), excluding struck-through historical affiliations"
+    }
+  ],
+  "ddragonResources": [
+    {
+      "id": "Belveth",
+      "field": "resource",
+      "ddragon": "",
+      "wiki": "None",
+      "resolution": "Use descriptive wiki resource; None becomes Manaless"
+    },
+    {
+      "id": "Briar",
+      "field": "resource",
+      "ddragon": "Fury",
+      "wiki": "Frenzy",
+      "resolution": "Use descriptive wiki resource; None becomes Manaless"
+    },
+    {
+      "id": "DrMundo",
+      "field": "resource",
+      "ddragon": "None",
+      "wiki": "Health",
+      "resolution": "Use descriptive wiki resource; None becomes Manaless"
+    },
+    {
+      "id": "RekSai",
+      "field": "resource",
+      "ddragon": "Rage",
+      "wiki": "Fury",
+      "resolution": "Use descriptive wiki resource; None becomes Manaless"
+    },
+    {
+      "id": "Zac",
+      "field": "resource",
+      "ddragon": "None",
+      "wiki": "Health",
+      "resolution": "Use descriptive wiki resource; None becomes Manaless"
+    }
+  ],
+  "attackRangeClassification": [
+    {
+      "id": "Gnar",
+      "attackrange": 175,
+      "wiki": "Ranged"
+    },
+    {
+      "id": "Jayce",
+      "attackrange": 125,
+      "wiki": "Ranged"
+    },
+    {
+      "id": "Lillia",
+      "attackrange": 325,
+      "wiki": "Melee"
+    }
+  ]
+}
