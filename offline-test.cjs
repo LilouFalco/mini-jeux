@@ -11,7 +11,7 @@ const {chromium}=require('/tmp/qa/node_modules/playwright'),assert=require('node
  const manifest=await(await fetch('manifest.webmanifest')).json();
  const cache=await caches.open('lilou-yakazu-v4');return {manifest,keys:(await cache.keys()).map(r=>r.url)};
  });
- assert.equal(resources.manifest.display,'standalone');assert.equal(resources.manifest.icons.length,2);assert.equal(resources.keys.length,32);
+ assert.equal(resources.manifest.display,'standalone');assert.equal(resources.manifest.icons.length,2);assert.equal(resources.keys.length,35);
  await p.waitForFunction(()=>!!localStorage.getItem('lilou-yakazu-v1'));
  await c.setOffline(true);await p.reload({waitUntil:'load'});
  await p.waitForFunction(()=>!!document.querySelector('#board .cell')&&document.querySelector('#loading').hidden);

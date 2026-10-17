@@ -6,7 +6,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   const c=await b.newContext({viewport:{width,height:900},isMobile:width<600,hasTouch:width<600});
   const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
   // links between games
-  await p.goto(BASE);assert.equal(await p.locator('.games a').count(),4);
+  await p.goto(BASE);assert.equal(await p.locator('.games a').count(),5);
   assert.equal(await p.locator('a[href*="portfolio"],a[href*="liloufalco.github.io"]').count(),0);
   await p.click('.games a[href="sudoku.html"]');await p.waitForURL(/sudoku\.html/);
   // SUDOKU
