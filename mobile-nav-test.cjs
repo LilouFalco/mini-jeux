@@ -28,7 +28,7 @@ await p.goto(B+'puissance4.html?mode=duo');assert.equal(await p.locator('[data-m
 await p.goto(B+'yakazu.html');assert(await p.locator('#board .cell').first().waitFor().then(()=>true));
 await c.close()}
 const d=await br.newPage({viewport:{width:1440,height:900}});await d.goto(B);assert(!(await d.locator('.mbar').isVisible()));assert.equal(await d.locator('.mode').count(),3);
-await d.locator('.mode[data-k=solo]').click();assert.equal(await d.locator('a.gtile').count(),8);await d.screenshot({path:'/tmp/desk-home.png'});
+await d.locator('.mode[data-k=solo]').click();assert.equal(await d.locator('a.gtile').count(),9);await d.screenshot({path:'/tmp/desk-home.png'});
 await d.goto(B+'demineur.html');assert(!(await d.locator('.mbar').isVisible()));assert(await d.locator('.games').isVisible());assert(await d.locator('.intro').isVisible());
 await d.goto(B+'yakazu.html');assert(await d.locator('.games a[href="yakazu.html"]').isVisible());
 console.log('mobile nav + home ok');await br.close()})().catch(e=>{console.error(e);process.exit(1)})
