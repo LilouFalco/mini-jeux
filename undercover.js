@@ -18,7 +18,10 @@ function setup(){const tk=Object.keys(U.THEMES);
 function reveal(){const w=G.words[idx];
  if(!shown)v.innerHTML='<div class="uc"><div class="card"><p>Passe le téléphone à</p><div class="word">'+esc(nm(idx))+'</div><p>Les autres ne regardent pas !</p></div><button id="see" class="primary big">Voir mon mot</button></div>';
  else v.innerHTML='<div class="uc"><div class="card"><p>'+esc(nm(idx))+', ton mot est</p><div class="word">'+(w?esc(w):'Aucun mot')+'</div><p>'+(w?'Retiens-le, puis cache l\'écran.':'Tu es Mister White. Écoute les autres et bluffe.')+'</p></div><button id="hide" class="primary big">'+(idx<S.n-1?'J\'ai vu, suivant':'J\'ai vu, on commence')+'</button></div>';
- if(!shown)$('#see').onclick=()=>{shown=true;draw()};else $('#hide').onclick=()=>{shown=false;idx++;if(idx>=S.n){ph='talk'}draw()}}
+ if(!shown){const b=$('#see');b.disabled=lockUntil>Date.now();if(b.disabled)setTimeout(()=>{if(b.isConnected)b.disabled=false},lockUntil-Date.now()+20);b.onclick=()=>{if(Date.now()<lockUntil||ph!=='reveal'||shown)return;shown=true;lockUntil=Date.now()+400;draw()}}else{const h=$('#hide');h.onclick=()=>{if(Date.now()<lockUntil||!shown)return;shown=false;idx++;lockUntil=Date.now()+600;if(idx>=S.n){ph='talk'}draw()}}}
+let lockUntil=0;
+function coverSecret(){if(ph==='reveal'&&shown){shown=false;lockUntil=Date.now()+600;draw()}}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)coverSecret()});addEventListener('pagehide',coverSecret);addEventListener('blur',coverSecret);
 function talk(){const rc=U.roleCounts(S.n,S.mw&&S.n>=5);
  v.innerHTML='<div class="uc"><div class="card"><p>Tout le monde a son mot.</p><p>Il y a '+rc.u+' undercover'+(rc.w?' et 1 Mister White':'')+' parmi '+S.n+' joueurs.</p><p>Commence : <b>'+esc(nm(G.first))+'</b></p></div><p>Chacun décrit son mot en un mot ou une phrase, dans le sens des aiguilles d\'une montre.</p><button id="vote" class="primary big">Passer au vote</button></div>';
  $('#vote').onclick=()=>{ph='vote';sel=-1;draw()}}

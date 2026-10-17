@@ -9,7 +9,7 @@ await p.locator('#mw').click();await p.locator('[data-t=lol]').click();await p.l
 for(let k=0;k<7;k++)await p.locator('#m').click();assert.equal(await p.locator('#cnt').textContent(),'3');assert(await p.locator('#mw').isDisabled());
 await p.locator('#p').click();await p.locator('#p').click();await p.locator('input').first().fill('Lilou');
 await p.locator('#go').click();const words=[];
-for(let i=0;i<5;i++){await p.locator('#see').click();words.push(await p.locator('.word').textContent());if(i==0)await fit('reveal');await p.locator('#hide').click()}
+for(let i=0;i<5;i++){await p.waitForTimeout(650);await p.locator('#see').click();await p.waitForTimeout(450);words.push(await p.locator('.word').textContent());if(i==0)await fit('reveal');await p.locator('#hide').click()}
 assert.equal(words.filter(x=>x==='Aucun mot').length,1);await fit('talk');
 await p.locator('#vote').click();await fit('vote');
 // eliminate until end
