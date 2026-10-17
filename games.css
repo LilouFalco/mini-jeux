@@ -36,3 +36,4 @@ body.mf h1{font-size:60px;letter-spacing:-4px}body.mf h1 span{display:inline-blo
 .puissance4 .names,.morpion .names{display:grid;gap:8px;margin:12px 0}.puissance4 .names input{width:100%;font:inherit;padding:6px;border:2px solid var(--outline);background:#fff9ee;border-radius:4px}.puissance4 .names input:disabled{opacity:.5}.puissance4 .controls{min-width:210px}.puissance4 .play-area{align-items:start}
 #score{display:flex;flex-direction:column;gap:2px;margin:6px 0}
 .games{max-width:100%;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.games::-webkit-scrollbar{display:none}.games a{white-space:nowrap;flex:none}
+.puissance4 .board-wrap{width:100%;max-width:420px}.puissance4 .colbtns button{height:30px;position:relative}.puissance4 .colbtns button::before{content:"";position:absolute;left:50%;top:50%;margin:-3px 0 0 -6px;border:6px solid transparent;border-top:8px solid currentColor;border-bottom:0}

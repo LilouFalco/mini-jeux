@@ -7,7 +7,7 @@ const name=p=>st.mode==='two'?(p===1?st.n1:st.n2):(p===1?st.n1:'Ordi');
 const SY={1:'♥',2:'✦'};
 function render(){
  const cb=$('#colbtns');cb.innerHTML='';
- for(let c=0;c<C;c++){const x=document.createElement('button');x.textContent='▾';x.setAttribute('aria-label','Colonne '+(c+1));x.className=c===st.sel?'sel':'';x.disabled=st.over||st.busy||P.drop(st.b,c)<0;x.onclick=()=>{st.sel=c;play(c)};cb.appendChild(x)}
+ for(let c=0;c<C;c++){const x=document.createElement('button');x.setAttribute('aria-label','Colonne '+(c+1));x.className=c===st.sel?'sel':'';x.disabled=st.over||st.busy||P.drop(st.b,c)<0;x.onclick=()=>{st.sel=c;play(c)};cb.appendChild(x)}
  const b=$('#board');b.innerHTML='';
  st.b.forEach((v,i)=>{const d=document.createElement('div');d.className='pcell'+(v?' p'+v:'')+(st.line?.includes(i)?' win':'')+(i===st.last?' last':'');d.setAttribute('role','gridcell');d.setAttribute('aria-label',v?SY[v]:'vide');d.textContent=v?SY[v]:'';b.appendChild(d)});
  document.querySelectorAll('[data-mode]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.mode===st.mode)));
