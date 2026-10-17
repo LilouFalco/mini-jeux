@@ -18,8 +18,8 @@ for(const f of pages){const p=await c.newPage();const errs=[];p.on('pageerror',e
  assert(!errs.length,errs.join());await p.close()}
 // home choices
 let p=await c.newPage();await p.goto(B);await p.evaluate(()=>localStorage.clear());await p.reload();assert.equal(await p.locator('.mode').count(),3);assert(await p.locator('#glist').isHidden());
-await p.locator('.mode[data-k=multi]').tap();assert.equal(await p.locator('.gtile').count(),3);assert.equal(await p.locator('.gtile a, a.gtile').count(),1);
-await p.locator('.mode[data-k=duo]').tap();await p.locator('a.gtile',{hasText:'Morpion'}).tap();await p.waitForURL(/morpion\.html\?mode=duo/);
+await p.locator('.mode[data-k=multi]').tap();await p.waitForSelector('.msheet:not([hidden])');assert.equal(await p.locator('.msheet .mtile').count(),3);assert.equal(await p.locator('.msheet a.mtile').count(),1);await p.locator('.mclose').tap();
+await p.locator('.mode[data-k=duo]').tap();await p.locator('.msheet a.mtile',{hasText:'Morpion'}).tap();await p.waitForURL(/morpion\.html\?mode=duo/);
 assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('lilou-morpion-v1')||'{}').mode||document.querySelector('[data-mode][aria-pressed=true]').dataset.mode),'two');
 assert.equal(await p.locator('.mbar button[aria-current=page]').getAttribute('data-k'),'duo');
 await p.locator('.mback').tap();await p.waitForURL(u=>!/morpion/.test(u.href));assert.equal(await p.locator('.mode[aria-pressed=true]').getAttribute('data-k'),'duo','mode remembered');

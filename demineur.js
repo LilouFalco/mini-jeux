@@ -19,8 +19,15 @@ function start(level){
  game={level,R:s.R,C:s.C,total:s.mines,mines:null,counts:null,state:new Array(s.R*s.C).fill(0),elapsed:0,over:false,won:false,lost:-1,id:Date.now().toString(36)};
  selected=Math.floor(s.R/2)*s.C+Math.floor(s.C/2);build();save();message('Le premier clic ouvre toujours une zone sûre.');
 }
+const MQ=matchMedia('(max-width:700px)');
+function fitMobile(){const b=document.querySelector('#board'),sc=document.querySelector('.board-scroll');if(!b||!sc||!game)return;
+ if(!MQ.matches){b.style.removeProperty('--cs');b.classList.remove('fixedfit');return}
+ b.classList.add('fixedfit');const cs=getComputedStyle(sc),w=sc.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight),h=sc.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+ if(w<=0||h<=0)return;const px=Math.max(6,Math.floor(Math.min(w/game.C,h/game.R)*2)/2);b.style.setProperty('--cs',px+'px')}
+addEventListener('resize',()=>fitMobile());addEventListener('orientationchange',()=>setTimeout(fitMobile,150));
+addEventListener('DOMContentLoaded',()=>{const sc=document.querySelector('.board-scroll');if(sc&&window.ResizeObserver)new ResizeObserver(()=>fitMobile()).observe(sc)});
 function build(){
- const b=$('#board');b.style.setProperty('--c',game.C);b.dataset.size=game.R+'x'+game.C;b.classList.toggle('compact',compact);b.replaceChildren();
+ const b=$('#board');b.style.setProperty('--c',game.C);b.dataset.size=game.R+'x'+game.C;b.classList.toggle('compact',compact);b.replaceChildren();requestAnimationFrame(fitMobile);
  for(let i=0;i<game.R*game.C;i++){
   const c=document.createElement('button');c.type='button';c.className='cell';c.dataset.i=i;c.setAttribute('role','gridcell');
   c.addEventListener('click',()=>{if(suppress>Date.now())return;selected=i;act(i)});

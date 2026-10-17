@@ -21,6 +21,7 @@ function toggle(k){if(!sheet.hidden&&openKey===k)return close();
  sheet.hidden=false;document.documentElement.classList.add('msheet-open');
  bar.querySelectorAll('button').forEach(b=>b.setAttribute('aria-expanded',String(b.dataset.k===k)));
  (sheet.querySelector('.mtile[href]')||sheet.querySelector('.mclose')).focus({preventScroll:true})}
+window.MiniSheet={open:k=>{if(sheet.hidden||openKey!==k)toggle(k)},close:()=>close(),isOpen:()=>!sheet.hidden,key:()=>openKey};
 function close(){sheet.hidden=true;openKey=null;document.documentElement.classList.remove('msheet-open');bar.querySelectorAll('button').forEach(b=>b.setAttribute('aria-expanded','false'))}
 sheet.querySelector('.mbackdrop').onclick=close;sheet.querySelector('.mclose').onclick=close;
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!sheet.hidden)close()});

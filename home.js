@@ -2,7 +2,7 @@
 (function(){
 const Y=window.YakazuGames,$=s=>document.querySelector(s);let mode=Y.getMode(),players=4;
 const cards=$('#modes'),list=$('#glist'),step=$('#players');
-Y.MODES.forEach(m=>{const b=document.createElement('button');b.type='button';b.className='mode';b.dataset.k=m.k;b.innerHTML='<span class="mico">'+Y.svg(m.i,'mi huge')+'</span><b>'+m.n+'</b><small>'+m.t+'</small>';b.onclick=()=>{mode=m.k;Y.setMode(m.k);draw();list.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'nearest'})};cards.appendChild(b)});
+Y.MODES.forEach(m=>{const b=document.createElement('button');b.type='button';b.className='mode';b.dataset.k=m.k;b.innerHTML='<span class="mico">'+Y.svg(m.i,'mi huge')+'</span><b>'+m.n+'</b><small>'+m.t+'</small>';b.onclick=()=>{mode=m.k;Y.setMode(m.k);draw();if(matchMedia('(max-width:700px)').matches&&window.MiniSheet){window.MiniSheet.open(m.k);return}list.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'nearest'})};cards.appendChild(b)});
 function draw(){
  cards.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.k===mode)));
  list.hidden=!mode;if(!mode)return;
