@@ -26,5 +26,12 @@ function close(){sheet.hidden=true;openKey=null;document.documentElement.classLi
 sheet.querySelector('.mbackdrop').onclick=close;sheet.querySelector('.mclose').onclick=close;
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!sheet.hidden)close()});
 function mount(){const b=document.body;b.classList.add('has-mnav');b.prepend(top);b.append(sheet,bar)}
+(function(){if(!('serviceWorker' in navigator)||window.__miniSw)return;window.__miniSw=1;
+ const had=!!navigator.serviceWorker.controller;let reloaded=false;
+ const note=txt=>{let n=document.querySelector('.autosave,#offline-ready');if(!n&&home){const f=document.querySelector('footer');if(f){n=E('p');n.id='offline-ready';n.setAttribute('role','status');n.style.cssText='margin:6px 0 0;font-size:12px;opacity:.8';f.appendChild(n)}}if(n)n.textContent=txt};
+ navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!had||reloaded||!home)return;reloaded=true;location.reload()});
+ const go=()=>navigator.serviceWorker.register('sw.js',{scope:'./'}).then(()=>navigator.serviceWorker.ready).then(r=>{if(r.active&&home)note('♡ Prêt hors connexion.')}).catch(()=>{});
+ if(document.readyState==='complete')go();else addEventListener('load',go,{once:true});
+})();
 if(document.body)mount();else document.addEventListener('DOMContentLoaded',mount);
 })();

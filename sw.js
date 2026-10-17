@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='lilou-yakazu-v16';
+const CACHE='lilou-yakazu-v17';
 const FILES=['./','index.html','yakazu.html','home.css','home.js','games-data.js','sudoku.html','mots-fleches.html','binairo.html','style.css','games.css','fonts.css','app.js','engine.js','worker.js','sudoku.js','sudoku-engine.js','sudoku-worker.js','mf.js','mf-engine.js','mf-words.js','mf-worker.js','binairo.js','binairo-engine.js','binairo-worker.js','demineur.html','demineur.js','demineur-engine.js','mobile.css','mobile.js','morpion.html','naval.html','undercover.html','undercover.js','undercover-engine.js','naval.js','naval-engine.js','morpion.js','morpion-engine.js','puissance4.html','puissance4.js','puissance4-engine.js','icon.svg','symbols.woff2','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png',...Array.from({length:6},(_,i)=>'fonts/font-'+i+'.ttf')];
 const ROOT=new URL('./',self.location).href;
 self.addEventListener('install',event=>{
@@ -11,7 +11,7 @@ self.addEventListener('activate',event=>{
 self.addEventListener('fetch',event=>{
  if(event.request.method!=='GET'||!event.request.url.startsWith(ROOT))return;
  event.respondWith(caches.open(CACHE).then(async cache=>{
-  const cached=await cache.match(event.request);
+  const cached=await cache.match(event.request)||(event.request.mode==='navigate'?await cache.match(event.request,{ignoreSearch:true}):null);
   if(cached)return cached;
   try{return await fetch(event.request)}
   catch(error){if(event.request.mode==='navigate')return cache.match(new URL('index.html',ROOT).href);throw error}
