@@ -127,3 +127,10 @@ body.has-mnav{position:fixed;inset:0;width:100%;padding:0}
 .has-mnav.demineur #zoom,.has-mnav.demineur .scroll-hint{display:none!important}
 }
 @media(max-width:700px){.has-mnav .glist{display:none!important}}
+@media(max-width:700px){.has-mnav.quiestce .game-body{overflow:hidden;display:flex;flex-direction:column;padding:8px 8px 6px}.has-mnav.quiestce #v{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.has-mnav.quiestce .qe{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;width:100%;max-width:none;overflow:hidden}
+.has-mnav.quiestce .qg{flex:1;min-height:0;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(6,minmax(0,1fr));gap:4px}
+.has-mnav.quiestce .qc{padding:2px;overflow:hidden;min-height:0}.has-mnav.quiestce .qc img{flex:1;min-height:0;width:auto;max-width:100%;height:auto;aspect-ratio:1}.has-mnav.quiestce .qc span{font-size:9px}
+.has-mnav.quiestce .qbar{flex:none;gap:6px}.has-mnav.quiestce .qbar button{min-height:44px;padding:4px 6px;font-size:13px}.has-mnav.quiestce .stage-title{flex:none;font-size:12px}.has-mnav.quiestce .secret{flex:none;padding:4px;font-size:12px}
+.has-mnav.quiestce .qe.cover,.has-mnav.quiestce .qe.end{justify-content:center}.has-mnav.quiestce .qe.end .reveal{flex:none}.has-mnav.quiestce .qc.big{width:84px}
+.has-mnav.quiestce footer{display:none}}

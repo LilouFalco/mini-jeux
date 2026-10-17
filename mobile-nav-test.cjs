@@ -10,7 +10,7 @@ for(const f of pages){const p=await c.newPage();const errs=[];p.on('pageerror',e
  const small=await p.evaluate(()=>[...document.querySelectorAll('.mbar button,.mback,.mclose,.mode')].filter(e=>e.offsetParent&&(e.getBoundingClientRect().height<44||e.getBoundingClientRect().width<44)).length);assert.equal(small,0,'tap size '+f);
  assert(!(await p.locator('.has-mnav>main>header').isVisible()),'old header hidden');
  assert(await p.evaluate(()=>Math.round(document.querySelector('.mbar').getBoundingClientRect().bottom)===innerHeight),'bar fixed');
- const counts={solo:[9,8],duo:[5,3],multi:[3,1]};
+ const counts={solo:[9,8],duo:[5,4],multi:[3,1]};
  for(const k of ['solo','duo','multi']){await p.locator('.mbar button[data-k='+k+']').tap();assert.equal(await p.locator('.msheet:visible .mtile').count(),counts[k][0],k+' tiles');assert.equal(await p.locator('.msheet a.mtile').count(),counts[k][1],k+' links');await p.keyboard.press('Escape');assert(!(await p.locator('.msheet:visible').count()))}
  await p.locator('.mbar button[data-k=solo]').tap();await p.locator('.mbar button[data-k=solo]').tap();assert(!(await p.locator('.msheet:visible').count()));
  assert(/user-scalable=no/.test(await p.evaluate(()=>document.querySelector('meta[name=viewport]').content)));
