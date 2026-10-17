@@ -11,3 +11,9 @@ Lancer en local avec `python3 -m http.server 28461`.
 Tests moteur avec `node test.cjs`. Tests navigateur avec `node ui-test.cjs` (Playwright et Chrome requis ; chemins de lancement à adapter). Les tests comprennent l’exemple officiel de yakazu-gratuit.fr, le cas des segments isolés, 40 générations vérifiées uniques et les interactions aux largeurs 1440, 390 et 360.
 
 Publication GitHub Pages depuis main, racine.
+
+## Installation et hors connexion
+
+Le manifeste propose un affichage autonome et des icônes PNG roses 192/512. Sur un navigateur compatible, utiliser « Installer l’application » ou « Ajouter à l’écran d’accueil ». Après le premier chargement, attendre la mention « prêt hors connexion ». Le service worker précache tout le jeu, le générateur et les polices locales. Les nouvelles grilles sont créées sur l’appareil sans réseau. Comme toute application web, le mode hors connexion dépend de la conservation des données du site par le navigateur.
+
+Tester le mode avion avec `node offline-test.cjs` : Playwright coupe le réseau, recharge la page, vérifie les ressources et les polices, génère aux quatre niveaux et vérifie la sauvegarde après rechargement, sur ordinateur et mobile. Le cache du service worker doit changer de version lors des futures mises à jour d’assets.

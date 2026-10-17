@@ -106,3 +106,11 @@ document.addEventListener('keydown',e=>{
 setInterval(()=>{if(game&&!game.won&&!busy&&!document.hidden&&!document.querySelector('dialog[open]')){game.elapsed++;$('#timer').textContent=time();if(game.elapsed%5===0)save()}},1000);
 document.addEventListener('visibilitychange',save);addEventListener('pagehide',save);
 if(load()){selected=m.cells.find(i=>!game.givens[i])??m.cells[0];build();message(game.won?'Ta dernière victoire est sauvegardée. Une autre grille ?':'Ta petite pause reprend exactement ici.')}else start(0);
+
+// A complete, same-origin app shell is precached for airplane-mode play.
+if('serviceWorker' in navigator){
+ addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{scope:'./'}).then(()=>navigator.serviceWorker.ready).then(()=>{
+  const saved=document.querySelector('.autosave');
+  if(saved)saved.textContent='♡ Sauvegarde auto · prêt hors connexion.';
+ }).catch(()=>{/* Online play remains available if browser storage is disabled. */}));
+}

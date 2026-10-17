@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "Yakazu · la pause de Lilou",
+  "short_name": "Yakazu",
+  "lang": "fr",
+  "description": "Des grilles Yakazu uniques et une petite pause toute douce, même hors connexion.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff9ee",
+  "theme_color": "#d58b9f",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
