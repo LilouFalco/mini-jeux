@@ -37,3 +37,14 @@ body.mf h1{font-size:60px;letter-spacing:-4px}body.mf h1 span{display:inline-blo
 #score{display:flex;flex-direction:column;gap:2px;margin:6px 0}
 .games{max-width:100%;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.games::-webkit-scrollbar{display:none}.games a{white-space:nowrap;flex:none}
 .puissance4 .board-wrap{width:100%;max-width:420px}.puissance4 .colbtns button{height:30px;position:relative}.puissance4 .colbtns button::before{content:"";position:absolute;left:50%;top:50%;margin:-3px 0 0 -6px;border:6px solid transparent;border-top:8px solid currentColor;border-bottom:0}
+
+.naval .names{display:grid;gap:8px;margin:12px 0;max-width:320px}.naval .names input{width:100%;font:inherit;padding:6px;border:2px solid var(--outline);background:#fff9ee;border-radius:4px}.naval .names input:disabled{opacity:.5}
+.naval .hint{font-size:12px;color:var(--muted);line-height:1.5;max-width:420px}.naval .tools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.naval .tools button{flex:1 1 auto}
+.naval .stage-title{font-weight:700;margin:0 0 8px}.naval .gl{font-size:11px;margin:6px 0 4px;color:var(--muted)}
+.naval .grids{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+.naval .ngrid{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:2px;width:min(88vw,360px);padding:4px;background:#d58b9f;border:3px solid var(--outline);border-radius:6px;box-shadow:3px 3px 0 #edd5da;touch-action:manipulation}
+.naval .ngrid.small{width:min(60vw,200px)}
+.naval .nc{aspect-ratio:1;padding:0;border:0;border-radius:2px;background:#cfe9f3;color:#fff;font-size:clamp(10px,3.2vw,16px);display:flex;align-items:center;justify-content:center;line-height:1}
+.naval .nc.ship{background:#8f6a80}.naval .nc.miss{background:#e9f3f7;color:#6aa0b8}.naval .nc.hit{background:#c8466e}.naval .nc.prev{background:#f3b6c6}.naval .nc.bad{background:#e08b7a}.naval .nc:disabled{opacity:1}
+.naval .fleet{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px;font-size:12px;letter-spacing:1px;color:var(--muted)}.naval .fleet .cur{color:#c8466e;font-weight:700}.naval .fleet .done{opacity:.35}
+.naval #cover{text-align:center;padding:48px 12px;background:#f9e4e8;border:3px solid var(--outline);border-radius:6px}.naval #cover p{margin:0 0 16px;line-height:1.5}

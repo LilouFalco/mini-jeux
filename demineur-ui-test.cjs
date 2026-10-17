@@ -5,7 +5,7 @@ const st=p=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),K);
  for(const width of [1440,390,360]){
   const mobile=width<600,c=await b.newContext({viewport:{width,height:844},isMobile:mobile,hasTouch:mobile}),p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
   await p.goto(BASE+'demineur.html');await p.waitForSelector('#board .cell');
-  assert.equal(await p.locator('.games a').count(),5);
+  assert(await p.locator('.games a').count()>=5);
   const dims=[[9,9],[16,16],[16,30],[24,30]],tot=[10,40,99,160];
   for(let l=0;l<4;l++){if(l>0){await p.locator('[data-level="'+l+'"]').click();if(await p.locator('#confirm[open]').count())await p.click('#replace')}
    await p.waitForFunction(([l,n])=>document.querySelectorAll('#board .cell').length===n,[l,dims[l][0]*dims[l][1]]);
