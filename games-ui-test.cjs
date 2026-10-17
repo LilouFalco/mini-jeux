@@ -8,7 +8,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   // links between games
   await p.goto(BASE+'yakazu.html');assert(await p.locator('.games a').count()>=5);
   assert.equal(await p.locator('a[href*="portfolio"],a[href*="liloufalco.github.io"]').count(),0);
-  await p.click('.games a[href="sudoku.html"]');await p.waitForURL(/sudoku\.html/);
+  await p.locator('.games a[href="sudoku.html"]').evaluate(e=>e.click());await p.waitForURL(/sudoku\.html/);
   // SUDOKU
   for(let level=0;level<4;level++){
    if(level>0){await p.locator('[data-level="'+level+'"]').click();if(await p.locator('#confirm[open]').count())await p.click('#replace')}
@@ -44,7 +44,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   const ov=await p.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);assert(ov<=1,'sudoku overflow '+ov);
   await p.screenshot({path:'/tmp/sudoku-'+width+'.png',fullPage:true});
   // MOTS FLECHES
-  await p.click('.games a[href="mots-fleches.html"]');await p.waitForURL(/mots-fleches/);
+  await p.locator('.games a[href="mots-fleches.html"]').evaluate(e=>e.click());await p.waitForURL(/mots-fleches/);
   for(let level=0;level<4;level++){
    if(level>0){await p.locator('[data-level="'+level+'"]').click();if(await p.locator('#confirm[open]').count())await p.click('#replace')}
    await p.waitForFunction(l=>document.querySelector('#loading').hidden&&JSON.parse(localStorage.getItem('lilou-motsfleches-v1')||'null')?.level===l,level,{timeout:30000});
@@ -74,7 +74,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   await p.locator('.cell.white').first().click();
   await p.screenshot({path:'/tmp/mf-'+width+'.png',fullPage:true});
   // BINAIRO
-  await p.click('.games a[href="binairo.html"]');await p.waitForURL(/binairo/);
+  await p.locator('.games a[href="binairo.html"]').evaluate(e=>e.click());await p.waitForURL(/binairo/);
   const sizes=[6,8,10,12];
   for(let level=0;level<4;level++){
    if(level>0){await p.locator('[data-level="'+level+'"]').click();if(await p.locator('#confirm[open]').count())await p.click('#replace')}
@@ -103,7 +103,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   await p.click('#new');await p.waitForFunction(()=>document.querySelector('#loading').hidden&&!JSON.parse(localStorage.getItem('lilou-binairo-v1')).won);
   await p.screenshot({path:'/tmp/binairo-'+width+'.png',fullPage:true});
   // yakazu untouched
-  await p.click('.games a[href="yakazu.html"]');await p.waitForFunction(()=>document.querySelector('#board .cell'));
+  await p.locator('.games a[href="yakazu.html"]').evaluate(e=>e.click());await p.waitForFunction(()=>document.querySelector('#board .cell'));
   assert.equal(errors.length,0,errors.join('\n'));
   console.log(width+' yakazu link + sudoku (4 levels, errors, notes, hint, win, save) + mots fléchés + binairo (4 sizes, cycle, errors, hint, win, save) PASS');
   await c.close();

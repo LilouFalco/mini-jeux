@@ -8,7 +8,7 @@ let curMode=new URLSearchParams(location.search).get('mode');if(!['solo','duo','
 if(!curMode&&cur){const s=Y.getMode();curMode=s&&s in cur.m?s:Object.keys(cur.m)[0]}
 if(!curMode&&home)curMode=Y.getMode();
 const top=E('div');top.className='mtop';
-top.innerHTML=(home?'<span class="mlogo" aria-hidden="true">✦</span>':'<a class="mback" href="./" aria-label="Retour à l\'accueil">'+svg('M15 5l-7 7 7 7')+'</a>')+'<strong>'+(cur?cur.n:'Pause jeux')+'</strong><span class="mtag" aria-hidden="true">pause douce</span>';
+top.innerHTML=(home?'<span class="mlogo" aria-hidden="true">✦</span>':'<a class="mback" href="./" aria-label="Retour à l\'accueil">'+svg('M15 5l-7 7 7 7')+'</a>')+'<strong>'+(cur?cur.n:'Mini-jeux')+'</strong><span class="mtag" aria-hidden="true">pause douce</span>';
 const bar=E('nav');bar.className='mbar';bar.setAttribute('aria-label','Choisir un mode');
 const sheet=E('div');sheet.className='msheet';sheet.hidden=true;sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');
 sheet.innerHTML='<div class="mbackdrop"></div><div class="mpanel"><div class="mhead"><strong id="msh-t"></strong><button type="button" class="mclose" aria-label="Fermer">'+svg('M6 6l12 12M18 6L6 18')+'</button></div><div class="mtiles"></div></div>';

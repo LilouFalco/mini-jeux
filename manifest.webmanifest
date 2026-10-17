@@ -1,9 +1,9 @@
 {
   "id": "./",
-  "name": "Pause de Lilou · Yakazu, Sudoku, Mots fléchés",
-  "short_name": "Pause jeux",
+  "name": "Mini-jeux · la pause de Lilou",
+  "short_name": "Mini-jeux",
   "lang": "fr",
-  "description": "Yakazu, Sudoku et mots fléchés en grilles infinies, jouables hors connexion.",
+  "description": "Les mini-jeux de la pause de Lilou : seule, à deux ou entre amis, même hors connexion.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
