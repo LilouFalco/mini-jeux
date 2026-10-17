@@ -3,5 +3,8 @@
 const N=24;
 function pick(n,rnd){rnd=rnd||Math.random;const a=ROSTER.map(c=>c.id);for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,n||N)}
 function name(id){const c=ROSTER.find(c=>c.id===id);return c?c.name:id}
-function judge(champs,secrets,guesser,idx){return champs[idx]===secrets[1-guesser]?guesser:1-guesser}
+function judge(champs,secrets,guesser,idx){
+ if(!Array.isArray(champs)||!Array.isArray(secrets)||secrets.length!==2||!Number.isInteger(guesser)||guesser<0||guesser>1||!Number.isInteger(idx)||idx<0||idx>=champs.length||!secrets.every(i=>Number.isInteger(i)&&i>=0&&i<champs.length))throw new RangeError('Invalid champion or player index');
+ return idx===secrets[1-guesser]?guesser:1-guesser
+}
 const api={ROSTER,N,pick,name,judge};if(typeof module!=='undefined')module.exports=api;else g.QE=api})(typeof window!=='undefined'?window:globalThis);
