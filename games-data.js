@@ -22,6 +22,7 @@ G.find(g=>g.id==='morpion').m.online='morpion.html?mode=online';
 G.find(g=>g.id==='puissance4').m.online='puissance4.html?mode=online';
 G.find(g=>g.id==='chess').m.online='chess.html?mode=online';
 G.find(g=>g.id==='naval').m.online='naval.html?mode=online';
+G.find(g=>g.id==='quiestce').m.online='quiestce.html?mode=online';
 const KEY='lilou-yakazu-mode';
 const getMode=()=>{try{const m=localStorage.getItem(KEY);return MODES.some(x=>x.k===m)?m:null}catch{return null}};
 const setMode=m=>{try{localStorage.setItem(KEY,m)}catch{}};

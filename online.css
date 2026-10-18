@@ -54,3 +54,12 @@
 
 .online-active.naval .game-body>#setup,.online-active.naval .game-body>#stage,.online-active.naval .game-body>#cover{display:none}
 .naval .on-grids{display:grid;gap:10px;justify-items:center}
+
+.online-active.quiestce .game-body>#v{display:none}
+.quiestce .qe-modes{display:none;text-align:center;margin:0 0 6px}.quiestce .game-body:has(#v .names) .qe-modes{display:block}
+.quiestce .qe-online-btn{font:inherit;font-size:12px;padding:7px 14px;min-height:34px;border:2px solid var(--outline);border-radius:6px;background:#f9e9ee;color:var(--outline);box-shadow:2px 2px 0 var(--outline);cursor:pointer}.online-active.quiestce .qe-modes{display:none!important}
+.quiestce .qe-me{display:flex;align-items:center;gap:8px;justify-content:center;margin:6px 0}.quiestce .qe-me .qc{width:84px}
+.quiestce #online-root .qg{grid-template-columns:repeat(4,1fr)}.quiestce #online-root .qc:disabled{opacity:1}.quiestce #online-root .qc.x:disabled{opacity:.35}
+
+/* Online grids must not inherit the offline fit-to-viewport rows: 44px buttons would overflow and overlap. */
+@media(max-width:700px){.has-mnav.quiestce #online-root .qg{flex:none;grid-template-rows:none;grid-auto-rows:auto}.has-mnav.quiestce #online-root .qc{overflow:hidden;min-height:0}.has-mnav.quiestce #online-root .qc img{flex:none;width:100%;height:auto}.has-mnav.quiestce #online-root .qe-me .qc{width:84px}}
