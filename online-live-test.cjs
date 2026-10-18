@@ -139,7 +139,9 @@ for(let i=0;i<2;i++)await recordJoined(i,(await snap(pages[i],roomId)).topic);
  const after=await snap(other,roomId);
  assert.equal(after.id,roomId);assert.equal(after.instance,prior.instance);
  assert.equal(after.version,prior.version+1);assert.equal(after.topic,prior.topic);
- assert.ok(st.events.slice(eventOffset).some(e=>e.topic==='realtime:'+after.topic&&e.instance===after.instance&&e.version===after.version),'broadcast topic/epoch, instance and version must match canonical RPC of this exact move');
+ const matchingEvents=st.events.slice(eventOffset).filter(e=>e.topic==='realtime:'+after.topic&&e.instance===after.instance&&e.version===after.version);
+ assert.ok(matchingEvents.length,'broadcast topic/epoch, instance and version must match canonical RPC of this exact move');
+ for(const event of matchingEvents)if(event.id!==undefined)assert.ok(event.id===roomId,'broadcast payload.id does not match canonical room.id');
  }
  await start();const stale=await snap(a,roomId);
  for(const [p,o,cell]of [[a,b,0],[b,a,3],[a,b,1],[b,a,4],[a,b,2]])await move(p,o,cell);
