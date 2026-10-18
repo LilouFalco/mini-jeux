@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),decode=require('./online-live-frame.cjs');
+const topic=Buffer.from('realtime:mini:fixture:epoch'),event=Buffer.from('changed'),meta=Buffer.from('{"fixture":true}');
+const expected={version:7,instance:'fixture-instance'},body=Buffer.from(JSON.stringify(expected));
+const frame=Buffer.concat([Buffer.from([4,topic.length,event.length,meta.length,1]),topic,event,meta,body]);
+const message=decode(frame);
+assert.equal(message.topic,topic.toString());assert.equal(message.event,'broadcast');assert.equal(message.payload.event,'changed');
+assert.deepEqual(message.payload.payload,expected);assert.deepEqual(Object.keys(message.payload.payload).sort(),['instance','version']);
+assert.deepEqual(decode(JSON.stringify([null,null,topic.toString(),'broadcast',{event:'changed',payload:expected}])),message);
+assert.throws(()=>decode(Buffer.from([4,20,7,0,1])),/truncated/);
+const binary=Buffer.from(frame);binary[4]=0;assert.throws(()=>decode(binary),/JSON/);
+console.log('PASS offline Realtime v2 binary/text fixture, metadata offset and minimal payload');

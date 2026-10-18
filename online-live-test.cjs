@@ -44,9 +44,7 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  p.on('pageerror',e=>errors.push(e.message));
  p.on('request',r=>{if(r.url().includes('/rest/v1/rpc/')){st.rpc++;if(r.url().endsWith('online_heartbeat'))st.heartbeat++;}});
  p.on('websocket',ws=>{ws.on('framereceived',f=>{try{
- let m;
- if(typeof f.payload==='string'){const raw=JSON.parse(f.payload);m=Array.isArray(raw)?{topic:raw[2],event:raw[3],payload:raw[4]}:raw;}
- else{const b=Buffer.from(f.payload);if(b[0]!==4)return;const r=b[1],i=b[2],a=b[3];m={topic:b.subarray(5,5+r).toString(),event:'broadcast',payload:{event:b.subarray(5+r,5+r+i).toString(),payload:JSON.parse(b.subarray(5+r+i+a).toString())}};}
+ const m=require('./online-live-frame.cjs')(f.payload);if(!m)return;
  if(m.event==='broadcast'&&m.payload?.event==='changed'){if(!st.changed)console.log('first real socket changed',engine,i,JSON.stringify(shape(m.payload.payload)));st.changed++;const payload=m.payload.payload;st.payloadKeys.push(Object.keys(payload).sort().join(','));}
  if(m.event==='phx_reply'&&m.payload?.status==='ok'&&m.topic?.startsWith('realtime:mini:')){st.subscribed++;if(!st.topics.includes(m.topic))st.topics.push(m.topic);}
  }catch{}});});
