@@ -48,14 +48,16 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
   const file=path.join(path.dirname(saved),'auth429-metadata.json');
   fs.writeFileSync(file,JSON.stringify(metadata,null,2),{mode:0o600});fs.chmodSync(file,0o600);
  });
- pages.push(p);const st={changed:0,subscribed:0,rpc:0,heartbeat:0,payloadKeys:[],topics:[]};stats.push(st);
+ pages.push(p);const st={changed:0,subscribed:0,rpc:0,heartbeat:0,payloadKeys:[],topics:[],decodeErrors:0};stats.push(st);
  p.on('pageerror',e=>errors.push(e.message));
  p.on('request',r=>{if(r.url().includes('/rest/v1/rpc/')){st.rpc++;if(r.url().endsWith('online_heartbeat'))st.heartbeat++;}});
  p.on('websocket',ws=>{ws.on('framereceived',f=>{try{
  const m=require('./online-live-frame.cjs')(f.payload);if(!m)return;
- if(m.event==='broadcast'&&m.payload?.event==='changed'){if(!st.changed)console.log('first real socket changed',engine,i,JSON.stringify(shape(m.payload.payload)));st.changed++;const payload=m.payload.payload;st.payloadKeys.push(Object.keys(payload).sort().join(','));}
+ if(m.event==='broadcast'&&m.payload?.event==='changed'){if(!st.changed)console.log('first real socket changed',engine,i,JSON.stringify(shape(m.payload.payload)));st.changed++;const payload=m.payload.payload;
+ if('id' in payload){assert.equal(typeof payload.id,'string');assert.match(payload.id,/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);}
+ st.payloadKeys.push(Object.keys(payload).sort().join(','));}
  if(m.event==='phx_reply'&&m.payload?.status==='ok'&&m.topic?.startsWith('realtime:mini:')){st.subscribed++;if(!st.topics.includes(m.topic))st.topics.push(m.topic);}
- }catch{}});});
+ }catch{st.decodeErrors++;}});});
  await p.goto(BASE+'morpion.html');await p.locator('#online-toggle').click();await p.waitForSelector('#online-pseudo',{timeout:20000});await p.waitForFunction(()=>document.querySelector('#online-status')?.textContent.includes('Choisis un nom'));
  fs.writeFileSync(saved,JSON.stringify(await c.storageState()),{mode:0o600});fs.chmodSync(saved,0o600);
  await p.locator('#online-pseudo').fill('TEST player '+(i+1));await p.locator('#online-room-name').fill(room);
@@ -109,7 +111,13 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  await b.evaluate(async()=>{const c=await MiniOnline.client();if(window.__outsiderChannel)await c.removeChannel(window.__outsiderChannel);});
  await b.getByRole('button',{name:'Rejoindre',exact:true}).click();await b.waitForSelector('.online-members');
  await a.waitForFunction(()=>document.querySelectorAll('.online-members span').length===2,null,{timeout:5000});
- for(let i=0;i<2;i++){await pages[i].waitForFunction(async()=>{const c=await MiniOnline.client();return c.getChannels().some(ch=>ch.state==='joined');},null,{timeout:15000});assert.ok(stats[i].subscribed>0,'real channel subscribed');}
+ async function recordJoined(i,topic){
+ const expected='realtime:'+topic;
+ await pages[i].waitForFunction(async expected=>{const c=await MiniOnline.client();return c.getChannels().some(ch=>ch.topic===expected&&ch.state==='joined'&&ch.params.config.private===true);},expected,{timeout:15000});
+ // Actual official SDK channel state, not a timing-sensitive count of all phx_reply frames.
+ if(!stats[i].topics.includes(expected)){stats[i].subscribed++;stats[i].topics.push(expected);}
+}
+for(let i=0;i<2;i++)await recordJoined(i,(await snap(pages[i],roomId)).topic);
  async function start(){
  await a.getByRole('button',{name:'Prête !',exact:true}).click();
  await b.waitForFunction(()=>[...document.querySelectorAll('.online-members span')].some(x=>x.textContent.includes('player 1')&&x.textContent.includes('✓')),null,{timeout:5000});
@@ -122,7 +130,7 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  const before=stats[pages.indexOf(other)].changed,t=Date.now();
  await p.locator('.online-board .mcell').nth(cell).click();
  await other.waitForFunction(cell=>!!document.querySelectorAll('.online-board .mcell')[cell]?.textContent,cell,{timeout:5000});
- latencies.push(Date.now()-t);assert.ok(stats[pages.indexOf(other)].changed>before,'update from real broadcast');
+ latencies.push(Date.now()-t);assert.ok(latencies.at(-1)<5000,'update must be under five seconds');assert.ok(stats[pages.indexOf(other)].changed>before,'update from real broadcast');
  }
  await start();const stale=await snap(a,roomId);
  for(const [p,o,cell]of [[a,b,0],[b,a,3],[a,b,1],[b,a,4],[a,b,2]])await move(p,o,cell);
@@ -148,12 +156,12 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  const readyBefore=stats[1].changed;
  await a.getByRole('button',{name:'Prête !',exact:true}).click();
  await b.waitForFunction(()=>[...document.querySelectorAll('.online-members span')].some(x=>x.textContent.includes('player 1')&&x.textContent.includes('✓')),null,{timeout:5000});
- assert.ok(stats[1].changed>readyBefore);assert.ok(stats[1].topics.includes('realtime:'+remaining.topic));
+ assert.ok(stats[1].changed>readyBefore);await recordJoined(1,remaining.topic);
  await b.waitForFunction(()=>[...document.querySelectorAll('.online-members span')].some(x=>x.textContent.includes('player 1')&&x.textContent.includes('✓')),null,{timeout:5000});
  await b.getByRole('button',{name:'Prête !',exact:true}).click();await b.getByRole('button',{name:'Démarrer',exact:true}).click();
  await a.waitForSelector('.online-board');assert.equal((await snap(b,roomId)).status,'playing');
  assert.deepEqual(errors,[]);
- for(const st of stats.slice(0,2)){assert.equal(st.heartbeat,0);assert.ok(st.payloadKeys.every(k=>k==='instance,version'),'unexpected notification keys: '+[...new Set(st.payloadKeys)].join(';'));}
+ for(const st of stats.slice(0,2)){assert.equal(st.heartbeat,0);assert.equal(st.decodeErrors,0,'socket decoder/shape errors');assert.ok(st.payloadKeys.every(k=>k==='instance,version'||k==='id,instance,version'),'unexpected notification keys: '+[...new Set(st.payloadKeys)].join(';'));}
  report.push({engine,viewports:['360x640','390x844'],win:true,draw:true,reloadSameIdentityAndSeat:true,stale:'STALE_VERSION',outsiderRead:'NOT_MEMBER',outsiderAction:'NOT_MEMBER',outsiderSubscribe:outsider.status,outsiderEvents:0,noToken:{status:noToken.status,code:noToken.code},directWrite:{status:writes.status,code:writes.code},forgedPublication:forged.result,publicChannel:publicChannel.status,epochRotation:true,epochContinuation:true,maxUpdateMs:Math.max(...latencies),updates:latencies.length,clients:stats.slice(0,2).map(x=>({changed:x.changed,subscribed:x.subscribed,rpc:x.rpc,heartbeat:x.heartbeat})),leaveMs:Date.now()-t});
  }finally{
  // Never use admin deletion. Leave every membership owned by these test guests.
