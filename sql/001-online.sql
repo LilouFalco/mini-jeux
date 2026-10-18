@@ -208,7 +208,7 @@ create or replace function public.online_action(
 ) returns jsonb language plpgsql security definer set search_path = '' as $$
 declare u uuid:=app_private.actor(); r app_private.rooms; m app_private.members;
  req jsonb; prev app_private.receipts; ack jsonb; w int:=0; ln int[]:='{}';
- a int; b int; c int; trip int[]; remain int;
+ a int; b int; c int; trip int[]; remain int; old_topic text;
 begin
  if p_action is null or p_instance is null or p_version is null or p_kind is null
  or p_kind not in ('ready','unready','start','place','rematch','leave')
@@ -256,17 +256,26 @@ begin
  elsif p_kind='leave' then
   delete from app_private.members where room_id=p_room and uid=u;
   select count(*) into remain from app_private.members where room_id=p_room;
+  old_topic:='mini:'||r.id::text||':'||r.epoch::text;
   r.epoch:=gen_random_uuid(); -- cached authorization cannot see future topics
   if remain=0 then r.status:='closed';
   else
    select uid into r.host_uid from app_private.members where room_id=p_room order by seat limit 1;
-   if r.status='playing' then r.status:='finished'; r.winner:=3-m.seat; r.line:='{}'; end if;
+   -- A departure abandons the current round, not the remaining player's lobby.
+   r.status:='waiting'; r.instance:=gen_random_uuid();
+   r.board:=array[0,0,0,0,0,0,0,0,0]; r.turn:=1; r.winner:=0; r.line:='{}';
+   update app_private.members set ready=false where room_id=p_room;
   end if;
  end if;
  update app_private.rooms set status=r.status,instance=r.instance,epoch=r.epoch,host_uid=r.host_uid,
  board=r.board,turn=r.turn,winner=r.winner,line=r.line,version=version+1,expires_at=now()+interval '30 minutes' where id=p_room returning version into r.version;
  ack:=jsonb_build_object('version',r.version,'left',p_kind='leave');
  insert into app_private.receipts(room_id,uid,action_id,request,ack) values(p_room,u,p_action,req,ack);
+ if old_topic is not null then
+  -- The removed member can see this final invalidation hint, never any game state.
+  -- Remaining members on the old channel refetch through membership-checked RPC.
+  perform realtime.send(jsonb_build_object('version',r.version,'instance',r.instance),'changed',old_topic,true);
+ end if;
  perform app_private.notify(p_room);
  return ack;
 end $$;
