@@ -1,0 +1,13 @@
+Online v1 test evidence, local only
+
+All evidence below uses local files. No Supabase schema was applied, project setting changed, anonymous account created, or hosted version deployed by this work. The project must still pass a real two-client Supabase integration check after the owner applies the migration and enables anonymous sign-ins.
+
+node online-sql-test.cjs compiles and reruns the entire transaction in PGlite PostgreSQL WASM. The fixture explicitly stubs auth.uid(), roles, realtime.messages, realtime.topic() and realtime.send(). It checks grant denial for anon/private helpers, membership isolation, normalized name collision, occupied capacity, wrong actor, stale version and instance, exactly-once receipts and request mismatch, computed win/draw, leave old-topic minimal invalidation, epoch authorization rotation, remaining lobby reset and a replacement player's successful start. This is SQL semantics coverage, not a real Realtime authorization integration test.
+
+node online-ui-test.cjs connects two isolated browser contexts to those actual SQL reducers through a serialized test transport. Auth and private Broadcast delivery are simulated. It passes Chromium and WebKit at 360x640 and 390x844, create/join/ready/start/alternating moves/win, reload resume, old-channel leave invalidation and organizer transfer, return to offline mode, text-only markup names, no document overflow, no page errors, and no external API requests.
+
+node online-client-test.cjs checks lazy client creation, restored session, one anonymous signup when missing, no-store transport, RPC error propagation, sanitized errors and setup-disabled wording. node online-failure-test.cjs uses the real vendored SDK for disabled anonymous Auth and storage failures, and an unavailable bundle case. All preserve a playable offline Morpion.
+
+node online-concurrency-test.cjs is the optional test for a fresh isolated local PostgreSQL database. It refuses a non-/tmp/mini-online- socket. It exercises room-first heartbeat contention and independent database-session races for ready, unready, leave, same-version different moves and identical receipt retries. Do not interpret existence of the test as execution evidence. Auth and realtime are still stubs even when a real PostgreSQL server runs it.
+
+Remaining integration gates are real Supabase grants and security advisors, no-token/nonmember API calls, private channel rejection/connected removed-member isolation, Auth expiry/refresh, genuine lost/delayed packets and reconnect, and two real devices. CAPTCHA, identity farming prevention, email accounts, unattended host lease migration, timed disconnect forfeit, retention cleanup and the other seven online games are not part of this first Morpion build.
