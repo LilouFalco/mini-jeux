@@ -51,3 +51,6 @@
  .has-mnav .online-board{width:min(100%,250px);max-height:250px;flex-shrink:0}
 }
 @media(prefers-reduced-motion:reduce){.online-board .mcell{transition:none;animation:none}}
+
+.online-active.naval .game-body>#setup,.online-active.naval .game-body>#stage,.online-active.naval .game-body>#cover{display:none}
+.naval .on-grids{display:grid;gap:10px;justify-items:center}
