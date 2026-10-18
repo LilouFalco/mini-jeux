@@ -10,7 +10,7 @@
 .online-form input{width:100%;min-width:0;box-sizing:border-box;min-height:44px;padding:8px 10px;border:2px solid #d9b3ba;background:#fffaf1;color:#563c47;font:inherit;border-radius:6px}
 .online-form input:focus-visible{outline:3px solid #b77288;outline-offset:2px}
 .online-actions{display:flex;gap:8px}.online-actions>*{flex:1}
-.online-note{font-size:12px;line-height:1.4;margin:0;color:#805965}
+.online-note{font-size:12px;line-height:1.4;margin:0;color:#6b4252}
 .online-status{font-size:13px;line-height:1.4;margin:0;min-height:19px;text-align:center;color:#734b5c}
 .online-directory{display:flex;flex-direction:column;gap:6px}
 .online-room{text-align:left;display:flex;justify-content:space-between;gap:8px;align-items:center}
@@ -29,11 +29,11 @@
  .has-mnav #online-root{flex:1;min-height:0;gap:6px;overflow:hidden}
  .has-mnav .online-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;gap:6px;padding:2px}
  .has-mnav .online-heading strong{font-size:13px}
- .has-mnav .online-heading button{font-size:11px;padding:4px 8px}
+ .has-mnav .online-heading button,.has-mnav #online-root button{font-size:12px;padding:4px 10px;min-height:44px}
  .has-mnav .online-form{gap:5px}
  .has-mnav .online-form label{font-size:12px}
  .has-mnav .online-form input{font-size:16px;min-height:40px;padding:6px 8px}
- .has-mnav .online-note{font-size:11px}
+ .has-mnav .online-note{font-size:12px;color:#6b4252}
  .has-mnav .online-room{padding:6px;align-items:flex-start;flex-direction:column;gap:3px}
  .has-mnav .online-status{font-size:11px;line-height:1.25;flex:none}
  .has-mnav .online-board{width:min(100%,250px);max-height:250px;flex-shrink:0}

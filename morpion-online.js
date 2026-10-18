@@ -215,16 +215,19 @@
  }
  async function open() {
   if (active) return; active = true; generation++; root.hidden = false; document.body.classList.add('online-active');
-  toggle.setAttribute('aria-pressed', 'true'); setup(); message('Connexion au petit salon…');
+  toggle.setAttribute('aria-pressed', 'true'); navSet(); setup(); message('Connexion au petit salon…');
   await task(async () => { await load(); if (active) await lobby(); });
   if (!snapshot && active && !root.querySelector('.online-form')) {
    $('#online-content').append(button('Réessayer', () => task(async () => { await load(); await lobby(); })));
   }
  }
+ let navSaved=null;
+ function navSet(){const bs=[...document.querySelectorAll('.mbar button[data-k]')];if(!bs.length)return;navSaved=bs.map(b=>[b,b.getAttribute('aria-current')]);bs.forEach(b=>{if(b.dataset.k==='duo')b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});}
+ function navRestore(){if(!navSaved)return;navSaved.forEach(([b,v])=>v===null?b.removeAttribute('aria-current'):b.setAttribute('aria-current',v));navSaved=null;}
  function close() {
   // Returning to local games reserves the guest seat; only Quitter abandons it.
   active = false; generation++; busy = false; root.hidden = true;
-  document.body.classList.remove('online-active'); toggle.setAttribute('aria-pressed', 'false');
+  document.body.classList.remove('online-active'); toggle.setAttribute('aria-pressed', 'false'); navRestore();
   clearInterval(timer); timer = null; snapshot = null; pending = null;
   stopChannel().catch(() => {}); toggle.focus();
  }
