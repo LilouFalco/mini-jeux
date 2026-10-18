@@ -2,7 +2,7 @@
 (function(){
 const U=window.Undercover,KEY='lilou-undercover-v1',$=s=>document.querySelector(s),v=$('#v');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let S={n:4,names:['Lilou','Lulu','','','','','','','',''],themes:['general'],mw:false,scores:{}};
+let S={n:4,names:['Joueur 1','Joueur 2','','','','','','','',''],themes:['general'],mw:false,scores:{}};
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 const q=new URLSearchParams(location.search).get('players');if(q&&+q>=3&&+q<=10)S.n=+q;
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};

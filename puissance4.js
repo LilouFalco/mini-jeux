@@ -1,6 +1,6 @@
 'use strict';
 const $=s=>document.querySelector(s),P=Puissance4,KEY='lilou-puissance4-v1',R=P.R,C=P.C;
-let st={mode:'easy',b:P.empty(),turn:1,first:1,over:false,line:null,last:-1,sel:3,busy:false,scores:{easy:[0,0,0],hard:[0,0,0],two:[0,0,0]},n1:'Lilou',n2:'Lulu'};
+let st={mode:'easy',b:P.empty(),turn:1,first:1,over:false,line:null,last:-1,sel:3,busy:false,scores:{easy:[0,0,0],hard:[0,0,0],two:[0,0,0]},n1:'Joueur 1',n2:'Joueur 2'};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.b)&&s.b.length===R*C&&s.scores)st={...st,...s,busy:false}}catch{}
 {const q=new URLSearchParams(location.search).get('mode');const want=q==='duo'?'two':(q==='solo'&&st.mode==='two'?'easy':null);if(want&&want!==st.mode){st.mode=want;st.b=P.empty();st.turn=1;st.first=1;st.over=false;st.line=null,st.last=-1}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch{}};
@@ -27,7 +27,7 @@ function fresh(){st.first=st.first===1?2:1;st.b=P.empty();st.turn=st.first;st.ov
 document.querySelectorAll('[data-mode]').forEach(x=>x.onclick=()=>{st.mode=x.dataset.mode;st.first=2;fresh()});
 $('#new').onclick=fresh;
 $('#n1').value=st.n1;$('#n2').value=st.n2;
-$('#n1').oninput=e=>{st.n1=e.target.value||'Lilou';render();save()};$('#n2').oninput=e=>{st.n2=e.target.value||'Lulu';render();save()};
+$('#n1').oninput=e=>{st.n1=e.target.value||'Joueur 1';render();save()};$('#n2').oninput=e=>{st.n2=e.target.value||'Joueur 2';render();save()};
 document.addEventListener('keydown',e=>{if(/INPUT/.test(e.target.tagName))return;if(e.key==='ArrowLeft'){st.sel=(st.sel+C-1)%C;render()}else if(e.key==='ArrowRight'){st.sel=(st.sel+1)%C;render()}else if(e.key==='Enter'&&e.target.tagName!=='BUTTON'){play(st.sel)}});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 render();if(st.turn===2&&!st.over)aiTurn();

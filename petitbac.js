@@ -2,7 +2,7 @@
 (function(){
 const P=window.PetitBac,KEY='lilou-petitbac-v1',$=s=>document.querySelector(s),v=$('#v');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let S={n:3,names:['Lilou','Lulu','','','','','','','',''],cats:P.DEFAULT.slice(),time:120,rand:true,ex:true,sound:true,used:[],letter:'',marks:{},tot:null,rounds:0};
+let S={n:3,names:['Joueur 1','Joueur 2','','','','','','','',''],cats:P.DEFAULT.slice(),time:120,rand:true,ex:true,sound:true,used:[],letter:'',marks:{},tot:null,rounds:0};
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const nm=i=>(S.names[i]||'').trim()||'Joueur '+(i+1);

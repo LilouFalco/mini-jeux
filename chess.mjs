@@ -10,7 +10,7 @@ const PATHS={
  k:'M16 38h32v7H16zM20 34h24v4H20zM24 28h16l3 6H21zM32 13c-10-8-20 5-9 14h18c11-9 1-22-9-14zM32 2v12M27 7h10'
 };
 function pieceSVG(p){return '<svg class="chess-piece" aria-hidden="true" viewBox="12 0 40 50"><path d="'+PATHS[p.type]+'" fill="'+(p.color==='w'?'#fffdf4':'#755064')+'" stroke="'+(p.color==='w'?'#80566a':'#402e3c')+'" stroke-width="2.1" stroke-linejoin="round"/>'+(p.type==='n'?'<circle cx="30" cy="12" r="1.5" fill="#402e3c"/>':'')+'</svg>'}
-let game=new Chess(),st={mode:'easy',n1:'Lilou',n2:'Lulu',flipped:false,claimed:false};
+let game=new Chess(),st={mode:'easy',n1:'Joueur 1',n2:'Joueur 2',flipped:false,claimed:false};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s){game=restore(s);for(const k of ['n1','n2'])if(typeof s[k]==='string')st[k]=s[k].slice(0,20);st.mode=s.mode;st.flipped=s.flipped===true;st.claimed=s.claimed===true}}catch{}
 const q=new URLSearchParams(location.search).get('mode');
 if(q==='duo'&&st.mode!=='two'){game=new Chess();st.mode='two';st.claimed=false}
@@ -90,7 +90,7 @@ $('#new').onclick=()=>requestNew(st.mode);
 $('#mode').onchange=e=>{const mode=e.target.value;e.target.value=st.mode;requestNew(mode)};
 $('#cancel-new').onclick=()=>{$('#confirm-new').close();nextMode=null};
 $('#accept-new').onclick=()=>{fresh(nextMode||st.mode);nextMode=null;$('#confirm-new').close();$('#options').close()};
-for(const k of ['n1','n2']){$('#'+k).value=st[k];$('#'+k).oninput=e=>{st[k]=e.target.value.slice(0,20)||(k==='n1'?'Lilou':'Lulu');save();render()}}
+for(const k of ['n1','n2']){$('#'+k).value=st[k];$('#'+k).oninput=e=>{st[k]=e.target.value.slice(0,20)||(k==='n1'?'Joueur 1':'Joueur 2');save();render()}}
 $('#claim').onclick=()=>{
  $('#options').close();clearSelection();notice='';
  if(claimable(game)){cancelAI();st.claimed=true;save();render()}

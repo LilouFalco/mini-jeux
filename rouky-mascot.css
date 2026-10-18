@@ -1,0 +1,38 @@
+/* Designed on a 64px grid. Integer multiples keep Rouky's pixels sharp. */
+.rouky-mascot {
+  display: block;
+  width: var(--rouky-size, 128px);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+  user-select: none;
+  flex-shrink: 0;
+  transform-origin: 50% 90%;
+}
+.rouky-mascot--hello {
+  animation: rouky-hello 560ms steps(4, end) 1;
+}
+@keyframes rouky-hello {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-4px) rotate(-3deg); }
+  60% { transform: translateY(-2px) rotate(3deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rouky-mascot--hello { animation: none; }
+}
+/* Uses spare status space only. No additional row, hit target or layout shift. */
+.rouky-status-host { position: relative; }
+.rouky-status-reaction {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  --rouky-size: 32px;
+}
+.rouky-status-reaction[hidden] { display: none; }

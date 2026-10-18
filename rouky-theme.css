@@ -1,0 +1,35 @@
+/* Rouky's cartridge palette. Layout dimensions deliberately remain game-owned. */
+:root{--surface:#fffdf6;--surface-soft:#f9e8e9;--shadow:#eac4ce;--focus:#895174;--rose:#cf809b;--outline:#a65b79;--cream:#fff9ee;--ink:#553c4b;--muted:#80616e;--pale:#f9e8e9;--green:#4b7b60}
+:root[data-theme=dark]{--surface:#30263b;--surface-soft:#3f2d48;--shadow:#17121e;--focus:#ffd0e4;--rose:#e9a1c1;--outline:#cc8cac;--cream:#211c2b;--ink:#f9e9ed;--muted:#d3b7c7;--pale:#403044;--green:#9dd2ac}
+body{background-color:var(--cream)}
+button,input,select,textarea{color:var(--ink);background-color:var(--surface);border-color:var(--outline)}
+button:hover{background-color:var(--pale)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:var(--focus)}
+.game-window,dialog,.online-panel,.online-card{background-color:var(--surface);color:var(--ink);box-shadow:5px 5px 0 var(--shadow)}
+.windowbar{background-color:var(--pale)}
+.levels,.games,#clue-bar{background-color:var(--surface-soft)}
+.levels button[aria-pressed=true],.games a[aria-current=page]{background:var(--cream)}
+:root[data-theme=dark] .cell{background-color:#30283b;color:#edbad2}
+:root[data-theme=dark] .cell.given{background-color:#403448;color:#ffedf3}
+:root[data-theme=dark] .cell.peer,:root[data-theme=dark] .cell.word{background-color:#4b3650}
+:root[data-theme=dark] .cell.same{background-color:#5b3e5c}
+:root[data-theme=dark] .cell.selected{background-color:#694b6c}
+:root[data-theme=dark] .cell.error{background-color:#653941;color:#ffd3d4}
+:root[data-theme=dark] .cell.black{background-color:#a66b8b}
+:root[data-theme=dark] .cell.one,:root[data-theme=dark] .cell.given.one{background-color:#654367;color:#ffe9f4}
+:root[data-theme=dark] .cell.zero{background-color:#352c42;color:#edbad2}
+:root[data-theme=dark] dialog::backdrop{background:#100b1ca8}
+:root[data-theme=dark] .hint,:root[data-theme=dark] .subtitle,:root[data-theme=dark] footer{color:var(--muted)}
+:root[data-theme=dark] .online-panel input,:root[data-theme=dark] .online-panel select{background:var(--cream);color:var(--ink)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+:root[data-theme=dark] .mode,:root[data-theme=dark] .gtile,:root[data-theme=dark] .mtile{background:var(--surface-soft);color:var(--ink);box-shadow:3px 3px 0 var(--shadow)}
+:root[data-theme=dark] .mode:hover,:root[data-theme=dark] .gtile:hover,:root[data-theme=dark] .mtile[aria-current=page]{background:#593d5b}
+:root[data-theme=dark] .mbar button[aria-current=page],:root[data-theme=dark] .mbar button[aria-expanded=true]{background:#593d5b;color:#ffd1e3}
+:root[data-theme=dark] .mback,:root[data-theme=dark] .mtop{color:#261d30}
+.home .welcome-art{animation:none}
+.home .welcome-art img{width:100%;height:auto;display:block}
+@media(min-width:701px){.home .hero{position:relative;padding-top:20px;padding-bottom:22px}.home .hero::before{content:'';display:block;width:116px;height:116px;margin:0 auto 8px;background:url('rouky-paw.svg') center/contain no-repeat;image-rendering:pixelated}.home .hero h1{font-size:clamp(44px,6vw,68px)}.home .mode{min-height:174px}.home .mode b{font-size:21px}}
+:root[data-theme=dark] body input:not([type=checkbox]):not([type=radio]):not([type=range]),:root[data-theme=dark] body select,:root[data-theme=dark] body textarea{background:var(--surface);color:var(--ink);border-color:var(--outline)}
+:root[data-theme=dark] body input::placeholder,:root[data-theme=dark] body textarea::placeholder{color:var(--muted);opacity:1}
+:root[data-theme=dark] .chess #status{color:#edbad2}

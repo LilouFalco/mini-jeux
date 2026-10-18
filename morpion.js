@@ -1,6 +1,6 @@
 'use strict';
 const $=s=>document.querySelector(s),M=Morpion,KEY='lilou-morpion-v1',SY={1:'♥',2:'✦'};
-let st={mode:'easy',b:Array(9).fill(0),turn:1,first:1,over:false,line:null,scores:{easy:[0,0,0],hard:[0,0,0],two:[0,0,0]},n1:'Lilou',n2:'Lulu'};
+let st={mode:'easy',b:Array(9).fill(0),turn:1,first:1,over:false,line:null,scores:{easy:[0,0,0],hard:[0,0,0],two:[0,0,0]},n1:'Joueur 1',n2:'Joueur 2'};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.b)&&s.b.length===9&&s.scores)st={...st,...s}}catch{}
 {const q=new URLSearchParams(location.search).get('mode');const want=q==='duo'?'two':(q==='solo'&&st.mode==='two'?'easy':null);if(want&&want!==st.mode){st.mode=want;st.b=Array(9).fill(0);st.turn=1;st.first=1;st.over=false;st.line=null}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch{}};
@@ -23,6 +23,6 @@ function fresh(){st.first=st.first===1?2:1;st.b=Array(9).fill(0);st.turn=st.firs
 document.querySelectorAll('[data-mode]').forEach(x=>x.onclick=()=>{st.mode=x.dataset.mode;st.first=2;fresh()});
 $('#new').onclick=fresh;
 $('#n1').value=st.n1;$('#n2').value=st.n2;
-$('#n1').oninput=e=>{st.n1=e.target.value||'Lilou';render();save()};$('#n2').oninput=e=>{st.n2=e.target.value||'Lulu';render();save()};
+$('#n1').oninput=e=>{st.n1=e.target.value||'Joueur 1';render();save()};$('#n2').oninput=e=>{st.n2=e.target.value||'Joueur 2';render();save()};
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 render();

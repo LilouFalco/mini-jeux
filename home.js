@@ -8,7 +8,7 @@ function draw(){
  list.hidden=!mode;if(!mode)return;
  const m=Y.MODES.find(x=>x.k===mode);$('#gtitle').textContent=m.n+' · '+m.t;
  step.hidden=mode!=='multi';$('#pn').textContent=players;
- list.querySelector('.gl-items').innerHTML='';
+ list.querySelector('.gl-items').replaceChildren();if(mode==='online'&&window.RoukyProfile)window.RoukyProfile.mount(list.querySelector('.gl-items'));
  Y.forMode(mode,mode==='multi'?players:null).forEach(g=>{const a=document.createElement(g.ok?'a':'span');a.className='gtile'+(g.ok?'':' soon');if(g.ok){a.href=g.href+(mode==='multi'?(g.href.includes('?')?'&':'?')+'mode=multi&players='+players:'')}else a.setAttribute('aria-disabled','true');
   a.innerHTML='<span class="mico">'+Y.svg(g.i,'mi big')+'</span><b>'+g.n+'</b>'+(g.href?'':'<em>bientôt</em>')+(g.range?'<small>'+g.range+'</small>':'');list.querySelector('.gl-items').appendChild(a)});
 }

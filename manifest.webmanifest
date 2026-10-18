@@ -1,9 +1,9 @@
 {
   "id": "./",
-  "name": "Mini-jeux · la pause de Lilou",
-  "short_name": "Mini-jeux",
+  "name": "Rouky Games",
+  "short_name": "Rouky Games",
   "lang": "fr",
-  "description": "Les mini-jeux de la pause de Lilou : seule, à deux ou entre amis, même hors connexion.",
+  "description": "Le repère de Rouky. Des jeux solo, duo, entre amis ou en ligne.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -11,13 +11,13 @@
   "theme_color": "#d58b9f",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "rouky-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "rouky-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

@@ -1,7 +1,7 @@
 'use strict';
 (function(){const Q=window.QE,$=s=>document.querySelector(s),v=$('#v'),KEY='lilou-quiestce-v1';
 const esc=t=>String(t).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-let S={n1:'Lilou',n2:'Lulu',phase:'setup',p:0,next:'pick',champs:[],secret:[-1,-1],sel:-1,elim:[[],[]],w:[0,0],winner:-1,show:false};
+let S={n1:'Joueur 1',n2:'Joueur 2',phase:'setup',p:0,next:'pick',champs:[],secret:[-1,-1],sel:-1,elim:[[],[]],w:[0,0],winner:-1,show:false};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.phase)S={...S,...s}}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 let lockUntil=0;const locked=()=>Date.now()<lockUntil;

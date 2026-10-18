@@ -1,5 +1,5 @@
 .home .hero{display:block;text-align:center}.home .hero h1{margin-bottom:6px}
-.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:8px auto 22px}
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:8px auto 22px}
 .mode{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:190px;padding:20px 14px;background:#f9e4e8;border:3px solid var(--outline);border-radius:12px;box-shadow:5px 5px 0 #edd5da;color:var(--ink);text-align:center;touch-action:manipulation;transition:transform .15s,background .15s}
 .mode:hover{background:#f6d7de;transform:translateY(-2px)}.mode[aria-pressed=true]{background:#efd0dc;outline:3px solid var(--outline);outline-offset:3px}
 .mode b{font-family:'Space Mono','Yakazu Symbols',monospace;font-size:26px;letter-spacing:1px;text-transform:uppercase}.mode small{font-size:13px;color:var(--muted);line-height:1.4;max-width:200px}.mode .mico{color:#c8466e}
@@ -33,3 +33,5 @@
 }
 .mode[data-k=duo] svg,.mode[data-k=multi] svg,.mbar button[data-k=duo] svg,.mbar button[data-k=multi] svg{overflow:visible;stroke-linecap:round;stroke-linejoin:round}
 .mode .mico{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;flex:none}.mode .mi.huge{width:56px;height:56px}
+
+@media(min-width:701px) and (max-width:1000px){.modes{grid-template-columns:repeat(2,1fr)}}

@@ -17,11 +17,11 @@ for(const [w,h] of sizes){const mob=w<=700;const tag=en+' '+w+'x'+h;
   const d=document.documentElement;return{sw:d.scrollWidth>vw,sh:d.scrollHeight>vh+1,off,hiddenFocusable,overlap}});
  await p.goto(B+'index.html');await p.waitForTimeout(250);let g=await geom();
  ck(!g.sw,'home hscroll');if(mob){ck(!g.sh,'home vscroll');ck(g.off.length===0,'home offscreen '+g.off);ck(await p.locator('.welcome').isVisible(),'welcome visible');ck(await p.locator('.modes').isHidden(),'big buttons hidden');
-  ck(await p.locator('.welcome-art').isVisible()&&await p.locator('.welcome h2').innerText()==='Bienvenue dans la pause de Lilou','welcome content');
+  ck(await p.locator('.welcome-art').isVisible()&&await p.locator('.welcome h2').innerText()==='Bienvenue chez Rouky','welcome content');
   const wb=await p.evaluate(()=>{const e=document.querySelector('.welcome').getBoundingClientRect(),m=document.querySelector('.mbar').getBoundingClientRect(),t=document.querySelector('.mtop').getBoundingClientRect();return e.top>=t.bottom-1&&e.bottom<=m.top+1});ck(wb,'welcome between bars');
   ck(g.hiddenFocusable.length===0,'home hiddenFocusable '+g.hiddenFocusable);
   for(const k of ['solo','duo','multi']){await p.locator('.mbar button[data-k='+k+']').click();ck(await p.locator('.msheet').isVisible(),'sheet '+k);const pn=await p.evaluate(()=>{const r=document.querySelector('.mpanel').getBoundingClientRect();return r.top>=0&&r.right<=innerWidth+1});ck(pn,'panel fits '+k);await p.locator('.mclose').click()}}
- else{ck((await p.locator('.mode').count())===3,'3 cards');ck(await p.locator('.welcome').isHidden(),'welcome hidden desktop');for(const m of await p.locator('.mode .mi').all()){const bb=await m.boundingBox();ck(bb.width>=40,'icon size')}}
+ else{ck((await p.locator('.mode').count())===4,'4 cards');ck(await p.locator('.welcome').isHidden(),'welcome hidden desktop');for(const m of await p.locator('.mode .mi').all()){const bb=await m.boundingBox();ck(bb.width>=40,'icon size')}}
  for(const pg of PAGES){await p.goto(B+pg);await p.waitForTimeout(150);const a=p.locator(mob?'.mtop .mback':'.home-back');
   ck(await a.isVisible(),pg+' back visible');if(!await a.isVisible())continue;const r=await a.boundingBox();ck(r.height>=43.9&&r.width>=43.9,pg+' target '+JSON.stringify(r));
   ck(await a.getAttribute('href')==='./'&&await a.getAttribute('data-home-link')!==null,pg+' href/marker');ck((await a.innerText()).trim().toLowerCase()==='accueil',pg+' label');

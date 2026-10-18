@@ -1,7 +1,7 @@
 'use strict';
 const $=s=>document.querySelector(s),V=Naval,N=V.N,KEY='lilou-naval-v1';
 const esc=t=>t.replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-let S={mode:'easy',n1:'Lilou',n2:'Lulu',phase:'setup',ships:[[],[]],shots:[Array(100).fill(0),Array(100).fill(0)],turn:0,placer:0,manual:false,msg:'',winner:-1,cover:null};
+let S={mode:'easy',n1:'Joueur 1',n2:'Joueur 2',phase:'setup',ships:[[],[]],shots:[Array(100).fill(0),Array(100).fill(0)],turn:0,placer:0,manual:false,msg:'',winner:-1,cover:null};
 let ui={sel:0,h:true,hover:-1};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.ships&&s.shots&&s.phase)S={...S,...s}}catch{}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}};
@@ -71,7 +71,7 @@ $('#again').onclick=()=>{S.phase='setup';S.cover=null;render();save()};
 $('#start-auto').onclick=()=>{newPlace(false)};$('#start-manual').onclick=()=>{newPlace(true)};
 document.querySelectorAll('[data-mode]').forEach(x=>x.onclick=()=>{S.mode=x.dataset.mode;render();save()});
 $('#n1').value=S.n1;$('#n2').value=S.n2;
-$('#n1').oninput=e=>{S.n1=e.target.value.trim()||'Lilou';save()};$('#n2').oninput=e=>{S.n2=e.target.value.trim()||'Lulu';save()};
+$('#n1').oninput=e=>{S.n1=e.target.value.trim()||'Joueur 1';save()};$('#n2').oninput=e=>{S.n2=e.target.value.trim()||'Joueur 2';save()};
 document.addEventListener('keydown',e=>{if((e.key==='r'||e.key==='R')&&S.phase==='place'&&S.manual&&!/INPUT/.test(e.target.tagName))$('#rot').click()});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 render();if(S.phase==='play'&&!two()&&S.turn===1)setTimeout(aiTurn,650);

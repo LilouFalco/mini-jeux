@@ -2,7 +2,7 @@
 (function(){
 const U=window.TimesUp,KEY='lilou-timesup-v1',$=s=>document.querySelector(s),v=$('#v');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let S={n:4,names:['Lilou','Lulu','','','','','','','','','',''],themes:['general'],count:30,sound:true,G:null,wins:[0,0]};
+let S={n:4,names:['Joueur 1','Joueur 2','','','','','','','','','',''],themes:['general'],count:30,sound:true,G:null,wins:[0,0]};
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const nm=i=>(S.names[i]||'').trim()||'Joueur '+(i+1);
