@@ -31,7 +31,15 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  const c=await browser.newContext({...(require('node:fs').existsSync(saved)?{storageState:saved}:{}),viewport:i%2?{width:390,height:844}:{width:360,height:640},serviceWorkers:'block'});contexts.push(c);
  await c.route('**/auth/v1/signup',r=>r.abort('blockedbyclient'));
  await c.addInitScript(()=>{const orig=window.setInterval;window.setInterval=(fn,ms,...args)=>ms===20000?0:orig(fn,ms,...args);});
- const p=await c.newPage();pages.push(p);const st={changed:0,subscribed:0,rpc:0,heartbeat:0,payloadKeys:[],topics:[]};stats.push(st);
+ const p=await c.newPage();
+ p.on('response',async response=>{
+  if(response.status()!==429||!response.url().includes('/auth/v1/'))return;
+  const headers=await response.allHeaders();
+  const metadata={observedAt:new Date().toISOString(),status:429,date:headers.date||null,retryAfter:headers['retry-after']||null};
+  const file=path.join(path.dirname(saved),'auth429-metadata.json');
+  fs.writeFileSync(file,JSON.stringify(metadata,null,2),{mode:0o600});fs.chmodSync(file,0o600);
+ });
+ pages.push(p);const st={changed:0,subscribed:0,rpc:0,heartbeat:0,payloadKeys:[],topics:[]};stats.push(st);
  p.on('pageerror',e=>errors.push(e.message));
  p.on('request',r=>{if(r.url().includes('/rest/v1/rpc/')){st.rpc++;if(r.url().endsWith('online_heartbeat'))st.heartbeat++;}});
  p.on('websocket',ws=>{ws.on('framereceived',f=>{try{
@@ -79,6 +87,7 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  const c=await MiniOnline.client(),session=(await c.auth.getSession()).data.session,conf=MINI_ONLINE_CONFIG;
  const r=await fetch(conf.url+'/rest/v1/rooms',{method:'POST',headers:{apikey:conf.key,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json','Content-Profile':'app_private'},body:'{}'});const j=await r.json();return {status:r.status,code:j.code,message:j.message};
  });assert.ok(writes.status>=400);assert.match(writes.message,/schema|permission/i);
+ assert.equal(await b.evaluate(()=>window.__outsiderEvents),0,'nonmember received no events before joining');
  await b.evaluate(async()=>{const c=await MiniOnline.client();if(window.__outsiderChannel)await c.removeChannel(window.__outsiderChannel);});
  await b.getByRole('button',{name:'Rejoindre',exact:true}).click();await b.waitForSelector('.online-members');
  await a.waitForFunction(()=>document.querySelectorAll('.online-members span').length===2,null,{timeout:5000});
@@ -125,7 +134,6 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  await b.waitForFunction(()=>[...document.querySelectorAll('.online-members span')].some(x=>x.textContent.includes('player 1')&&x.textContent.includes('✓')),null,{timeout:5000});
  await b.getByRole('button',{name:'Prête !',exact:true}).click();await b.getByRole('button',{name:'Démarrer',exact:true}).click();
  await a.waitForSelector('.online-board');assert.equal((await snap(b,roomId)).status,'playing');
- assert.equal(await out.evaluate(()=>window.__outsiderEvents),0);
  assert.deepEqual(errors,[]);
  for(const st of stats.slice(0,2)){assert.equal(st.heartbeat,0);assert.ok(st.payloadKeys.every(k=>k==='instance,version'),'unexpected notification keys: '+[...new Set(st.payloadKeys)].join(';'));}
  report.push({engine,viewports:['360x640','390x844'],win:true,draw:true,reloadSameIdentityAndSeat:true,stale:'STALE_VERSION',outsiderRead:'NOT_MEMBER',outsiderAction:'NOT_MEMBER',outsiderSubscribe:outsider.status,outsiderEvents:0,noToken:{status:noToken.status,code:noToken.code},directWrite:{status:writes.status,code:writes.code},forgedPublication:forged.result,publicChannel:publicChannel.status,epochRotation:true,epochContinuation:true,maxUpdateMs:Math.max(...latencies),updates:latencies.length,clients:stats.slice(0,2).map(x=>({changed:x.changed,subscribed:x.subscribed,rpc:x.rpc,heartbeat:x.heartbeat})),leaveMs:Date.now()-t});
