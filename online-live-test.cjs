@@ -52,9 +52,12 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  await p.goto(BASE+'morpion.html');await p.locator('#online-toggle').click();await p.waitForSelector('#online-pseudo',{timeout:20000});await p.waitForFunction(()=>document.querySelector('#online-status')?.textContent.includes('Choisis un nom'));
  fs.writeFileSync(saved,JSON.stringify(await c.storageState()),{mode:0o600});fs.chmodSync(saved,0o600);
  await p.locator('#online-pseudo').fill('TEST player '+(i+1));await p.locator('#online-room-name').fill(room);
- if(i===0){await p.getByRole('button',{name:i?'Rejoindre':'Créer',exact:true}).click();await p.waitForSelector('.online-members',{timeout:15000}).catch(async e=>{throw Error('enter player '+i+': '+await p.locator('#online-status').textContent());});if(!i)roomId=(await current(p)).id;}
+ if(i===0){await p.getByRole('button',{name:'Créer',exact:true}).click();await p.waitForSelector('.online-members',{timeout:15000}).catch(async e=>{throw Error('enter player '+i+': '+await p.locator('#online-status').textContent());});if(!i)roomId=(await current(p)).id;}
  }
+ assert.equal(pages.length,2,'exactly two authenticated browser pages');
  const [a,b]=pages,out=b;
+ assert.equal((await snap(a,roomId)).members.length,1,'B must remain outside during access-control checks');
+ assert.equal((await rpc(b,'online_my_rooms')).data.length,0,'B has not joined any test room');
  const deniedRead=await rpc(out,'online_get_room',{p_room:roomId});assert.match(deniedRead.error?.message||'',/NOT_MEMBER/);
  const s=await snap(a,roomId);const deniedAction=await act(out,s,'ready');assert.match(deniedAction.error?.message||'',/NOT_MEMBER/);
  const outsider=await out.evaluate(async topic=>{
