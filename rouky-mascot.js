@@ -136,8 +136,9 @@
         const value = normalized(next);
         if (current !== value) {
           current = value;
-          image.dataset.pose = value;
-          image.src = new URL('rouky-paw.svg', base).href;
+          image.dataset.pose = 'wave';
+          image.dataset.outcome = value;
+          image.src = new URL('rouky-wave-body.svg', base).href;
           image.classList.remove('rouky-mascot--hello');
         }
         return controller;
@@ -158,6 +159,15 @@
     const motion = () => {
       if (reduced.matches) image.classList.remove('rouky-mascot--hello');
     };
+    // Tail wag only runs while Rouky is on screen and the tab is visible.
+    let onscreen = true;
+    const wag = () => image.classList.toggle('rouky-wag', onscreen && !document.hidden && !reduced.matches);
+    if ('IntersectionObserver' in global) {
+      new IntersectionObserver(es => { onscreen = es[es.length - 1].isIntersecting; wag(); }).observe(image);
+    }
+    document.addEventListener('visibilitychange', wag);
+    reduced.addEventListener('change', wag);
+    wag();
     controller.setPose(pose || 'wave');
     element.appendChild(image);
     mounted.set(element, controller);
@@ -198,7 +208,6 @@
     document.querySelectorAll('[data-rouky-pose]').forEach(element => {
       mount(element, element.dataset.roukyPose);
     });
-    return; // neutral paw only: no status reactions while the mascot is unapproved
     const status = document.querySelector('#status');
     if (!status) return;
     let badge = null;
@@ -215,6 +224,7 @@
         reaction = null;
       }
       if (badge) badge.hidden = true;
+      delete status.dataset.roukyOutcome;
       const message = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
       const loss = /\b(perdu|perdue|defaite|perdez|dommage|lost|defeat)\b/.test(message);
       const win = !/\b(pas|aucun|sans)\b/.test(message) &&
@@ -224,6 +234,9 @@
         return;
       }
       if (win && !loss) play('win');
+      const outcome = loss ? 'loss' : 'win';
+      status.dataset.roukyOutcome = outcome;
+      document.dispatchEvent(new CustomEvent('rouky:outcome', { detail: { outcome } }));
       // Only use genuinely spare room. Never displace or cover the status text.
       const box = status.getBoundingClientRect();
       const range = document.createRange();

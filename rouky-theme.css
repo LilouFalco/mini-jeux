@@ -29,7 +29,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 :root[data-theme=dark] .mback,:root[data-theme=dark] .mtop{color:#261d30}
 .home .welcome-art{animation:none}
 .home .welcome-art img{width:100%;height:auto;display:block}
-@media(min-width:701px){.home .hero{position:relative;padding-top:20px;padding-bottom:22px}.home .hero::before{content:'';display:block;width:116px;height:116px;margin:0 auto 8px;background:url('rouky-paw.svg') center/contain no-repeat;image-rendering:pixelated}.home .hero h1{font-size:clamp(44px,6vw,68px)}.home .mode{min-height:174px}.home .mode b{font-size:21px}}
+@media(min-width:701px){.home .hero{position:relative;padding-top:20px;padding-bottom:22px}.home .hero::before{content:'';display:block;width:116px;height:116px;margin:0 auto 8px;background:url('rouky-wave-body.svg') center/contain no-repeat,url('rouky-seated-tail.svg') 0 0/400% 100% no-repeat;transform:scale(.8);transform-origin:50% 90%;image-rendering:pixelated}.home .hero h1{font-size:clamp(44px,6vw,68px)}.home .mode{min-height:174px}.home .mode b{font-size:21px}}
 :root[data-theme=dark] body input:not([type=checkbox]):not([type=radio]):not([type=range]),:root[data-theme=dark] body select,:root[data-theme=dark] body textarea{background:var(--surface);color:var(--ink);border-color:var(--outline)}
 :root[data-theme=dark] body input::placeholder,:root[data-theme=dark] body textarea::placeholder{color:var(--muted);opacity:1}
 :root[data-theme=dark] .chess #status{color:#edbad2}
+
+@keyframes rouky-hero-tail{0%{background-position:0 0,0 0}25%{background-position:0 0,33.3333% 0}50%{background-position:0 0,66.6667% 0}75%{background-position:0 0,100% 0}}
+@media(min-width:701px) and (prefers-reduced-motion:no-preference){.home .hero::before{animation:rouky-hero-tail 1s steps(1,end) infinite}}
