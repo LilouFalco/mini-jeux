@@ -86,11 +86,12 @@ begin
   if r.host_uid<>u then raise exception 'HOST_ONLY'; end if;
   if s.phase<>'scoring' then raise exception 'WRONG_PHASE'; end if;
   if (select count(*) from jsonb_object_keys(p_data))<>3
-   or not (p_data ?& array['player','category','points'])
-   or jsonb_typeof(p_data->'player')<>'string' or jsonb_typeof(p_data->'category')<>'string'
+   or not (p_data ?& array['seat','category','points'])
+   or jsonb_typeof(p_data->'seat') is distinct from 'number' or p_data->>'seat'!~'^[0-9]{1,2}$' or jsonb_typeof(p_data->'category')<>'string'
    or jsonb_typeof(p_data->'points')<>'number' or p_data->>'points' not in ('0','5','10') then raise exception 'INVALID_MARK'; end if;
-  target:=(p_data->>'player')::uuid; c:=p_data->>'category';
-  if not s.categories ? c or not exists(select 1 from app_private.members where room_id=p_room and uid=target) then raise exception 'INVALID_MARK'; end if;
+  select uid into target from app_private.members where room_id=p_room and seat=(p_data->>'seat')::int;
+  c:=p_data->>'category';
+  if target is null or not s.categories ? c or not exists(select 1 from app_private.members where room_id=p_room and uid=target) then raise exception 'INVALID_MARK'; end if;
   s.marks:=jsonb_set(s.marks,array[target::text],coalesce(s.marks->target::text,'{}'::jsonb)||jsonb_build_object(c,p_data->'points'));
  elsif p_kind='finish' then
   if r.host_uid<>u then raise exception 'HOST_ONLY'; end if;

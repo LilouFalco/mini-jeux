@@ -27,7 +27,7 @@ Undercover: server-random pair and hidden per-seat roles/words, 1 undercover (2 
 votes, alive-only one vote per round, non-self valid target, majority elimination, ties restart
 voting, civil/impostor win detection. No Mr White variant yet. Pair pool is now all 72 pairs of undercover-engine.js (6 themes mixed),
 not the full existing mixed-theme catalog. Snapshot never includes other players' role/word.
-Time's Up: fixed16-card server-shuffled deck, 4+ players, alternating seats and parity teams,
+Time's Up: fixed16-card server-shuffled deck, EVEN 4–12 players only, alternating seats and parity teams,
 current card only to active describer, server60second turn deadline, pass/found, scores,
 three rounds reusing reshuffled deck. No selectable theme/count/duration configuration yet.
 A describer can claim a word was guessed, as in the social game; outsiders cannot write it.
@@ -76,3 +76,24 @@ Independent security/SQL review, resolve findings, user applies the reviewed sin
 wire each online client (including chess validation on both peers), then actual two-client
 Supabase/Auth/private Realtime validation. No game beyond tested real deployment is 'live'.
 No Auth, external network, remote SQL application or git push was used for this draft.
+
+Targeted independent-audit corrections, pending independent re-review
+
+Undercover now shuffles rows from FROM unnest(seats), not a ProjectSet target-list
+expression. Native PostgreSQL16 regression covers 24 games each with 3 and 9 players,
+multiple impostor seat positions, and exact role counts.
+Petit Bac mark payload is now {seat, category, points}, NOT player UUID. The server
+resolves seat membership; snapshots need not reveal another member UUID. Native test
+stops with zero submissions, scores both members across every category from public
+snapshots only, finishes and advances to the next round.
+Time's Up advances describer/opposing parity team when a deck ends, as on turn end.
+Odd lobbies of 5 or 7 cannot start (EVEN_PLAYERS_REQUIRED); supported counts are
+4, 6, 8, 10, 12. A future online client must display this even-player restriction.
+No online Time's Up client is currently wired, so no client parity claim is made.
+Native regressions verify odd rejection without mutation, even 4/6/12 wraparound,
+and all three complete decks (48 scored cards). No true concurrent-RPC claim.
+Command: node -r ./test-guard.cjs online-audit-regression-test.cjs
+Uses native PostgreSQL16 with listen_addresses='' and a temporary Unix socket only.
+Auth/Realtime are local stubs; this is NOT a real Supabase validation.
+All five existing SQL suites were rerun under the same strict network guard and passed.
+SQL001 remains unchanged. No push, live Auth, remote SQL, or delivery authorization.

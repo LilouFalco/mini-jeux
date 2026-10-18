@@ -82,12 +82,13 @@ begin
  elsif p_kind='start' then
   if r.host_uid<>u then raise exception 'HOST_ONLY'; end if;
   if r.status<>'waiting' or p_data<>'{}'::jsonb or n<(case when r.game='timesup' then 4 when r.game='undercover' then 3 else 2 end) or exists(select 1 from app_private.members where room_id=p_room and not ready) then raise exception 'NOT_READY'; end if;
+  if r.game='timesup' and (n%2<>0 or n>12) then raise exception 'EVEN_PLAYERS_REQUIRED'; end if;
   if r.game in ('naval','quiestce') and (select count(*) from jsonb_object_keys(s->'players'))<>2 then raise exception 'NOT_CONFIGURED'; end if;
   if r.game='naval' then s:=s||jsonb_build_object('shots','{}'::jsonb,'phase','playing');
   elsif r.game='quiestce' then s:=s||jsonb_build_object('choices',(select jsonb_agg(i) from generate_series(0,23)i),'phase','playing');
   elsif r.game='undercover' then
    select value into pair from jsonb_array_elements('[["Café","Thé"],["Plage","Piscine"],["Pizza","Tarte"],["Vélo","Trottinette"],["Stylo","Crayon"],["Cinéma","Théâtre"],["Savon","Shampoing"],["Train","Tramway"],["Pull","Gilet"],["Montagne","Colline"],["Lait","Crème"],["Chocolat","Caramel"],["Ahri","Evelynn"],["Jinx","Vi"],["Yasuo","Yone"],["Lux","Syndra"],["Zed","Talon"],["Thresh","Blitzcrank"],["Garen","Darius"],["Ashe","Caitlyn"],["Baron Nashor","Dragon"],["Lee Sin","Jarvan IV"],["Tour","Inhibiteur"],["Ranked","Normal"],["Mario","Sonic"],["Minecraft","Terraria"],["Pokémon","Digimon"],["Fortnite","Apex Legends"],["Les Sims","Animal Crossing"],["Switch","PlayStation"],["Zelda","Final Fantasy"],["Pac-Man","Tetris"],["Overwatch","Valorant"],["Stardew Valley","Animal Crossing"],["Mario Kart","Crash Team Racing"],["Manette","Clavier"],["Naruto","Sasuke"],["Luffy","Zoro"],["Goku","Vegeta"],["Tanjiro","Zenitsu"],["Eren","Levi"],["Totoro","Ponyo"],["Sailor Moon","Card Captor Sakura"],["One Piece","Naruto"],["Demon Slayer","Jujutsu Kaisen"],["Attack on Titan","Fullmetal Alchemist"],["Studio Ghibli","Pixar"],["Death Note","Code Geass"],["Britney Spears","Christina Aguilera"],["Lady Gaga","Katy Perry"],["Beyoncé","Rihanna"],["Madonna","Cher"],["Dua Lipa","Ariana Grande"],["Taylor Swift","Olivia Rodrigo"],["Sabrina Carpenter","Chappell Roan"],["Shakira","Jennifer Lopez"],["RuPaul","Tyra Banks"],["Drag Race","Project Runway"],["Kylie Minogue","Dua Lipa"],["Paillettes","Strass"],["Gloss","Rouge à lèvres"],["Vernis","Faux ongles"],["Licorne","Papillon"],["Bubble tea","Milkshake"],["Barbie","Hello Kitty"],["Skincare","Maquillage"],["Sac à main","Pochette"],["Talons","Ballerines"],["Journal intime","Bullet journal"],["Peluche","Poupée"],["Brunch","Goûter"],["Rose","Fuchsia"]]'::jsonb) order by random() limit 1;
-   select array_agg(x) into seats from (select unnest(seats)x order by random())z;
+   select array_agg(x) into seats from (select x from unnest(seats) as t(x) order by random())z;
    s:=jsonb_build_object('players','{}'::jsonb,'alive','{}'::jsonb,'votes','{}'::jsonb,'phase','voting');
    for idx in 1..n loop
     s:=jsonb_set(s,array['players',seats[idx]::text],jsonb_build_object('role',case when idx<=(case when n>=9 then 2 else 1 end) then 'undercover' else 'civil' end,'word',pair->case when idx<=(case when n>=9 then 2 else 1 end) then 1 else 0 end));
@@ -147,7 +148,10 @@ begin
      if jsonb_array_length(s->'pile')=0 then
       idx:=(s->>'round')::int+1;
       if idx>=3 then r.status:='finished';s:=s||jsonb_build_object('phase','finished');
-      else select jsonb_agg(card) into deck from (select card from jsonb_array_elements(s->'deck')card order by random())z;s:=s||jsonb_build_object('round',idx,'pile',deck,'phase','ready','deadline',null);end if;
+      else
+       select coalesce(min(seat),seats[1]) into nextseat from app_private.members where room_id=p_room and seat>r.turn;
+       r.turn:=nextseat;
+       select jsonb_agg(card) into deck from (select card from jsonb_array_elements(s->'deck')card order by random())z;s:=s||jsonb_build_object('round',idx,'pile',deck,'phase','ready','deadline',null);end if;
      end if;
     elsif jsonb_array_length(s->'pile')>1 then s:=jsonb_set(s,'{pile}',((s->'pile')-0)||jsonb_build_array(s->'pile'->0));end if;
    end if;
