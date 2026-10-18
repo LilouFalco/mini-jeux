@@ -1,5 +1,5 @@
 const {chromium,webkit}=require('/tmp/qa/node_modules/playwright'),assert=require('node:assert/strict');
-const PAGES=['yakazu','sudoku','mots-fleches','binairo','demineur','champdle','chess','morpion','puissance4','naval','quiestce','petitbac','undercover','timesup'].map(x=>x+'.html');
+const PAGES=['yakazu','sudoku','binairo','demineur','champdle','chess','morpion','puissance4','naval','quiestce','petitbac','undercover','timesup'].map(x=>x+'.html');
 (async()=>{const B=process.env.BASE||'http://localhost:28461/';let n=0;const fails=[];
 const sizes=[];for(const w of [320,360,390])for(const h of [640,667,844])sizes.push([w,h]);for(const s of [[1440,900],[1366,768],[768,900]])sizes.push(s);
 for(const [en,E] of [['chromium',chromium],['webkit',webkit]]){const b=await E.launch();

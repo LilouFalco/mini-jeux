@@ -1,6 +1,6 @@
 const pw=require('/tmp/qa/node_modules/playwright');const assert=require('assert');
 const B=process.env.BASE||'http://localhost:28461/';
-const pages=['','yakazu.html','sudoku.html','binairo.html','mots-fleches.html','demineur.html','morpion.html?mode=duo','puissance4.html?mode=duo','naval.html','undercover.html?players=5'];
+const pages=['','yakazu.html','sudoku.html','binairo.html','demineur.html','morpion.html?mode=duo','puissance4.html?mode=duo','naval.html','undercover.html?players=5'];
 const only=process.env.ENGINE;let bad=0;const fail=(...a)=>{bad++;console.log('FAIL',...a)};
 const tiles=async p=>p.evaluate(()=>[...document.querySelectorAll('.msheet .mtile')].map(e=>(e.getAttribute('href')||'soon')+'|'+e.textContent.trim()));
 (async()=>{

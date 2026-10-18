@@ -1,6 +1,6 @@
 const {chromium}=require('/tmp/qa/node_modules/playwright');
 const B=process.env.BASE||'http://localhost:28461/';
-const pages=['index','yakazu','sudoku','binairo','mots-fleches','demineur','morpion?mode=duo','puissance4?mode=duo'].concat(process.env.NAVAL?['naval']:[]);
+const pages=['index','yakazu','sudoku','binairo','demineur','morpion?mode=duo','puissance4?mode=duo'].concat(process.env.NAVAL?['naval']:[]);
 const url=f=>B+(f==='index'?'':f.includes('?')?f.replace('?','.html?'):f+'.html');
 (async()=>{const br=await chromium.launch({executablePath:'/opt/hako/bin/google-chrome',args:['--no-sandbox']});let bad=0;const shots=process.env.SHOTS;
 const measure=()=>{const d=document.documentElement;const top=document.querySelector('.mtop').getBoundingClientRect().bottom,bar=document.querySelector('.mbar').getBoundingClientRect().top;

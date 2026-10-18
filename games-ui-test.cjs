@@ -43,36 +43,6 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   await p.locator('.cell').first().click();
   const ov=await p.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);assert(ov<=1,'sudoku overflow '+ov);
   await p.screenshot({path:'/tmp/sudoku-'+width+'.png',fullPage:true});
-  // MOTS FLECHES
-  await p.goto(BASE+'mots-fleches.html');await p.waitForURL(/mots-fleches/);
-  for(let level=0;level<4;level++){
-   if(level>0){await p.locator('[data-level="'+level+'"]').click();if(await p.locator('#confirm[open]').count())await p.click('#replace')}
-   await p.waitForFunction(l=>document.querySelector('#loading').hidden&&JSON.parse(localStorage.getItem('lilou-motsfleches-v1')||'null')?.level===l,level,{timeout:30000});
-  }
-  await p.locator('[data-level="1"]').click();if(await p.locator('#confirm[open]').count())await p.click('#replace');
-  await p.waitForFunction(()=>document.querySelector('#loading').hidden&&JSON.parse(localStorage.getItem('lilou-motsfleches-v1')).level===1);
-  let m=await p.evaluate(()=>JSON.parse(localStorage.getItem('lilou-motsfleches-v1')));
-  assert(await p.evaluate(g=>MotsFleches.validate(g)===null,m),'valid grid');
-  assert(await p.locator('.clue').count()>5);
-  const white=m.cells.map((c,i)=>c.t==='w'?i:-1).filter(i=>i>=0);
-  // type a wrong letter in first white cell, error shows
-  await p.locator('.cell[data-i="'+white[0]+'"]').click();
-  const wl=m.cells[white[0]].ch==='A'?'B':'A';await p.keyboard.press(wl);
-  await p.check('#check');assert(await p.locator('.cell[data-i="'+white[0]+'"]').evaluate(el=>el.classList.contains('error')),'mf error');
-  await p.locator('.cell[data-i="'+white[0]+'"]').click();await p.click('#hint');
-  m=await p.evaluate(()=>JSON.parse(localStorage.getItem('lilou-motsfleches-v1')));assert.equal(m.values[white[0]],m.cells[white[0]].ch);assert.equal(m.hints,1);
-  assert((await p.textContent('#clue-bar')).length>5);
-  // direction toggle on a crossing cell via button
-  await p.click('#dir');
-  // clicking a clue cell selects its word
-  await p.locator('.cell.black button, button.cell.black').first().click();
-  // fill rest with on-screen keyboard for one word then everything via evaluate
-  for(const i of white){const ch=m.cells[i].ch;await p.locator('.cell[data-i="'+i+'"]').evaluate(el=>el.click());await p.locator('#keys [data-k="'+ch+'"]').evaluate(el=>el.click())}
-  await p.waitForSelector('#win[open]');await p.screenshot({path:'/tmp/mf-win-'+width+'.png'});await p.click('#stay');
-  await p.click('#new');await p.waitForFunction(()=>document.querySelector('#loading').hidden&&!JSON.parse(localStorage.getItem('lilou-motsfleches-v1')).won);
-  const ov2=await p.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);assert(ov2<=1,'mf page overflow '+ov2);
-  await p.locator('.cell.white').first().click();
-  await p.screenshot({path:'/tmp/mf-'+width+'.png',fullPage:true});
   // BINAIRO
   await p.goto(BASE+'binairo.html');await p.waitForURL(/binairo/);
   const sizes=[6,8,10,12];
@@ -105,7 +75,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   // yakazu untouched
   await p.goto(BASE+'yakazu.html');await p.waitForFunction(()=>document.querySelector('#board .cell'));
   assert.equal(errors.length,0,errors.join('\n'));
-  console.log(width+' yakazu link + sudoku (4 levels, errors, notes, hint, win, save) + mots fléchés + binairo (4 sizes, cycle, errors, hint, win, save) PASS');
+  console.log(width+' yakazu link + sudoku (4 levels, errors, notes, hint, win, save) + binairo (4 sizes, cycle, errors, hint, win, save) PASS');
   await c.close();
  }
  await b.close();

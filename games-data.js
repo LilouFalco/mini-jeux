@@ -5,7 +5,6 @@ const G=[
  {id:'yakazu',n:'Yakazu',i:'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',m:{solo:'yakazu.html'}},
  {id:'sudoku',n:'Sudoku',i:'M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18',m:{solo:'sudoku.html'}},
  {id:'binairo',n:'Takuzu',i:'M4 4h6v6H4zM14 14h6v6h-6zM14 4h6M4 14v6',m:{solo:'binairo.html'}},
- {id:'mots-fleches',n:'Mots fléchés',i:'M3 3h18v18H3zM3 12h18M12 3v18M6 7.5h3M15 16.5h3',m:{solo:'mots-fleches.html'}},
  {id:'demineur',n:'Démineur',i:'M12 8a4 4 0 100 8 4 4 0 000-8zM12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2 2M16.4 16.4l2 2M18.4 5.6l-2 2M7.6 16.4l-2 2',m:{solo:'demineur.html'}},
  {id:'champdle',n:'Champdle',i:'M12 3l8 4v6c0 4-3 7-8 8-5-1-8-4-8-8V7z',m:{solo:'champdle.html'}},
  {id:'chess',n:'Échecs',i:'M5 20h14M7 16h10l-2-7H9zM12 3v6M9 5h6',m:{solo:'chess.html?mode=solo',duo:'chess.html?mode=duo'}},

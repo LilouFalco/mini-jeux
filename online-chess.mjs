@@ -73,7 +73,7 @@ export function start(host){
   const row=el('div',null,'online-actions');let ck=null,cn=null;
   const enter=create=>task(async()=>{
    const p=$('#online-pseudo').value.trim()||rnd(),name=$('#online-room-name').value.trim();
-   try{localStorage.setItem('mini-online-pseudo',p)}catch{}
+   try{if(window.RoukyProfile)RoukyProfile.save({pseudo:p});else localStorage.setItem('mini-online-pseudo',p)}catch{}
    let room;
    if(create){if(cn!==name){cn=name;ck=uuid()}room=await rpcGame('create',{p_name:name,p_pseudo:p,p_action:ck})}
    else room=await rpcGame('join',{p_name:name,p_pseudo:p});

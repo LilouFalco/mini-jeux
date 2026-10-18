@@ -27,10 +27,6 @@
     {
       "name": "Sudoku",
       "url": "sudoku.html"
-    },
-    {
-      "name": "Mots fléchés",
-      "url": "mots-fleches.html"
     }
   ]
 }

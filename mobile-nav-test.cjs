@@ -1,7 +1,7 @@
 const {chromium}=require('/tmp/qa/node_modules/playwright');const assert=require('assert');
 const B=process.env.BASE||'http://localhost:28461/';
 (async()=>{const br=await chromium.launch({executablePath:'/opt/hako/bin/google-chrome',args:['--no-sandbox']});
-const pages=['index','yakazu','sudoku','binairo','mots-fleches','demineur','morpion','puissance4','naval','chess'];
+const pages=['index','yakazu','sudoku','binairo','demineur','morpion','puissance4','naval','chess'];
 for(const w of [390,360]){const c=await br.newContext({viewport:{width:w,height:780},hasTouch:true,isMobile:true,deviceScaleFactor:2});
 for(const f of pages){const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.goto(B+(f==='index'?'':f+'.html'));await p.waitForTimeout(400);
  assert(await p.locator('.mbar:visible').count(),'bar '+f);assert.equal(await p.locator('.mbar button').count(),3);
