@@ -1,3 +1,5 @@
+DRAFT SUPERSEDED: do not apply the current 002 until independent seven-game review. See sql-seven-review.md.
+
 # Appliquer la migration 002 (Puissance 4 en ligne)
 
 NE PAS appliquer avant l'accord du parent. 001 doit déjà être appliquée (c'est le cas). Une seule action à la fois.
