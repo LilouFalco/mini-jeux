@@ -1,0 +1,2 @@
+# Keep vendored upstream SDK bytes unchanged for checksum verification.
+vendor/supabase-2.118.0.js -whitespace
