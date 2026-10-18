@@ -1,0 +1,7 @@
+.online-active.undercover #v,.online-active.undercover .uc-mode{display:none}
+.undercover #online-root{max-width:620px}
+.uc-secret{display:grid;gap:10px;padding:16px;border:2px dashed var(--outline);border-radius:8px;text-align:center}
+.uc-votes{display:grid;gap:8px}
+.undercover .uc-mode{margin-bottom:8px}
+.has-mnav.online-active.undercover .game-body{overflow:hidden;display:flex;flex-direction:column}
+.has-mnav.online-active.undercover #online-root{flex:1;min-height:0}
