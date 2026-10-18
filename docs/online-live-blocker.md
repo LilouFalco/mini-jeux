@@ -1,0 +1,23 @@
+Real project integration attempt, 18 October 2026, no deployment
+
+online-live-test.cjs uses the actual vendored SDK, real anonymous Auth, PostgREST RPC and private WebSockets. No mocked transport. Requires ONLINE_LIVE=1 and local HTTP server BASE. It suppresses only the gameplay 20-second polling interval, not WebSocket heartbeats. Browser contexts are isolated; temporary storageState files allow guest reuse during further debugging. Those files must not be committed or shared.
+
+Chromium at 360x640 and 390x844 reached these assertions in a real project run: both channels joined; outsider read and action returned NOT_MEMBER; outsider private channel returned CHANNEL_ERROR; no-token RPC and app_private direct write HTTP requests failed; legal alternating win, stale-version rejection, reloaded Auth identity/seat preservation, rematch draw, old-channel leave notification, new epoch subscription and new ready/start continuation all passed. Every tested move was observed after an incoming real changed Broadcast with the polling interval disabled. Outsider received zero events.
+
+The run then FAILED the notification payload-key assertion. No passing evidence JSON was produced, so this is partial execution evidence, not a suite pass or a broad security certification. Supabase uses binary v2 Broadcast frames; the test now decodes their actual header rather than treating all frames as JSON. The decoded payload key set must be inspected safely and compared with the SQL minimal invalidation contract before claiming this gate passed.
+
+Further retry encountered AuthApiError Request rate limit reached before creation of another test guest. Do not raise Auth quotas or repeatedly retry signups merely to finish the test. WebKit has not run to completion. No result is committed or pushed. Existing audit scripts are untouched.
+
+Every test run used allowed online_action leave in finally to remove memberships of authenticated clients. A separate early diagnostic successfully created a TEST diagnostic room but closed its browser without persisting the guest session; that diagnostic room could not be cleaned by its now-lost guest identity. It expires logically after 30 minutes but is not physically deleted. No administrator cleanup was attempted. Anonymous test identities remain in Auth by design, since the client has no administrative deletion access.
+
+Remaining gates include exact safe notification keys/latencies, full WebKit execution, complete retained evidence, and independent device/reconnect/token-expiry checks. Successful HTTP responses alone have not been used to assert denial.
+
+Additional requested gates are now scripted, not executed successfully. An authenticated member joins a private test subscription with Broadcast ack enabled and sends an event named forged_test; an ok acknowledgement fails the test. A separate public channel must return CHANNEL_ERROR. Neither payload changes game state. Current retry remains blocked before the lobby by anonymous Auth rate limiting. A timeout alone is not treated as proof of public-channel rejection. The script prints only the first actual changed frame's payload key names for safe decoder diagnosis. No key, token, UID, room ID, or topic is logged.
+
+Session recovery limitation and resumable execution
+
+All Chromium contexts from the partial runs were closed before storageState persistence was added. No /tmp/online-live-*.json files exist. Those earlier identities cannot be recovered with the public key or pseudo. No further signup should be attempted for this work.
+
+The script now REQUIRES ONLINE_SESSION_FILES with three comma-separated existing /tmp storageState JSON paths, validates an Auth storage entry for the configured BASE origin, chmods the files 0600, writes refreshed state with 0600 permissions, and aborts /auth/v1/signup at the browser transport. It reuses the same three files across isolated Chromium and WebKit contexts, never a new identity per viewport. If supplied, these external files contain sensitive sessions and must never be committed or logged. The test cannot resume without already saved sessions. Its startup validation happens before launching any browser.
+
+The first actual changed socket frame prints only recursive property keys and value types. First completed game's socket/RPC counts and maximum UI update latency are printed immediately before later tests. Existing partial run's exact counts and latencies were not retained, so none can responsibly be reported retrospectively. Payload shape assertion remains a known incomplete gate until a session-backed run reveals its safe structural shape. WebKit would explicitly reuse previously created Chromium identities because of the Auth quota.
