@@ -46,7 +46,7 @@ const fs=require('node:fs'),assert=require('node:assert/strict'),{randomUUID}=re
  r=await get();assert.equal(r.version,startVersion+1);assert.equal(r.board.filter(Boolean).length,1);
  // Identical retry raced at the database boundary returns the same receipt once.
  const args=[r.id,r.instance,r.version,randomUUID(),'place',3];
- const retry=await Promise.all([rpc(b2,'online_action',args),rpc(b2,'online_action',args)]);
+ const retry=await Promise.all([rpc(b,'online_action',args),rpc(b2,'online_action',args)]);
  assert.deepEqual(retry[0],retry[1]);r=await get();assert.equal(r.board.filter(Boolean).length,2);
  const version=r.version;
  // Heartbeat vs explicit departure may finish first, or get NOT_MEMBER, never deadlock.
