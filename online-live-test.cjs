@@ -48,13 +48,16 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
   const file=path.join(path.dirname(saved),'auth429-metadata.json');
   fs.writeFileSync(file,JSON.stringify(metadata,null,2),{mode:0o600});fs.chmodSync(file,0o600);
  });
- pages.push(p);const st={changed:0,subscribed:0,rpc:0,heartbeat:0,payloadKeys:[],topics:[],decodeErrors:0};stats.push(st);
+ pages.push(p);const st={changed:0,subscribed:0,rpc:0,heartbeat:0,payloadKeys:[],topics:[],events:[],decodeErrors:0};stats.push(st);
  p.on('pageerror',e=>errors.push(e.message));
  p.on('request',r=>{if(r.url().includes('/rest/v1/rpc/')){st.rpc++;if(r.url().endsWith('online_heartbeat'))st.heartbeat++;}});
  p.on('websocket',ws=>{ws.on('framereceived',f=>{try{
  const m=require('./online-live-frame.cjs')(f.payload);if(!m)return;
  if(m.event==='broadcast'&&m.payload?.event==='changed'){if(!st.changed)console.log('first real socket changed',engine,i,JSON.stringify(shape(m.payload.payload)));st.changed++;const payload=m.payload.payload;
  if('id' in payload){assert.equal(typeof payload.id,'string');assert.match(payload.id,/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);}
+ assert.ok(Number.isSafeInteger(payload.version)&&payload.version>=0,'integer broadcast version');
+ assert.match(payload.instance,/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,'broadcast instance UUID');
+ st.events.push({topic:m.topic,instance:payload.instance,version:payload.version,id:payload.id});
  st.payloadKeys.push(Object.keys(payload).sort().join(','));}
  if(m.event==='phx_reply'&&m.payload?.status==='ok'&&m.topic?.startsWith('realtime:mini:')){st.subscribed++;if(!st.topics.includes(m.topic))st.topics.push(m.topic);}
  }catch{st.decodeErrors++;}});});
@@ -127,10 +130,16 @@ for(let i=0;i<2;i++)await recordJoined(i,(await snap(pages[i],roomId)).topic);
  }
  const latencies=[];
  async function move(p,other,cell){
- const before=stats[pages.indexOf(other)].changed,t=Date.now();
+ const st=stats[pages.indexOf(other)],before=st.changed,eventOffset=st.events.length;
+ const prior=await snap(p,roomId),t=Date.now();
+ assert.equal(prior.id,roomId);
  await p.locator('.online-board .mcell').nth(cell).click();
  await other.waitForFunction(cell=>!!document.querySelectorAll('.online-board .mcell')[cell]?.textContent,cell,{timeout:5000});
- latencies.push(Date.now()-t);assert.ok(latencies.at(-1)<5000,'update must be under five seconds');assert.ok(stats[pages.indexOf(other)].changed>before,'update from real broadcast');
+ latencies.push(Date.now()-t);assert.ok(latencies.at(-1)<5000,'update must be under five seconds');assert.ok(st.changed>before,'update from real broadcast');
+ const after=await snap(other,roomId);
+ assert.equal(after.id,roomId);assert.equal(after.instance,prior.instance);
+ assert.equal(after.version,prior.version+1);assert.equal(after.topic,prior.topic);
+ assert.ok(st.events.slice(eventOffset).some(e=>e.topic==='realtime:'+after.topic&&e.instance===after.instance&&e.version===after.version),'broadcast topic/epoch, instance and version must match canonical RPC of this exact move');
  }
  await start();const stale=await snap(a,roomId);
  for(const [p,o,cell]of [[a,b,0],[b,a,3],[a,b,1],[b,a,4],[a,b,2]])await move(p,o,cell);
@@ -162,7 +171,7 @@ for(let i=0;i<2;i++)await recordJoined(i,(await snap(pages[i],roomId)).topic);
  await a.waitForSelector('.online-board');assert.equal((await snap(b,roomId)).status,'playing');
  assert.deepEqual(errors,[]);
  for(const st of stats.slice(0,2)){assert.equal(st.heartbeat,0);assert.equal(st.decodeErrors,0,'socket decoder/shape errors');assert.ok(st.payloadKeys.every(k=>k==='instance,version'||k==='id,instance,version'),'unexpected notification keys: '+[...new Set(st.payloadKeys)].join(';'));}
- report.push({engine,viewports:['360x640','390x844'],win:true,draw:true,reloadSameIdentityAndSeat:true,stale:'STALE_VERSION',outsiderRead:'NOT_MEMBER',outsiderAction:'NOT_MEMBER',outsiderSubscribe:outsider.status,outsiderEvents:0,noToken:{status:noToken.status,code:noToken.code},directWrite:{status:writes.status,code:writes.code},forgedPublication:forged.result,publicChannel:publicChannel.status,epochRotation:true,epochContinuation:true,maxUpdateMs:Math.max(...latencies),updates:latencies.length,clients:stats.slice(0,2).map(x=>({changed:x.changed,subscribed:x.subscribed,rpc:x.rpc,heartbeat:x.heartbeat})),leaveMs:Date.now()-t});
+ report.push({engine,viewports:['360x640','390x844'],win:true,draw:true,reloadSameIdentityAndSeat:true,stale:'STALE_VERSION',outsiderRead:'NOT_MEMBER',outsiderAction:'NOT_MEMBER',outsiderSubscribe:outsider.status,outsiderEvents:0,noToken:{status:noToken.status,code:noToken.code},directWrite:{status:writes.status,code:writes.code},forgedPublication:forged.result,publicChannel:publicChannel.status,epochRotation:true,epochContinuation:true,maxUpdateMs:Math.max(...latencies),updates:latencies.length,semanticBroadcastChecks:latencies.length,clients:stats.slice(0,2).map(x=>({changed:x.changed,subscribed:x.subscribed,rpc:x.rpc,heartbeat:x.heartbeat})),leaveMs:Date.now()-t});
  }finally{
  // Never use admin deletion. Leave every membership owned by these test guests.
  for(const p of pages){try{
