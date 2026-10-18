@@ -5,6 +5,7 @@
  let active = false, api, snapshot, channel, channelTopic, timer, busy = false, pending = null;
  let directoryOffset = 0, notice = '', leaving = false;
  let loading, syncPromise, queuedSync = false, generation = 0, connected = navigator.onLine, requestGeneration = 0;
+ let outcomeKey = null;
  const G = window.MiniOnlineGame || {game: 'morpion', title: 'Salons de morpion', label: 'Morpion en ligne'};
  const symbols = {1: '♥', 2: '✦'};
  // Morpion keeps its original RPC names; other games use the game-aware ones.
@@ -17,7 +18,7 @@
   const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e;
  };
  function button(text, fn, cls) { const b = el('button', text, cls); b.type = 'button'; b.onclick = fn; return b; }
- function message(text) { $('#online-status').textContent = text; }
+ function message(text) { const status = $('#online-status'); if (status.textContent !== text) status.textContent = text; }
  async function load() {
   if (!loading) loading = (async () => {
    for (const src of ['online-config.js', 'vendor/supabase-2.118.0.js', 'online-client.js', 'online-lifecycle.js']) {
@@ -91,7 +92,7 @@
   box.append(el('p', 'Salons publics. Le pseudo n’est pas un compte. Garde ce navigateur pour retrouver ta place.', 'online-note'));
   const head = el('div', null, 'online-heading');
   head.append(el('strong', G.title), button('Actualiser', () => task(refreshDirectory)));
-  box.append(head, el('div', null, 'online-directory')); await refreshDirectory();
+  box.append(head, el('div', null, 'online-directory')); setBusy(busy); await refreshDirectory();
  }
  async function refreshDirectory() {
   const g = generation;
@@ -261,6 +262,11 @@
    s.status === 'finished' ? (s.winner ? (s.members.find(m => m.seat === s.winner)?.name || 'L’autre personne') + ' a gagné ! ✦' : 'Match nul, bien joué !') :
    s.turn === s.seat ? 'À toi de jouer ' + symbols[s.seat] : 'Au tour de ' + turn?.name + ' ' + symbols[s.turn];
   if (!pending) message(info);
+  // Real result from the authoritative snapshot and this client's own seat; never parsed from text.
+  if (s.status === 'finished' && s.members.length === 2 && s.seat) {
+   const key = s.instance + '|' + s.version;
+   if (key !== outcomeKey) { outcomeKey = key; const r = s.winner ? (s.winner === s.seat ? 'win' : 'loss') : 'draw'; window.RoukyMascot?.outcome?.(r, 'player', $('#online-status')); }
+  } else if (s.status !== 'finished') outcomeKey = null;
   setBusy(busy);
  }
  async function open() {

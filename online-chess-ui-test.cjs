@@ -8,11 +8,12 @@ function backend(){
  async function notify(){for(const p of S.pages)await p.evaluate(()=>window.__notify?.()).catch(()=>{})}
  S.rpc=async(i,name,a={})=>{
   S.log.push({i,name,kind:a.p_kind,data:a.p_data,version:a.p_version});
+  if(S.hold&&S.hold[name])await S.hold[name];
   if(S.failNext[i]===name){S.failNext[i]=null;return err('network','08006')}
   if(name==='online_create_room_game'||name==='online_join_room_game')return {data:snap(i)};
   if(name==='online_list_rooms_game')return {data:[]};
   if(name==='online_my_rooms_game')return {data:[{id:'room-1',name:'Echecs Rose',game:'chess'}]};
-  if(name==='online_get_room'||name==='online_heartbeat'){let s=snap(i);if(S.tamper[i])s=S.tamper[i](s);return {data:s}}
+  if(name==='online_get_room'||name==='online_room_status'||name==='online_heartbeat'){if(S.departed&&S.departed[i])return {data:{id:'room-1',terminated:true,name:'Lulu',reason:'player_left'}};let s=snap(i);if(S.tamper[i])s=S.tamper[i](s);return {data:s}}
   if(name==='online_chess_action'){
    const key=i+':'+a.p_action,req=JSON.stringify([a.p_instance,a.p_version,a.p_kind,a.p_data]);
    if(S.receipts.has(key)){const r=S.receipts.get(key);return r.req===req?{data:r.ack}:err('ACTION_REUSED')}
@@ -24,7 +25,7 @@ function backend(){
    else if(k==='report'){S.reports[seat]=a.p_data.result;if(S.reports[1]&&S.reports[1]===S.reports[2]){S.status='finished';S.winner=S.reports[1]==='white'?1:S.reports[1]==='black'?2:0}}
    S.version++;const ack={version:S.version};S.receipts.set(key,{req,ack});setTimeout(notify,0);return {data:ack}
   }
-  if(name==='online_game_leave'){return {data:{left:true}}}
+  if(name==='online_depart_room'||name==='online_game_leave'){S.departed=S.departed||{};S.departed[i]=true;S.log.push({i,name:'depart'});return {data:{id:'room-1',terminated:true,name:'Lilou',reason:'player_left'}}}
   return err('UNKNOWN_RPC '+name);
  };
  return S;
@@ -68,6 +69,59 @@ async function startGame(a,b,S){
  const browser=await G.launch(type,engine);
  for(const [w,h] of [[390,844],[1440,900]]){
   const tag=engine+' '+w;
+  // ---- 00. lobby opened while its directory refresh is still in flight: a Créer click must not be silently dropped
+  {const S=backend();let release;S.hold={online_list_rooms_game:new Promise(r=>release=r)};
+   const a=await client(browser,S,0,w,h);
+   await a.locator('#online-toggle').click();await a.waitForSelector('#online-pseudo',{timeout:20000});
+   await a.locator('#online-pseudo').fill('Lilou');await a.locator('#online-room-name').fill('Echecs Rose');
+   const btn=a.getByRole('button',{name:'Créer',exact:true});
+   const disabled=await btn.isDisabled();
+   if(!disabled){await btn.click().catch(()=>{});}
+   release();
+   await a.waitForFunction(()=>document.querySelector('#online-status')?.textContent==='Choisis un nom pour créer ou rejoindre un salon.',null,{timeout:10000});
+   assert.equal(await a.locator('#online-pseudo').inputValue(),'Lilou','typed pseudo survives the async directory refresh');
+   assert.equal(await a.locator('#online-room-name').inputValue(),'Echecs Rose','typed room name survives the async directory refresh');
+   if(disabled){await a.getByRole('button',{name:'Créer',exact:true}).click({timeout:10000});}
+   await a.waitForSelector('.online-members',{timeout:15000});
+   assert.equal(S.log.filter(l=>l.name==='online_create_room_game').length,1,'create sent exactly once');
+   assert.ok(disabled,'Créer is disabled (not silently ignored) while the lobby is still loading');
+   await a.context().close();
+  }
+  // ---- 0. STALE_VERSION on ready: visible accessible notice after resync, no automatic retry
+  {const S=backend();const a=await client(browser,S,0,w,h),b=await client(browser,S,1,w,h);
+   await enter(a,'Lilou',true);await enter(b,'Lulu',false);
+   S.version++;const n=S.log.filter(l=>l.name==='online_chess_action').length;
+   await a.getByRole('button',{name:'Prête !'}).click();
+   await a.waitForFunction(()=>document.querySelector('#online-status')?.textContent==='Le salon a été actualisé. Réessaie.',null,{timeout:10000});
+   assert.equal(await a.locator('#online-status').getAttribute('role'),'status');
+   assert.equal(await a.locator('#online-status').getAttribute('aria-live'),'polite');
+   await a.waitForTimeout(600);
+   assert.equal(S.log.filter(l=>l.name==='online_chess_action').length,n+1,'exactly one attempt, no auto retry');
+   assert.equal(S.members[0].ready,false,'stale ready not applied');
+   assert.equal(await a.locator('#online-status').textContent(),'Le salon a été actualisé. Réessaie.','notice persists');
+   await a.getByRole('button',{name:'Prête !'}).click();
+   await a.getByRole('button',{name:'Pas encore prête'}).waitFor({timeout:10000});
+   assert.equal(S.members[0].ready,true,'manual retry succeeds');
+   await a.context().close();await b.context().close();
+  }
+  // ---- 0b. delayed broadcast: b clicks ready on a stale snapshot -> notice, ONE manual retry after resync, then both ready and start enabled
+  {const S=backend();const a=await client(browser,S,0,w,h),b=await client(browser,S,1,w,h);
+   await enter(a,'Lilou',true);await enter(b,'Lulu',false);
+   const stub=p=>p.evaluate(()=>{window.__realNotify=window.__notify;window.__notify=()=>{}});
+   await stub(b);
+   await a.getByRole('button',{name:'Prête !'}).click();await a.getByRole('button',{name:'Pas encore prête'}).waitFor({timeout:10000});
+   // b has not received a's ready (delayed broadcast); b's click is stale
+   await b.getByRole('button',{name:'Prête !'}).click();
+   await b.waitForFunction(()=>document.querySelector('#online-status')?.textContent==='Le salon a été actualisé. Réessaie.',null,{timeout:10000});
+   assert.equal(S.members[1].ready,false,'stale ready not applied');
+   const n1=S.log.filter(l=>l.name==='online_chess_action').length;
+   await b.waitForTimeout(500);assert.equal(S.log.filter(l=>l.name==='online_chess_action').length,n1,'no auto retry');
+   await b.getByRole('button',{name:'Prête !'}).click();
+   await b.getByRole('button',{name:'Pas encore prête'}).waitFor({timeout:10000});
+   assert.equal(S.members[1].ready,true,'manual retry applied once');
+   await a.waitForFunction(()=>[...document.querySelectorAll('#online-root button')].some(x=>x.textContent==='Démarrer'&&!x.disabled),null,{timeout:10000});
+   await a.context().close();await b.context().close();
+  }
   // ---- 1. normal legal play, delivered to both, offline untouched
   {const S=backend();const [a,b]=await fresh(browser,S,w,h);
    assert.equal(await a.locator('script[src*="supabase"]').count(),1,'sdk lazy loaded by online entry');

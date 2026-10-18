@@ -197,7 +197,10 @@
     setSound,
     play,
     getSound() { return sound; },
-    outcome(result, perspective) { if (outcomeImpl) outcomeImpl(result, perspective); },
+    outcome(result, perspective, target) {
+      if (target) { const inst = attachStatus(target, true); if (inst) inst.outcome(result, perspective); return; }
+      if (outcomeImpl) outcomeImpl(result, perspective);
+    },
     setPose(element, pose) {
       return mount(element, pose);
     },
@@ -210,12 +213,15 @@
     document.querySelectorAll('[data-rouky-pose]').forEach(element => {
       mount(element, element.dataset.roukyPose);
     });
-    const status = document.querySelector('#status');
-    if (!status) return;
+    attachStatus(document.querySelector('#status'), false);
+  }
+  function attachStatus(status, explicitOnly) {
+    if (!status) return null;
+    if (status._roukyStatus) return status._roukyStatus;
     let badge = null;
     let reaction = null;
     let last = '';
-    let explicit = false;
+    let explicit = !!explicitOnly;
     let shownText = null;
     const hide = () => {
       if (badge) badge.hidden = true;
@@ -259,7 +265,7 @@
     };
     // Explicit hook: games report the real result from the player's point of view.
     // result is 'win', 'loss' or 'draw'; perspective 'neutral' means two people share the device.
-    outcomeImpl = (result, perspective) => {
+    const outcomeHere = (result, perspective) => {
       if (!['win', 'loss', 'draw'].includes(result)) return;
       explicit = true;
       status.dataset.roukyOutcome = result;
@@ -293,6 +299,9 @@
     };
     new MutationObserver(update).observe(status, { childList: true, characterData: true, subtree: true });
     update();
+    status._roukyStatus = { outcome: outcomeHere };
+    if (!explicitOnly) outcomeImpl = outcomeHere;
+    return status._roukyStatus;
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();

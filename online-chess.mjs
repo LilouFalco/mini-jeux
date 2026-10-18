@@ -36,8 +36,9 @@ export function start(host){
  function setBusy(v){busy=v;root.querySelectorAll('button').forEach(b=>b.disabled=(v&&b.dataset.always!=='true')||b.dataset.locked==='true')}
  async function load(){
   if(!loading)loading=(async()=>{
-   for(const src of ['online-config.js','vendor/supabase-2.118.0.js','online-client.js']){
+   for(const src of ['online-config.js','vendor/supabase-2.118.0.js','online-client.js','online-lifecycle.js']){
     if(src==='online-client.js'&&window.MiniOnline)continue;
+    if(src==='online-lifecycle.js'&&window.MiniLifecycle)continue;
     await new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>{s.remove();no(Error('SDK_LOAD'))};document.head.appendChild(s)});
    }
    api=window.MiniOnline;await api.client();
@@ -45,19 +46,20 @@ export function start(host){
   return loading;
  }
  const rpcGame=(kind,args={})=>api.rpc({create:'online_create_room_game',join:'online_join_room_game',list:'online_list_rooms_game',mine:'online_my_rooms_game'}[kind],{p_game:'chess',...args});
+ let staleNotice=false;
  async function task(fn){
   if(busy)return;setBusy(true);const g=gen;
   try{await fn()}
   catch(error){
    if(active&&g===gen){
     message(api?api.friendly(error):'Connexion indisponible. Réessaie ou joue hors ligne.');
-    if(snapshot&&/STALE_VERSION|NOT_YOUR_TURN|WRONG_PHASE/.test(error.message||'')){pending=null;await sync().catch(()=>{})}
+    if(snapshot&&/STALE_VERSION|NOT_YOUR_TURN|WRONG_PHASE/.test(error.message||'')){pending=null;await sync().catch(()=>{});if(active&&g===gen&&/STALE_VERSION/.test(error.message||''))staleNotice=true}
    }
-  }finally{if(g===gen){setBusy(false);if(snapshot)renderRoom()}}
+  }finally{if(g===gen){setBusy(false);if(snapshot)renderRoom();if(staleNotice){staleNotice=false;message('Le salon a été actualisé. Réessaie.')}}}
  }
  function input(label,id,value,max){const w=el('label',label),i=el('input');i.id=id;i.value=value;i.maxLength=max;i.autocomplete='off';i.spellcheck=false;w.append(i);return w}
  const rnd=()=>{const a=['Chat','Panda','Loutre','Renard'],b=['Rose','Étoilé','Malin','Pastel'],n=new Uint32Array(2);crypto.getRandomValues(n);return a[n[0]%4]+' '+b[n[1]%4]};
- const pseudo=()=>{try{return localStorage.getItem('mini-online-pseudo')||rnd()}catch{return rnd()}};
+ const pseudo=()=>{try{return window.RoukyProfile?.get()?.pseudo||localStorage.getItem('mini-online-pseudo')||rnd()}catch{return rnd()}};
  function setup(){
   root.replaceChildren();
   const top=el('div',null,'online-heading'),exit=button('Hors ligne',close);exit.dataset.always='true';
@@ -83,13 +85,13 @@ export function start(host){
   form.onsubmit=e=>{e.preventDefault();enter(false)};form.append(row);box.append(form);
   box.append(el('p','Salons publics. Le pseudo n’est pas un compte. Garde ce navigateur pour retrouver ta place.','online-note'));
   const head=el('div',null,'online-heading');head.append(el('strong','Salons d’échecs'),button('Actualiser',()=>task(refreshDirectory)));
-  box.append(head,el('div',null,'online-directory'));await refreshDirectory();
+  box.append(head,el('div',null,'online-directory'));setBusy(busy);await refreshDirectory();
  }
  async function refreshDirectory(){
   const g=gen,[rooms,mine]=await Promise.all([rpcGame('list',{p_offset:directoryOffset}),rpcGame('mine')]);
   if(!active||g!==gen||snapshot)return;
   const list=root.querySelector('.online-directory');if(!list)return;list.replaceChildren();
-  for(const r of mine.filter(r=>!r.game||r.game==='chess')){const b=button('Reprendre · '+r.name,()=>task(async()=>enterRoom(await api.rpc('online_get_room',{p_room:r.id}))));b.className='online-resume';list.append(b)}
+  for(const r of mine.filter(r=>!r.game||r.game==='chess')){const b=button('Reprendre · '+r.name,()=>task(async()=>{const x=await api.rpc('online_room_status',{p_room:r.id});if(window.MiniLifecycle.isTerminated(x))await terminated(x);else await enterRoom(x)}));b.className='online-resume';list.append(b)}
   if(!rooms.length)list.append(el('p','Le premier salon pourrait être le tien ♡','online-note'));
   const st={waiting:'En attente',playing:'En cours',finished:'Terminée'};
   for(const r of rooms.filter(r=>r.game==='chess')){const i=button('',()=>{$('#online-room-name').value=r.name;$('#online-room-name').focus()});i.className='online-room';i.append(el('strong',r.name),el('small',r.host+' · '+r.count+'/'+r.capacity+' · '+st[r.status]));list.append(i)}
@@ -101,7 +103,8 @@ export function start(host){
   await stopChannel();if(!snapshot||!active)return;
   const c=await api.client(),topic=snapshot.topic,g=gen;await c.realtime.setAuth();channelTopic=topic;
   channel=c.channel(topic,{config:{private:true}}).on('broadcast',{event:'changed'},()=>{if(active&&g===gen)sync().catch(()=>{connected=false;renderRoom()})})
-   .subscribe(s=>{if(!active||g!==gen||channelTopic!==topic)return;if(s==='SUBSCRIBED')sync().catch(()=>{});else if(s==='CHANNEL_ERROR'||s==='TIMED_OUT')message('Temps réel indisponible. Actualisation automatique toutes les 20 secondes.')});
+   .on('broadcast',{event:'terminated'},()=>{if(active&&g===gen)sync().catch(()=>{connected=false;renderRoom()})})
+   .subscribe(s=>{if(!active||g!==gen||channelTopic!==topic)return;if(s==='SUBSCRIBED')sync().catch(()=>{});else if(s==='CHANNEL_ERROR'||s==='TIMED_OUT')message('Temps réel indisponible. Actualisation automatique toutes les 10 secondes.')});
  }
  // The ONLY place a remote snapshot is accepted. Returns true when accepted.
  function accept(fresh){
@@ -122,14 +125,15 @@ export function start(host){
   snapshot=null;game=null;blocked=null;connected=navigator.onLine;pending=null;accept(room);
   if(!snapshot)throw Error('INVALID_REMOTE_SNAPSHOT');
   orient=snapshot.seat===2?2:1;flipped=null;renderRoom();await subscribe();await sync();
-  clearInterval(timer);timer=setInterval(()=>{if(active&&snapshot&&document.visibilityState==='visible'&&navigator.onLine)sync(true).catch(()=>{connected=false;renderRoom()})},20000);
+  clearInterval(timer);timer=setInterval(()=>{if(active&&snapshot&&navigator.onLine)sync(true).catch(()=>{connected=false;renderRoom()})},window.MiniLifecycle.HEARTBEAT_MS);
  }
  async function sync(heartbeat=false){
   if(!active||!snapshot||!api)return;
   if(syncPromise){queued=true;return syncPromise}
   const id=snapshot.id,g=gen,n=++seq;
   syncPromise=(async()=>{
-   const fresh=await api.rpc(heartbeat?'online_heartbeat':'online_get_room',{p_room:id});
+   const fresh=await api.rpc(heartbeat?'online_heartbeat':'online_room_status',{p_room:id});
+   if(active&&g===gen&&snapshot?.id===id&&n===seq&&window.MiniLifecycle.isTerminated(fresh)){await terminated(fresh);return}
    if(active&&g===gen&&snapshot?.id===id&&n===seq){accept(fresh);connected=navigator.onLine;renderRoom();await subscribe();setTimeout(()=>maybeReport().catch(()=>{}),0)}
   })();
   try{await syncPromise}finally{syncPromise=null;if(queued&&active&&snapshot?.id===id){queued=false;queueMicrotask(()=>sync().catch(()=>{}))}}
@@ -146,10 +150,9 @@ export function start(host){
    }
    const a=pending;
    try{
-    if(kind==='leave')await api.rpc('online_game_leave',{p_room:a.p_room,p_instance:a.p_instance,p_version:a.p_version,p_action:a.p_action});
-    else await api.rpc('online_chess_action',a);
+    const res=await api.rpc('online_chess_action',a);
     pending=null;
-    if(kind==='leave'){await lobby();return}
+    if(window.MiniLifecycle.isTerminated(res)){await terminated(res);return}
     await sync();message('');
    }catch(error){
     if(error?.code&&!/^08|^5/.test(error.code))pending=null;
@@ -157,12 +160,26 @@ export function start(host){
    }
   });
  }
+ let notice='',leaving=false;
+ async function terminated(raw){
+  if(leaving)return;
+  const t=window.MiniLifecycle.clean(raw);
+  notice=window.MiniLifecycle.message(t);pending=null;await lobby();message(notice);
+ }
+ async function depart(){
+  // The server derives the actor from auth; the client never names who leaves.
+  if(!snapshot)return;
+  const id=snapshot.id;leaving=true;
+  try{await window.MiniLifecycle.depart(api,id)}finally{leaving=false}
+  notice='';await lobby();
+ }
  async function retryPending(){
   // A retry must first look at fresh state: if it moved on, the old receipt is stale and is dropped, never rebased.
   await task(async()=>{
    const p=pending;if(!p)return;
-   const fresh=await api.rpc('online_get_room',{p_room:p.p_room});
-   const before=snapshot;pending=null;
+   const fresh=await api.rpc('online_room_status',{p_room:p.p_room});
+   if(window.MiniLifecycle.isTerminated(fresh)){pending=null;await terminated(fresh);return}
+   pending=null;
    if(!accept(fresh)){renderRoom();return}
    if(snapshot.instance!==p.p_instance||snapshot.version!==p.p_version){message('La partie a changé. Plateau actualisé, rejoue ton coup.');return}
    pending=p;
@@ -236,7 +253,7 @@ export function start(host){
    box.append(button('Retourner',()=>{flipped=(flipped??orient)===1?2:1;renderRoom()}));
   }
   if(pending)box.append(button('Vérifier / réessayer la demande',()=>retryPending()));
-  const leave=button('Quitter le salon',()=>{if(confirm(s.status==='playing'?'Quitter abandonne cette partie. Continuer ?':'Quitter ce salon ?'))send('leave',{})});
+  const leave=button('Quitter le salon',()=>{if(confirm(s.status==='playing'?'Quitter abandonne cette partie. Continuer ?':'Quitter ce salon ?'))task(depart)});
   leave.dataset.locked=String(!!blocked&&false);box.append(leave);
   const reps=s.chess?.reports??{};
   const info=blocked?blocked:!connected?'Reconnexion… Aucun coup envoyé hors connexion.':
@@ -256,7 +273,18 @@ export function start(host){
   active=false;gen++;busy=false;root.hidden=true;document.body.classList.remove('online-active');toggle.setAttribute('aria-pressed','false');
   clearInterval(timer);timer=null;snapshot=null;game=null;pending=null;blocked=null;stopChannel().catch(()=>{});toggle.focus();
  }
+ document.addEventListener('click',async e=>{
+  const a=e.target.closest?.('a[href],a[data-home-link]');
+  if(!a||!active||!snapshot||e.defaultPrevented||a.target||e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;
+  const u=new URL(a.href||a.dataset.homeLink||'./',location.href);
+  if(u.origin===location.origin&&u.pathname===location.pathname)return;
+  e.preventDefault();
+  if(!confirm('Quitter ce salon avant de continuer ?'))return;
+  try{await window.MiniLifecycle.depart(api,snapshot.id);location.href=u.href}
+  catch(error){message(api.friendly(error)+' Réessaie de quitter le salon.')}
+ },true);
  toggle.onclick=open;
+ if(new URL(location.href).searchParams.get('mode')==='online')open();
  addEventListener('offline',()=>{connected=false;if(active&&snapshot)renderRoom()});
  addEventListener('online',()=>{if(active&&snapshot)sync().catch(()=>{})});
  document.addEventListener('visibilitychange',()=>{if(active&&snapshot&&document.visibilityState==='visible')sync(true).catch(()=>{connected=false;renderRoom()})});

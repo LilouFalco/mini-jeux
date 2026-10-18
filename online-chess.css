@@ -8,9 +8,10 @@
 .chess #oc-board .check{background:#ec8798;box-shadow:inset 0 0 0 3px #b04461}
 .chess #oc-board .chess-cell:focus-visible{outline:-webkit-focus-ring-color auto 2px;outline-offset:-3px}
 .has-mnav.chess #oc-board{height:100%;aspect-ratio:auto;box-shadow:2px 2px 0 #edd5da}
-.online-active.chess .game-body>:not(.chess-modebar):not(#online-root){display:none}
+.online-active.chess .game-body>:not(#online-root){display:none}
 .chess-modebar{display:flex;justify-content:flex-end;margin-bottom:8px}
 .oc-wrap{width:min(100%,460px);margin:0 auto}
 #oc-board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));width:100%;aspect-ratio:1;border:3px solid var(--outline);box-shadow:4px 4px 0 #edd5da;border-radius:3px;overflow:hidden;background:var(--rose)}
 .online-alert{background:#fde3e6;border:2px solid #b04461;padding:8px;border-radius:5px;font-weight:700;color:#7a2540}
 #oc-board .chess-cell[data-locked=true]{cursor:default}
+.chess-top-actions{display:flex;gap:6px;flex:none}.chess-top>span:first-child{min-width:0}

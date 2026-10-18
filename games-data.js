@@ -20,6 +20,7 @@ const MODES=[{k:'solo',n:'Solo',t:'Un jeu, une pause, rien que pour toi',i:'M12 
 MODES.push({k:'online',n:'En ligne',t:'Un salon, chacun sur son écran',i:'M3 8a14 14 0 0118 0M6 12a9 9 0 0112 0M9 16a4 4 0 016 0M12 20h.01'});
 G.find(g=>g.id==='morpion').m.online='morpion.html?mode=online';
 G.find(g=>g.id==='puissance4').m.online='puissance4.html?mode=online';
+G.find(g=>g.id==='chess').m.online='chess.html?mode=online';
 const KEY='lilou-yakazu-mode';
 const getMode=()=>{try{const m=localStorage.getItem(KEY);return MODES.some(x=>x.k===m)?m:null}catch{return null}};
 const setMode=m=>{try{localStorage.setItem(KEY,m)}catch{}};
