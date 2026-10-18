@@ -10,6 +10,12 @@ function isLocalHost(h){return LOCAL.test(String(h||''))}
 function deny(kind,target){const h=hostOf(target);violations.push({kind,host:isLocalHost(h)?h:h.replace(/^[^.]+/,'*'),at:new Date().toISOString()});const e=new Error('NETWORK_GUARD: blocked '+kind+' to non-local host');e.code='ENETGUARD';throw e}
 function installNodeGuard(){
  if(globalThis.__netGuard)return;globalThis.__netGuard=true;
+ // children (node) inherit the guard; network CLIs and UDP/HTTP2 are refused outright
+ const opt=' --require '+__filename;if(!String(process.env.NODE_OPTIONS||'').includes(__filename))process.env.NODE_OPTIONS=(process.env.NODE_OPTIONS||'')+opt;
+ try{const dg=require('node:dgram');const cs=dg.createSocket;dg.createSocket=function(){deny('udp','udp socket')};dg.Socket.prototype.send=function(){deny('udp','udp send')}}catch{}
+ try{const h2=require('node:http2');const c=h2.connect;h2.connect=function(u,...r){const t=hostOf(typeof u==='object'&&!(u instanceof URL)?(u.host||u.hostname):u);if(!isLocalHost(t))deny('http2',t);return c.call(this,u,...r)}}catch{}
+ try{const cp=require('node:child_process');const BAD=/(^|[\s/;&|(])(curl|wget|nc|ncat|netcat|socat|ssh|scp|sftp|ftp|telnet|rsync|dig|nslookup|ping|git\s+(push|fetch|pull|clone|ls-remote)|npm|npx|pip3?|gh)(\s|$)/;
+  for(const f of ['spawn','spawnSync','exec','execSync','execFile','execFileSync','fork']){const o=cp[f];cp[f]=function(cmd,...r){const line=[cmd,...(Array.isArray(r[0])?r[0]:[])].join(' ');if(f!=='fork'&&BAD.test(' '+line))deny('child_process',line.split(' ')[0]);return o.call(this,cmd,...r)}}}catch{}
  const sock=net.Socket.prototype.connect;
  net.Socket.prototype.connect=function(...a){const o=a[0];if(o&&typeof o==='object'&&!o.path){if(!isLocalHost(o.host||'localhost'))deny('socket',o.host)}else if(typeof o==='number'||typeof o==='string'&&/^\d+$/.test(o)){const h=typeof a[1]==='string'?a[1]:'localhost';if(!isLocalHost(h))deny('socket',h)}return sock.apply(this,a)};
  const tc=tls.connect;tls.connect=function(...a){const o=typeof a[0]==='object'?a[0]:{};const h=o.host||o.servername||(typeof a[1]==='string'?a[1]:'');if(!isLocalHost(h))deny('tls',h);return tc.apply(this,a)};

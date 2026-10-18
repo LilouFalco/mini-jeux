@@ -14,10 +14,14 @@ const REAL=fs.readFileSync(__dirname+'/online-config.js','utf8').match(/https:\/
   ['net.connect',()=>net.connect(443,'example.invalid')],
   ['tls.connect',()=>require('node:tls').connect(443,'example.invalid')],
   ['dns.lookup',()=>dns.lookup('example.invalid',()=>{})],
-  ['WebSocket',()=>new WebSocket('wss://project.invalid/realtime/v1/websocket')]]){
+  ['WebSocket',()=>new WebSocket('wss://project.invalid/realtime/v1/websocket')],
+  ['udp socket',()=>require('node:dgram').createSocket('udp4')],
+  ['http2.connect',()=>require('node:http2').connect('https://project.invalid')],
+  ['child_process curl',()=>require('node:child_process').execSync('curl -s https://project.invalid')],
+  ['child_process spawn nc',()=>require('node:child_process').spawn('nc',['project.invalid','443'])]]){
   let err;try{await fn()}catch(e){err=e}
   assert.ok(err&&(err.code==='ENETGUARD'||/NETWORK_GUARD/.test(err.message)),'node '+name+' must be blocked by guard, got '+(err&&err.message));ok('node '+name+' blocked synchronously');}
- const nodeViol=G.violations.length;assert.equal(nodeViol,8);G.violations.length=0;
+ assert.ok(String(process.env.NODE_OPTIONS).includes('test-guard.cjs'),'children inherit guard');const nodeViol=G.violations.length;assert.equal(nodeViol,12);G.violations.length=0;
  // local server
  const srv=http.createServer((q,s)=>{
   if(q.url==='/online-config.js'){s.setHeader('content-type','text/javascript');return s.end(fs.readFileSync(__dirname+'/online-config.js'))}
