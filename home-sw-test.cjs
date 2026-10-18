@@ -8,7 +8,7 @@ await p.route('**/*',r=>{const u=new URL(r.request().url());return u.origin===ne
 await p.waitForFunction(()=>/Prêt hors connexion/.test(document.body.textContent),null,{timeout:20000});
 const sw=await (await fetch(B+'sw.js')).text();const ver=sw.match(/rouky-games-v\d+/)[0];
 const files=[...sw.match(/FILES=\[([^\]]*)\]/)[1].matchAll(/'([^']+)'/g)].map(x=>x[1]).filter(x=>/\.(html|js|css)$|^\.\/$/.test(x));
-const PG=['yakazu','sudoku','binairo','demineur','champdle','chess','morpion','puissance4','naval','quiestce','petitbac','undercover','timesup'].map(x=>x+'.html');const pm=PG.filter(x=>!files.includes(x));assert.equal(pm.length,0,n+' pages missing from precache: '+pm);assert.equal(ver,'rouky-games-v38','cache version');
+const PG=['yakazu','sudoku','binairo','demineur','champdle','chess','morpion','puissance4','naval','quiestce','petitbac','undercover','timesup'].map(x=>x+'.html');const pm=PG.filter(x=>!files.includes(x));assert.equal(pm.length,0,n+' pages missing from precache: '+pm);assert.equal(ver,'rouky-games-v39','cache version');
 await p.route('**/*',r=>{const u=new URL(r.request().url());return u.origin===new URL(B).origin?r.continue():r.abort()});
 const miss=await p.evaluate(async([v,f])=>{const ca=await caches.open(v);const o=[];for(const x of f)if(!(await ca.match(new URL(x,location.href).href)))o.push(x);return o},[ver,files]);
 assert.equal(miss.length,0,n+' ready shown before precache complete: '+miss);

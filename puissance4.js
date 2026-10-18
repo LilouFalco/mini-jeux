@@ -17,7 +17,8 @@ function render(){
  $('#status').textContent=st.over?(st.line?name(st.b[st.line[0]])+' a gagné ! ✦':'Match nul !'):'À '+name(st.turn)+' de jouer '+SY[st.turn];
 }
 const esc=t=>t.replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-function put(c,p){const r=P.drop(st.b,c);if(r<0)return false;st.b[r*C+c]=p;st.last=r*C+c;const w=P.winner(st.b);if(w){st.over=true;st.line=w.line;st.scores[st.mode][p-1]++}else if(P.full(st.b)){st.over=true;st.scores[st.mode][2]++}else st.turn=p===1?2:1;return true}
+function put(c,p){const r=P.drop(st.b,c);if(r<0)return false;st.b[r*C+c]=p;st.last=r*C+c;const w=P.winner(st.b);if(w){st.over=true;st.line=w.line;st.scores[st.mode][p-1]++}else if(P.full(st.b)){st.over=true;st.scores[st.mode][2]++}else st.turn=p===1?2:1;if(st.over)setTimeout(()=>announce(w?p:0),0);return true}
+function announce(p){const r=window.RoukyMascot&&RoukyMascot.outcome;if(!r)return;if(!p)r('draw');else if(st.mode==='two')r('win','neutral');else r(p===1?'win':'loss','player')}
 function play(c){
  if(st.over||st.busy||(st.mode!=='two'&&st.turn===2))return;
  if(!put(c,st.turn))return;render();save();aiTurn();

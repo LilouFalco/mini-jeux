@@ -18,7 +18,8 @@ function play(i){
  st.b[i]=st.turn;end();
  if(!st.over){st.turn=st.turn===1?2:1;render();save();if(st.mode!=='two'&&st.turn===2){document.querySelectorAll('.mcell').forEach(c=>c.disabled=true);setTimeout(()=>{if(!st.over&&st.turn===2){const m=M.aiMove(st.b,2,st.mode);if(m>=0){st.b[m]=2;end();if(!st.over)st.turn=1;render();save()}}},350)}}
 }
-function end(){const w=M.winner(st.b);if(w){st.over=true;st.line=w.line;st.scores[st.mode][w.p-1]++}else if(M.full(st.b)){st.over=true;st.scores[st.mode][2]++}render();save()}
+function end(){const w=M.winner(st.b);if(w){st.over=true;st.line=w.line;st.scores[st.mode][w.p-1]++}else if(M.full(st.b)){st.over=true;st.scores[st.mode][2]++}render();save();if(st.over)announce(w?w.p:0)}
+function announce(p){const r=window.RoukyMascot&&RoukyMascot.outcome;if(!r)return;if(!p)r('draw');else if(st.mode==='two')r('win','neutral');else r(p===1?'win':'loss','player')}
 function fresh(){st.first=st.first===1?2:1;st.b=Array(9).fill(0);st.turn=st.first;st.over=false;st.line=null;render();save();if(st.mode!=='two'&&st.turn===2){const m=M.aiMove(st.b,2,st.mode);st.b[m]=2;st.turn=1;render();save()}}
 document.querySelectorAll('[data-mode]').forEach(x=>x.onclick=()=>{st.mode=x.dataset.mode;st.first=2;fresh()});
 $('#new').onclick=fresh;
