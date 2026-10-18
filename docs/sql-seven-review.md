@@ -25,7 +25,7 @@ against opponent's choice and winner. Spoken yes/no questions and board eliminat
 client/social UI behavior. Stable champion-to-slot mapping must be supplied by the online UI.
 Undercover: server-random pair and hidden per-seat roles/words, 1 undercover (2 for9+), private
 votes, alive-only one vote per round, non-self valid target, majority elimination, ties restart
-voting, civil/impostor win detection. No Mr White variant yet. Pair pool is currently four pairs,
+voting, civil/impostor win detection. No Mr White variant yet. Pair pool is now all 72 pairs of undercover-engine.js (6 themes mixed),
 not the full existing mixed-theme catalog. Snapshot never includes other players' role/word.
 Time's Up: fixed16-card server-shuffled deck, 4+ players, alternating seats and parity teams,
 current card only to active describer, server60second turn deadline, pass/found, scores,
