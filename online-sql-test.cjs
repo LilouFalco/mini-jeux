@@ -59,6 +59,11 @@ const assert=require('node:assert/strict'), fs=require('node:fs');
  assert.equal(sent.private,true);assert.deepEqual(Object.keys(sent.payload).sort(),['instance','version']);
  assert.equal(sent.payload.version,r.version);
  const afterLeave=r.version;
+ // Creation identity is immutable even after the organizer changes.
+ const creator=(await db.query('select creator_uid,host_uid from app_private.rooms where id=$1',[r.id])).rows[0];
+ assert.equal(creator.creator_uid,ids[0]);assert.equal(creator.host_uid,ids[1]);
+ await fail(()=>rpc(0,'online_create_room',['Salon Rose','<b>Lilou</b>',key]),'NOT_MEMBER');
+ await rpc(1,'online_heartbeat',[r.id]);
  await rpc(0,'online_action',leaveArgs);assert.equal((await get(1)).version,afterLeave);
  await fail(()=>rpc(0,'online_action',args),'NOT_MEMBER');
  // A new player takes the free seat; the remaining player can host a working match.

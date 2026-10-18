@@ -22,3 +22,7 @@ https://supabase.com/docs/guides/auth/auth-anonymous
 https://supabase.com/docs/guides/realtime/authorization
 https://supabase.com/docs/guides/realtime/broadcast
 https://supabase.com/docs/reference/javascript/introduction
+
+Le SDK officiel supabase-js 2.118.0 est fourni localement dans vendor/supabase-2.118.0.js, issu de l'archive npm publiée, licence MIT jointe. SHA-256 ee3be8de192b97cb1d73d1e95d6b82bb1f6b658c0f97c4ef757fc331996ed3d3. Sa version a été vérifiée dans le registre npm le 18 octobre 2026. Il n'est exécuté qu'après sélection du mode En ligne; le cache de l'application ne stocke que les fichiers statiques publics, jamais les appels Supabase. Le bouton Hors ligne conserve une place existante; Quitter le salon l'abandonne explicitement.
+
+Les compteurs SQL limitent les opérations acceptées par transaction, pas les tentatives rejetées: PostgreSQL annule aussi l'incrément quand une exception rejette la requête. Ils ne remplacent donc pas une limitation anti-abus par IP ni les limites Auth. Une requête rejetée n'est pas enregistrée. L'identité de création est séparée de l'hôte courant pour ne pas réattribuer une clé de création après transfert. Heartbeat et mutations prennent tous deux le verrou du salon avant celui du membre.

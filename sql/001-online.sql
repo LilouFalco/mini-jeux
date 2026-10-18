@@ -11,6 +11,7 @@ create table if not exists app_private.rooms (
  name text not null check(char_length(name) between 3 and 40),
  lookup_name text not null,
  host_uid uuid not null references auth.users(id),
+ creator_uid uuid not null references auth.users(id),
  create_key uuid not null,
  capacity int not null default 2 check(capacity between 2 and 12),
  status text not null default 'waiting' check(status in ('waiting','playing','finished','closed')),
@@ -23,7 +24,7 @@ create table if not exists app_private.rooms (
  line int[] not null default '{}',
  created_at timestamptz not null default now(),
  expires_at timestamptz not null default now()+interval '30 minutes',
- unique(host_uid,create_key)
+ unique(creator_uid,create_key)
 );
 create unique index if not exists online_room_active_name on app_private.rooms(lookup_name) where status <> 'closed';
 create table if not exists app_private.members (
@@ -152,7 +153,7 @@ begin
  n := app_private.clean_text(p_name,3,40); pseudo := app_private.clean_text(p_pseudo,1,24);
  -- Serialize per-user room quotas and creation retries, even across tabs.
  perform pg_advisory_xact_lock(hashtextextended(u::text,0));
- select * into old from app_private.rooms where host_uid=u and create_key=p_action;
+ select * into old from app_private.rooms where creator_uid=u and create_key=p_action;
  if found then
   if old.name<>n then raise exception 'ACTION_REUSED'; end if;
   return app_private.snapshot(old.id);
@@ -163,8 +164,8 @@ begin
  or (select count(*) from app_private.members m join app_private.rooms r on r.id=m.room_id where m.uid=u and r.status in ('waiting','playing') and r.expires_at>now())>=3
  then raise exception 'ROOM_LIMIT'; end if;
  begin
-  insert into app_private.rooms(game,name,lookup_name,host_uid,create_key)
-  values('morpion',n,lower(n),u,p_action) returning id into rid;
+  insert into app_private.rooms(game,name,lookup_name,host_uid,creator_uid,create_key)
+  values('morpion',n,lower(n),u,u,p_action) returning id into rid;
  exception when unique_violation then raise exception 'NAME_TAKEN'; end;
  insert into app_private.members(room_id,uid,seat,name) values(rid,u,1,pseudo);
  perform app_private.notify(rid);
@@ -195,6 +196,9 @@ create or replace function public.online_heartbeat(p_room uuid) returns jsonb
 language plpgsql security definer set search_path = '' as $$
 declare u uuid:=app_private.actor();
 begin
+ -- Every member-changing operation locks rooms before members to avoid deadlocks.
+ perform 1 from app_private.rooms where id=p_room for update;
+ if not found then raise exception 'ROOM_NOT_FOUND'; end if;
  -- No shared version change: not a gameplay action.
  perform app_private.throttle('heartbeat',12);
  update app_private.members set seen_at=now() where room_id=p_room and uid=u;
