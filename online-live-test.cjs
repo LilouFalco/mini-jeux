@@ -8,6 +8,7 @@ assert.equal(sessionFiles.length,3,'ONLINE_SESSION_FILES requires three existing
 for(const file of sessionFiles){
  assert.ok(path.resolve(file).startsWith('/tmp/'),'sessions must be external /tmp files');
  assert.ok(fs.existsSync(file),'missing saved session file');
+ const dir=path.dirname(path.resolve(file));assert.notEqual(dir,'/tmp','use a dedicated private session directory, not /tmp itself');fs.chmodSync(dir,0o700);
  fs.chmodSync(file,0o600);
  const state=JSON.parse(fs.readFileSync(file,'utf8'));
  assert.ok(state.origins?.some(o=>o.origin===new URL(BASE).origin&&o.localStorage?.some(x=>x.name==='mini-online-auth-v1')),'saved Auth session required for current BASE origin');
@@ -127,7 +128,25 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  report.push({engine,viewports:['360x640','390x844'],win:true,draw:true,reloadSameIdentityAndSeat:true,stale:'STALE_VERSION',outsiderRead:'NOT_MEMBER',outsiderAction:'NOT_MEMBER',outsiderSubscribe:outsider.status,outsiderEvents:0,noToken:{status:noToken.status,code:noToken.code},directWrite:{status:writes.status,code:writes.code},forgedPublication:forged.result,publicChannel:publicChannel.status,epochRotation:true,epochContinuation:true,maxUpdateMs:Math.max(...latencies),updates:latencies.length,clients:stats.slice(0,2).map(x=>({changed:x.changed,subscribed:x.subscribed,rpc:x.rpc,heartbeat:x.heartbeat})),leaveMs:Date.now()-t});
  }finally{
  // Never use admin deletion. Leave every membership owned by these test guests.
- for(const p of pages){try{if(!await p.evaluate(async()=>window.MiniOnline&&!!(await (await MiniOnline.client()).auth.getSession()).data.session).catch(()=>false))continue;const r=await rpc(p,'online_my_rooms');for(const room of r.data||[]){const s=await snap(p,room.id);const r=await act(p,s,'leave');assert.equal(r.error,null);}}catch(e){console.error('cleanup failure',e.message);}}
+ for(const p of pages){try{
+ const cleaned=await p.evaluate(async()=>{
+  // Raw stored-token RPC only. Never call MiniOnline.client() in cleanup.
+  let session;try{session=JSON.parse(localStorage.getItem('mini-online-auth-v1')||'null');}catch{return {skipped:true};}
+  if(!session?.access_token||!window.MINI_ONLINE_CONFIG)return {skipped:true};
+  const conf=MINI_ONLINE_CONFIG;
+  async function call(name,args={}){
+   const r=await fetch(conf.url+'/rest/v1/rpc/'+name,{method:'POST',headers:{apikey:conf.key,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify(args)});
+   const j=await r.json();if(!r.ok)throw Error('cleanup RPC rejected '+r.status);return j;
+  }
+  const rooms=await call('online_my_rooms');let left=0;
+  for(const room of rooms){const s=await call('online_get_room',{p_room:room.id});
+   await call('online_action',{p_room:s.id,p_instance:s.instance,p_version:s.version,p_action:crypto.randomUUID(),p_kind:'leave',p_cell:null});left++;
+  }
+  const remaining=await call('online_my_rooms');return {left,remaining:remaining.length};
+ });
+ if(!cleaned.skipped){assert.equal(cleaned.remaining,0);console.log('cleanup evidence',engine,JSON.stringify(cleaned));}
+ }catch(e){console.error('cleanup failure',e.message);}}
+
  for(const c of contexts)await c.close();await browser.close();
  }
  }
