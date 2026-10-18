@@ -1,11 +1,11 @@
 // UI contract tests with an isolated PostgreSQL WASM backend and simulated Auth/Realtime.
 // No network requests to Supabase and no real users created.
-const pw=require('/tmp/qa/node_modules/playwright'),{PGlite}=require(process.env.PGLITE_MODULE||'/tmp/onlineqa/node_modules/@electric-sql/pglite');
+const G=require('./test-guard.cjs'),pw=require('/tmp/qa/node_modules/playwright'),{PGlite}=require(process.env.PGLITE_MODULE||'/tmp/onlineqa/node_modules/@electric-sql/pglite');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const BASE=process.env.BASE||'http://localhost:28461/';
 (async()=>{
  for(const [engine,type]of [['chromium',pw.chromium],['webkit',pw.webkit]]){
- const browser=await type.launch(engine==='chromium'?{executablePath:'/opt/hako/bin/google-chrome',args:['--no-sandbox']}:{});
+ const browser=await G.launch(type,engine);
  for(const [width,height]of [[360,640],[390,844]]){
   const db=new PGlite();await db.exec(`
   create role anon;create role authenticated;create schema auth;create schema realtime;
@@ -30,7 +30,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   });chain=job.catch(()=>{});return job;};
   for(let i=0;i<2;i++){
    await db.query('insert into auth.users values($1)',['10000000-0000-4000-8000-00000000000'+(i+1)]);
-   const c=await browser.newContext({viewport:{width,height},isMobile:true,hasTouch:true,serviceWorkers:'block'});contexts.push(c);
+   const c=await G.newContext(browser,{viewport:{width,height},isMobile:true,hasTouch:true});contexts.push(c);
    await c.route('https://**',r=>{remote.push(r.request().url());r.abort();});
    const p=await c.newPage();pages.push(p);p.on('pageerror',e=>errors.push(e.message));
    await p.exposeFunction('__rpc',(name,args)=>rpc(i,name,args));
@@ -85,4 +85,5 @@ const BASE=process.env.BASE||'http://localhost:28461/';
  }
  await browser.close();
  }
+ G.assertClean('online-ui-test.cjs');
 })().catch(e=>{console.error(e);process.exit(1)});
