@@ -4,6 +4,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
 if(process.env.ONLINE_LIVE!=='1')throw Error('Set ONLINE_LIVE=1 for separately authorized live execution');
 const fs=require('node:fs'),path=require('node:path');
 const sessionFiles=(process.env.ONLINE_SESSION_FILES||'').split(',').filter(Boolean);
+assert.equal(new Set(sessionFiles.map(f=>path.resolve(f))).size,2,'session filenames must be distinct');
 assert.equal(sessionFiles.length,2,'ONLINE_SESSION_FILES requires two existing external storageState files; no new signups');
 for(const file of sessionFiles){
  assert.ok(path.resolve(file).startsWith('/tmp/'),'sessions must be external /tmp files');
@@ -67,12 +68,20 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  },s.topic);assert.equal(outsider.status,'CHANNEL_ERROR','outsider private subscription rejected');
  // A current member may read private notifications, but must not publish them.
  const forged=await a.evaluate(async topic=>{
- const c=await MiniOnline.client();
- const ch=c.channel(topic+'',{config:{private:true,broadcast:{ack:true}}});
+ const current=await MiniOnline.client(),session=(await current.auth.getSession()).data.session;
+ if(!session?.access_token)throw Error('saved authenticated session required');
+ // Separate official client/socket. Never reuse or remove the application's channel.
+ const c=supabase.createClient(MINI_ONLINE_CONFIG.url,MINI_ONLINE_CONFIG.key,{
+  auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'test-forged-isolated'},
+ });
+ try{
+ await c.realtime.setAuth(session.access_token);
+ const ch=c.channel(topic,{config:{private:true,broadcast:{ack:true}}});
  const status=await new Promise(resolve=>ch.subscribe((s,e)=>{if(['SUBSCRIBED','CHANNEL_ERROR','TIMED_OUT'].includes(s))resolve({status:s,reason:e?.message||''});}));
- if(status.status!=='SUBSCRIBED'){await c.removeChannel(ch);return {join:status.status};}
+ if(status.status!=='SUBSCRIBED')return {join:status.status};
  const result=await ch.send({type:'broadcast',event:'forged_test',payload:{test:true}});
- await c.removeChannel(ch);return {join:status.status,result};
+ return {join:status.status,result};
+ }finally{await c.removeAllChannels();c.realtime.disconnect();}
  },s.topic);
  assert.equal(forged.join,'SUBSCRIBED');assert.notEqual(forged.result,'ok','member forged publication denied');
  const publicChannel=await out.evaluate(async()=>{
