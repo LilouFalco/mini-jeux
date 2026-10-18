@@ -3,14 +3,13 @@ const pw=require('/tmp/qa/node_modules/playwright'),assert=require('node:assert/
 const BASE=process.env.BASE||'http://localhost:28461/';
 if(process.env.ONLINE_LIVE!=='1')throw Error('Set ONLINE_LIVE=1 for separately authorized live execution');
 const fs=require('node:fs'),path=require('node:path');
-const allowNew=process.env.ONLINE_ALLOW_NEW_IDENTITIES==='1';
 const sessionFiles=(process.env.ONLINE_SESSION_FILES||'').split(',').filter(Boolean);
-assert.equal(sessionFiles.length,3,'ONLINE_SESSION_FILES requires three existing external storageState files; no new signups');
+assert.equal(sessionFiles.length,2,'ONLINE_SESSION_FILES requires two existing external storageState files; no new signups');
 for(const file of sessionFiles){
  assert.ok(path.resolve(file).startsWith('/tmp/'),'sessions must be external /tmp files');
  const dir=path.dirname(path.resolve(file));assert.notEqual(dir,'/tmp','use a dedicated private session directory, not /tmp itself');
- if(!fs.existsSync(dir)){assert.ok(allowNew,'missing saved session directory');fs.mkdirSync(dir,{recursive:true,mode:0o700});}fs.chmodSync(dir,0o700);
- if(!fs.existsSync(file)){assert.ok(allowNew,'missing saved session file; fresh identities require separate authorization and ONLINE_ALLOW_NEW_IDENTITIES=1');continue;}
+ assert.ok(fs.existsSync(dir),'missing saved session directory');fs.chmodSync(dir,0o700);
+ assert.ok(fs.existsSync(file),'missing saved session; bootstrap separately');
  fs.chmodSync(file,0o600);
  const state=JSON.parse(fs.readFileSync(file,'utf8'));
  assert.ok(state.origins?.some(o=>o.origin===new URL(BASE).origin&&o.localStorage?.some(x=>x.name==='mini-online-auth-v1')),'saved Auth session required for current BASE origin');
@@ -27,15 +26,10 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  const room='TEST '+engine+' '+Date.now().toString(36);
  let roomId;
  try{
- for(let i=0;i<3;i++){
+ for(let i=0;i<2;i++){
  const saved=sessionFiles[i];
  const c=await browser.newContext({...(require('node:fs').existsSync(saved)?{storageState:saved}:{}),viewport:i%2?{width:390,height:844}:{width:360,height:640},serviceWorkers:'block'});contexts.push(c);
- let signupAttempted=false;
- await c.route('**/auth/v1/signup',r=>{
-  // At most one fresh signup per missing identity, Chromium only. No retry burst.
-  if(!allowNew||engine!=='chromium'||fs.existsSync(saved)||signupAttempted)return r.abort('blockedbyclient');
-  signupAttempted=true;return r.continue();
- });
+ await c.route('**/auth/v1/signup',r=>r.abort('blockedbyclient'));
  await c.addInitScript(()=>{const orig=window.setInterval;window.setInterval=(fn,ms,...args)=>ms===20000?0:orig(fn,ms,...args);});
  const p=await c.newPage();pages.push(p);const st={changed:0,subscribed:0,rpc:0,heartbeat:0,payloadKeys:[],topics:[]};stats.push(st);
  p.on('pageerror',e=>errors.push(e.message));
@@ -50,12 +44,9 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  await p.goto(BASE+'morpion.html');await p.locator('#online-toggle').click();await p.waitForSelector('#online-pseudo',{timeout:20000});await p.waitForFunction(()=>document.querySelector('#online-status')?.textContent.includes('Choisis un nom'));
  fs.writeFileSync(saved,JSON.stringify(await c.storageState()),{mode:0o600});fs.chmodSync(saved,0o600);
  await p.locator('#online-pseudo').fill('TEST player '+(i+1));await p.locator('#online-room-name').fill(room);
- if(i<2){await p.getByRole('button',{name:i?'Rejoindre':'Créer',exact:true}).click();await p.waitForSelector('.online-members',{timeout:15000}).catch(async e=>{throw Error('enter player '+i+': '+await p.locator('#online-status').textContent());});if(!i)roomId=(await current(p)).id;}
+ if(i===0){await p.getByRole('button',{name:i?'Rejoindre':'Créer',exact:true}).click();await p.waitForSelector('.online-members',{timeout:15000}).catch(async e=>{throw Error('enter player '+i+': '+await p.locator('#online-status').textContent());});if(!i)roomId=(await current(p)).id;}
  }
- const [a,b,out]=pages;
- await a.waitForFunction(()=>document.querySelectorAll('.online-members span').length===2,null,{timeout:5000});
- // Allow both subscription acknowledgements before testing updates, not a heartbeat.
- for(let i=0;i<2;i++){await pages[i].waitForFunction(async()=>{const c=await MiniOnline.client();return c.getChannels().some(ch=>ch.state==='joined');},null,{timeout:15000});assert.ok(stats[i].subscribed>0,'real channel subscribed');}
+ const [a,b]=pages,out=b;
  const deniedRead=await rpc(out,'online_get_room',{p_room:roomId});assert.match(deniedRead.error?.message||'',/NOT_MEMBER/);
  const s=await snap(a,roomId);const deniedAction=await act(out,s,'ready');assert.match(deniedAction.error?.message||'',/NOT_MEMBER/);
  const outsider=await out.evaluate(async topic=>{
@@ -88,6 +79,10 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  const c=await MiniOnline.client(),session=(await c.auth.getSession()).data.session,conf=MINI_ONLINE_CONFIG;
  const r=await fetch(conf.url+'/rest/v1/rooms',{method:'POST',headers:{apikey:conf.key,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json','Content-Profile':'app_private'},body:'{}'});const j=await r.json();return {status:r.status,code:j.code,message:j.message};
  });assert.ok(writes.status>=400);assert.match(writes.message,/schema|permission/i);
+ await b.evaluate(async()=>{const c=await MiniOnline.client();if(window.__outsiderChannel)await c.removeChannel(window.__outsiderChannel);});
+ await b.getByRole('button',{name:'Rejoindre',exact:true}).click();await b.waitForSelector('.online-members');
+ await a.waitForFunction(()=>document.querySelectorAll('.online-members span').length===2,null,{timeout:5000});
+ for(let i=0;i<2;i++){await pages[i].waitForFunction(async()=>{const c=await MiniOnline.client();return c.getChannels().some(ch=>ch.state==='joined');},null,{timeout:15000});assert.ok(stats[i].subscribed>0,'real channel subscribed');}
  async function start(){
  await a.getByRole('button',{name:'Prête !',exact:true}).click();
  await b.waitForFunction(()=>[...document.querySelectorAll('.online-members span')].some(x=>x.textContent.includes('player 1')&&x.textContent.includes('✓')),null,{timeout:5000});
@@ -118,6 +113,7 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  const oldTopic=draw.topic,oldChanged=stats[1].changed,t=Date.now();
  a.on('dialog',d=>d.accept());await a.getByRole('button',{name:'Quitter le salon'}).click();await a.waitForSelector('#online-pseudo');
  await b.waitForFunction(()=>document.querySelectorAll('.online-members span').length===1,null,{timeout:5000});
+ const removedRead=await rpc(a,'online_get_room',{p_room:roomId});assert.match(removedRead.error?.message||'',/NOT_MEMBER/);
  const remaining=await snap(b,roomId);assert.notEqual(remaining.topic,oldTopic);assert.ok(stats[1].changed>oldChanged);
  await b.waitForFunction(()=>[...document.querySelectorAll('#online-root button')].some(x=>x.textContent==='Démarrer'),null,{timeout:5000});
  await a.locator('#online-room-name').fill(room);await a.getByRole('button',{name:'Rejoindre',exact:true}).click();await a.waitForSelector('.online-members');
