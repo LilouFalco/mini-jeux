@@ -13,8 +13,8 @@ const measure=()=>{const d=document.documentElement;const top=document.querySele
  return{noScroll:d.scrollHeight===d.clientHeight&&document.body.scrollHeight<=d.clientHeight&&d.scrollWidth<=d.clientWidth,probs,board:br?[Math.round(br.width),Math.round(br.height)]:null}};
 for(const [w,h] of [[360,640],[390,844]]){const c=await br.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:true,deviceScaleFactor:2});
 for(const f of pages){const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.goto(url(f));await p.waitForTimeout(900);
- const levels=await p.locator('.levels button').count();const n=levels||1;
- for(let l=0;l<n;l++){if(levels){await p.locator('.levels button').nth(l).tap();await p.waitForTimeout(l?1200:200);const cf=p.locator('#replace');if(await cf.isVisible().catch(()=>false))await cf.tap();await p.waitForTimeout(800)}
+ const levels=await p.locator('.levels button:not(#online-toggle)').count();const n=levels||1;
+ for(let l=0;l<n;l++){if(levels){await p.locator('.levels button:not(#online-toggle)').nth(l).tap();await p.waitForTimeout(l?1200:200);const cf=p.locator('#replace');if(await cf.isVisible().catch(()=>false))await cf.tap();await p.waitForTimeout(800)}
   const r=await p.evaluate(measure);const ok=r.noScroll&&!r.probs.length&&!errs.length&&(!r.board||r.board[0]>=160);if(!ok)bad++;
   console.log(w+'x'+h,f,'L'+l,ok?'ok':'FAIL',JSON.stringify(r));if(shots)await p.screenshot({path:'/tmp/fit-'+w+'-'+f.split('?')[0]+'-'+l+'.png'})}
  // page itself must not scroll via touch drag/wheel
