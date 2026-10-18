@@ -5,7 +5,14 @@
  let active = false, api, snapshot, channel, channelTopic, timer, busy = false, pending = null;
  let directoryOffset = 0;
  let loading, syncPromise, queuedSync = false, generation = 0, connected = navigator.onLine, requestGeneration = 0;
+ const G = window.MiniOnlineGame || {game: 'morpion', title: 'Salons de morpion', label: 'Morpion en ligne'};
  const symbols = {1: '♥', 2: '✦'};
+ // Morpion keeps its original RPC names; other games use the game-aware ones.
+ const rpcCall = (kind, args = {}) => {
+  if (G.game === 'morpion') return api.rpc({create: 'online_create_room', join: 'online_join_room', list: 'online_list_rooms', mine: 'online_my_rooms'}[kind], args);
+  const name = {create: 'online_create_room_game', join: 'online_join_room_game', list: 'online_list_rooms_game', mine: 'online_my_rooms_game'}[kind];
+  return api.rpc(name, {p_game: G.game, ...args});
+ };
  const el = (tag, text, cls) => {
   const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e;
  };
@@ -35,7 +42,7 @@
   catch (error) {
    if (active && g === generation) {
     message(api ? api.friendly(error) : 'Connexion indisponible. Réessaie ou joue hors ligne.');
-    if (snapshot && /STALE_VERSION|NOT_YOUR_TURN|CELL_OCCUPIED/.test(error.message || '')) {
+    if (snapshot && /STALE_VERSION|NOT_YOUR_TURN|CELL_OCCUPIED|COLUMN_FULL/.test(error.message || '')) {
      pending = null; await sync().catch(() => {});
     }
    }
@@ -73,8 +80,8 @@
    let room;
    if (create) {
     if (createName !== name) { createName = name; createKey = crypto.randomUUID(); }
-    room = await api.rpc('online_create_room', {p_name: name, p_pseudo: p, p_action: createKey});
-   } else room = await api.rpc('online_join_room', {p_name: name, p_pseudo: p});
+    room = await rpcCall('create', {p_name: name, p_pseudo: p, p_action: createKey});
+   } else room = await rpcCall('join', {p_name: name, p_pseudo: p});
    if (!active) return; await enterRoom(room);
   });
   row.append(button('Créer', () => enter(true), 'primary'), button('Rejoindre', () => enter(false)));
@@ -82,21 +89,21 @@
   form.append(row); box.append(form);
   box.append(el('p', 'Salons publics. Le pseudo n’est pas un compte. Garde ce navigateur pour retrouver ta place.', 'online-note'));
   const head = el('div', null, 'online-heading');
-  head.append(el('strong', 'Salons de morpion'), button('Actualiser', () => task(refreshDirectory)));
+  head.append(el('strong', G.title), button('Actualiser', () => task(refreshDirectory)));
   box.append(head, el('div', null, 'online-directory')); await refreshDirectory();
  }
  async function refreshDirectory() {
   const g = generation;
-  const [rooms, mine] = await Promise.all([api.rpc('online_list_rooms', {p_offset: directoryOffset}), api.rpc('online_my_rooms')]);
+  const [rooms, mine] = await Promise.all([rpcCall('list', {p_offset: directoryOffset}), rpcCall('mine')]);
   if (!active || g !== generation || snapshot) return;
   const list = root.querySelector('.online-directory'); if (!list) return; list.replaceChildren();
-  for (const room of mine) {
+  for (const room of mine.filter(r => !r.game || r.game === G.game)) {
    const b = button('Reprendre · ' + room.name, () => task(async () => enterRoom(await api.rpc('online_get_room', {p_room: room.id}))));
    b.className = 'online-resume'; list.append(b);
   }
   if (!rooms.length) list.append(el('p', 'Le premier salon pourrait être le tien ♡', 'online-note'));
   const statuses = {waiting: 'En attente', playing: 'En cours', finished: 'Terminée'};
-  for (const room of rooms.filter(r => r.game === 'morpion')) {
+  for (const room of rooms.filter(r => r.game === G.game)) {
    const item = button('', () => { $('#online-room-name').value = room.name; $('#online-room-name').focus(); });
    item.className = 'online-room';
    item.append(el('strong', room.name), el('small', room.host + ' · ' + room.count + '/' + room.capacity + ' · ' + statuses[room.status]));
@@ -173,9 +180,25 @@
    }
   });
  }
+ function dropBoard(s, locked) {
+  const wrap = el('div', null, 'online-p4');
+  const cols = el('div', null, 'online-cols');
+  for (let c = 0; c < 7; c++) {
+   const full = s.board[c] !== 0;
+   const b = button('', () => action('place', c)); b.className = 'online-col';
+   b.setAttribute('aria-label', 'Colonne ' + (c + 1) + (full ? ' pleine' : ''));
+   b.dataset.locked = String(locked || full); cols.append(b);
+  }
+  const grid = el('div', null, 'online-board online-board-p4'); grid.role = 'grid'; grid.setAttribute('aria-label', G.label);
+  s.board.forEach((v, i) => {
+   const d = el('div', v ? symbols[v] : '', 'pcell' + (v ? ' p' + v : '') + (s.line.includes(i) ? ' win' : ''));
+   d.role = 'gridcell'; d.setAttribute('aria-label', v ? symbols[v] : 'vide'); grid.append(d);
+  });
+  wrap.append(cols, grid); return wrap;
+ }
  function renderRoom() {
   if (!snapshot || !active) return;
-  const s = snapshot, box = $('#online-content'); box.replaceChildren();
+  const s = snapshot, box = $('#online-content'); box.replaceChildren(); let rematch = null;
   const head = el('div', null, 'online-heading'); head.append(el('strong', s.name), button('Actualiser', () => task(() => sync())));
   box.append(head);
   const people = el('div', null, 'online-members');
@@ -191,21 +214,26 @@
    }
    box.append(row);
   } else {
-   const board = el('div', null, 'online-board'); board.role = 'grid'; board.setAttribute('aria-label', 'Morpion en ligne');
+   const locked = s.status !== 'playing' || s.turn !== s.seat || !connected || !!pending;
+   if (G.game === 'puissance4') box.append(dropBoard(s, locked)); else {
+   const board = el('div', null, 'online-board'); board.role = 'grid'; board.setAttribute('aria-label', G.label);
    s.board.forEach((v, i) => {
     const b = button(v ? symbols[v] : '', () => action('place', i));
     b.className = 'mcell' + (v ? ' p' + v : '') + (s.line.includes(i) ? ' win' : '');
     b.role = 'gridcell'; b.setAttribute('aria-label', 'Case ' + (i + 1) + (v ? ' ' + symbols[v] : ' vide'));
     b.dataset.locked = String(!!v || s.status !== 'playing' || s.turn !== s.seat || !connected || !!pending); board.append(b);
    });
-   box.append(board);
-   if (s.status === 'finished' && s.members.length === 2) box.append(button('Proposer une revanche', () => action('rematch')));
+   box.append(board); }
+   if (s.status === 'finished' && s.members.length === 2) {
+    const rb = button('Proposer une revanche', () => action('rematch'));
+    if (G.game === 'puissance4') rematch = rb; else box.append(rb);
+   }
   }
   if (pending) box.append(button('Vérifier / réessayer la demande', () => action(pending.p_kind, pending.p_cell)));
   const leave = button('Quitter le salon', () => {
    if (confirm(s.status === 'playing' ? 'Quitter abandonne cette manche. Continuer ?' : 'Quitter ce salon ?')) action('leave');
   });
-  box.append(leave);
+  if (G.game === 'puissance4') { const row = el('div', null, 'online-actions'); if (rematch) row.append(rematch); row.append(leave); box.append(row); } else box.append(leave);
   const info = !connected ? 'Reconnexion… Aucun coup envoyé hors connexion.' :
    s.status === 'waiting' ? 'Tu joues ' + symbols[s.seat] + '. En attente des deux personnes.' :
    s.status === 'finished' ? (s.winner ? (s.members.find(m => m.seat === s.winner)?.name || 'L’autre personne') + ' a gagné ! ✦' : 'Match nul, bien joué !') :

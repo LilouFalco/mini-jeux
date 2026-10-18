@@ -6,8 +6,8 @@ const pages=[['sudoku.html','lilou-sudoku-v1'],['mots-fleches.html','lilou-motsf
   const c=await b.newContext({viewport:{width,height:900},isMobile:width<600,hasTouch:width<600}),p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
   await p.goto(BASE+'sudoku.html');await p.evaluate(()=>navigator.serviceWorker.ready);await p.waitForFunction(()=>!!navigator.serviceWorker.controller||true);
   await p.reload();await p.waitForFunction(()=>!!navigator.serviceWorker.controller);
-  await p.waitForFunction(async()=>{const k=await caches.keys();return k.includes('lilou-yakazu-v26')&&(await (await caches.open('lilou-yakazu-v26')).keys()).length>=35});
-  const cached=await p.evaluate(async()=>(await (await caches.open('lilou-yakazu-v26')).keys()).map(r=>new URL(r.url).pathname.split('/').pop()||'./'));
+  await p.waitForFunction(async()=>{const k=await caches.keys();return k.includes('lilou-yakazu-v27')&&(await (await caches.open('lilou-yakazu-v27')).keys()).length>=35});
+  const cached=await p.evaluate(async()=>(await (await caches.open('lilou-yakazu-v27')).keys()).map(r=>new URL(r.url).pathname.split('/').pop()||'./'));
   for(const f of ['sudoku.html','mots-fleches.html','binairo.html','sudoku-worker.js','mf-worker.js','binairo-worker.js','demineur.html','demineur-engine.js','mf-words.js','games.css'])assert(cached.includes(f),'not cached '+f);
   await c.setOffline(true);
   for(const [page,key] of pages){

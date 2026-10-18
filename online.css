@@ -1,6 +1,6 @@
 /* A little pink internet salon, separate from every offline engine/save. */
 #online-root[hidden]{display:none}
-.online-active.morpion .game-body>.play-area,.online-active.morpion .game-body>#status{display:none}
+.online-active.morpion .game-body>.play-area,.online-active.morpion .game-body>#status,.online-active.puissance4 .game-body>.play-area,.online-active.puissance4 .game-body>#status{display:none}
 #online-root{display:flex;flex-direction:column;gap:10px;max-width:620px;width:100%;margin:0 auto;text-align:left}
 .online-heading{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .online-heading strong{color:var(--ink,#6b4252);overflow-wrap:anywhere}
@@ -20,12 +20,22 @@
 .online-members span{font-size:12px;background:#fff9ee;border:1px solid #e3c7ca;padding:6px 8px;border-radius:5px;overflow-wrap:anywhere}
 .online-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));width:min(100%,310px);aspect-ratio:1;gap:6px;margin:0 auto}
 .online-board .mcell{font-size:clamp(24px,8vw,46px);min-height:0;min-width:0;transform:none!important;transition:background .12s,opacity .12s}
+.online-p4{width:min(100%,330px);margin:0 auto;display:flex;flex-direction:column;gap:4px}
+.online-cols{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.online-cols .online-col{min-height:44px;padding:0;position:relative;background:#f9e4e8;border:2px solid var(--outline);border-radius:4px;color:#c8466e;touch-action:manipulation}
+.online-cols .online-col::before{content:"";position:absolute;left:50%;top:50%;margin:-3px 0 0 -6px;border:6px solid transparent;border-top:8px solid currentColor;border-bottom:0}
+.online-cols .online-col:disabled{opacity:.35}
+.online-board.online-board-p4{width:100%;aspect-ratio:7/6;grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:repeat(6,minmax(0,1fr));gap:3px;padding:3px;background:#cfa5b0;border:3px solid var(--outline);border-radius:3px;box-sizing:border-box}
+.online-board-p4 .pcell{aspect-ratio:auto;min-width:0;min-height:0;font-size:clamp(10px,3.4vw,20px)}
 #online-root button{min-height:44px}
 #online-root button:disabled{cursor:default}
 @media(max-width:700px){
- .has-mnav.morpion .levels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;gap:3px}
- .has-mnav.morpion .levels button{padding:4px 2px;font-size:10px;min-height:40px;white-space:normal}
- .has-mnav.online-active.morpion .game-body{overflow:hidden}
+ .has-mnav.morpion .levels,.has-mnav.puissance4 .levels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;gap:3px}
+ .has-mnav.morpion .levels button,.has-mnav.puissance4 .levels button{padding:4px 2px;font-size:10px;min-height:40px;white-space:normal}
+ .has-mnav.online-active.morpion .game-body,.has-mnav.online-active.puissance4 .game-body{overflow:hidden}
+ .has-mnav .online-p4{flex:1 1 0;min-height:120px;width:100%;max-width:none;container-type:size;align-items:center;justify-content:center;gap:3px}
+ .has-mnav .online-p4>.online-cols,.has-mnav .online-p4>.online-board-p4{width:min(100cqw,calc((100cqh - 47px)*7/6),330px);flex:none}
+ .has-mnav .online-cols .online-col{min-height:44px;height:44px}
  .has-mnav #online-root{flex:1;min-height:0;gap:6px;overflow:hidden}
  .has-mnav .online-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;gap:6px;padding:2px}
  .has-mnav .online-heading strong{font-size:13px}
@@ -36,6 +46,8 @@
  .has-mnav .online-note{font-size:12px;color:#6b4252}
  .has-mnav .online-room{padding:6px;align-items:flex-start;flex-direction:column;gap:3px}
  .has-mnav .online-status{font-size:11px;line-height:1.25;flex:none}
+ .has-mnav.puissance4 .online-members{flex-wrap:nowrap}.has-mnav.puissance4 .online-members span{flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .has-mnav.puissance4 .online-heading strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
  .has-mnav .online-board{width:min(100%,250px);max-height:250px;flex-shrink:0}
 }
 @media(prefers-reduced-motion:reduce){.online-board .mcell{transition:none;animation:none}}

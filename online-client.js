@@ -45,6 +45,7 @@ window.MiniOnline = (() => {
    STALE_VERSION: 'La partie a changé. Le plateau est actualisé, rejoue ton coup.',
    NOT_YOUR_TURN: "C'est au tour de l'autre personne.",
    CELL_OCCUPIED: 'Cette case est déjà prise.',
+   COLUMN_FULL: 'Cette colonne est pleine.',
    NOT_READY: 'Les deux personnes doivent être prêtes.',
    HOST_ONLY: 'La personne qui organise peut démarrer.',
    WRONG_PHASE: 'La partie a changé. Vérifie le salon.',
