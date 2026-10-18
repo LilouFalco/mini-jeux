@@ -138,3 +138,5 @@ body.has-mnav{position:fixed;inset:0;width:100%;padding:0}
 .has-mnav.champdle .cdl{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;width:100%;max-width:none}.has-mnav.champdle .cdl>*{flex:none}.has-mnav.champdle .ct{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
 .has-mnav.champdle .ch,.has-mnav.champdle .cr{min-width:0;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px}.has-mnav.champdle .ch span{font-size:7px;padding:0}.has-mnav.champdle .cd{font-size:7.5px;min-height:40px;padding:1px;border-width:1px}.has-mnav.champdle .cd img{width:100%;height:auto;max-width:32px}
 .has-mnav.champdle .levels button{min-height:40px}.has-mnav.champdle .sg{max-height:30vh}.has-mnav.champdle footer{display:none}}
+
+@media(max-width:700px){.mtop .mback{width:auto;min-width:44px;padding:0 12px 0 4px;margin-left:-4px;gap:2px;font-size:13px;border:2px solid #fff9ee66;border-radius:8px;color:var(--cream);flex:none}.mtop strong{text-align:center;padding-right:48px}.mtop .mtag{display:none}}

@@ -1,0 +1,12 @@
+const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
+const L={};vm.runInNewContext(fs.readFileSync(__dirname+'/online-lifecycle.js','utf8'),{window:L,setInterval,clearInterval});
+const M=L.MiniLifecycle;
+assert(M.isTerminated({terminated:true}));assert(!M.isTerminated({version:1}));
+const c=M.clean({terminated:true,name:'Ami\u202e<b>',reason:'evil',id:'x',board:[1]});
+assert.equal(c.reason,'expired');assert(!('board' in c));assert(!c.name.includes('\u202e'));
+assert.equal(M.message({name:'Rose',reason:'player_left'}),'Rose a quitté le salon.');
+const calls=[];const api={rpc:async(n,a)=>{calls.push([n,a]);return {}}};
+(async()=>{await M.depart(api,'r');await M.status(api,'r');await M.heartbeat(api,'r');
+assert.deepEqual(calls.map(x=>x[0]),['online_depart_room','online_room_status','online_heartbeat']);
+assert(calls.every(x=>Object.keys(x[1]).join()==='p_room'));assert.equal(M.HEARTBEAT_MS,10000);
+console.log('PASS lifecycle helpers (mocks only)')})();

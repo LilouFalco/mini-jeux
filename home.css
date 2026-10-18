@@ -14,3 +14,22 @@
 [hidden]{display:none!important}.home .hero h1{letter-spacing:-1px;word-spacing:4px}
 .home .gl-items{grid-auto-rows:1fr}
 @media(max-width:700px){body.home footer{margin-bottom:84px}}
+
+/* ===== home welcome ===== */
+.welcome{display:none}
+@media(prefers-reduced-motion:reduce){.home-back{transition:none}}
+@media(max-width:700px){
+.mback{width:auto;padding:0 12px 0 6px;margin-left:-4px;gap:2px;font-size:13px;border:2px solid #fff9ee66;border-radius:8px}
+.has-mnav>main>header{display:none}
+.has-mnav.home .modes,.has-mnav.home #glist,.has-mnav.home .intro{display:none!important}
+.has-mnav.home main{align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.has-mnav.home .welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,2.2dvh,18px);max-width:340px;min-height:0;padding:0 8px}
+.welcome-art{width:min(52vw,200px,26dvh);height:auto;flex:none;image-rendering:pixelated;animation:wfloat 3.2s steps(4) infinite}
+.welcome h2{margin:0;font-family:'Space Mono','Yakazu Symbols',monospace;font-size:clamp(20px,6vw,26px);line-height:1.2;letter-spacing:-.5px;color:var(--ink)}
+.welcome p{margin:0;font-size:14px;line-height:1.45;color:var(--muted)}.welcome p b{color:#c8466e}
+@keyframes wfloat{50%{transform:translateY(-4px)}}
+@media(prefers-reduced-motion:reduce){.welcome-art{animation:none}}
+@media(max-height:680px){.welcome p{font-size:13px}.welcome-art{width:min(40vw,26dvh)}}
+}
+.mode[data-k=duo] svg,.mode[data-k=multi] svg,.mbar button[data-k=duo] svg,.mbar button[data-k=multi] svg{overflow:visible;stroke-linecap:round;stroke-linejoin:round}
+.mode .mico{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;flex:none}.mode .mi.huge{width:56px;height:56px}

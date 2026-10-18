@@ -17,9 +17,9 @@ for(const f of pages){const p=await c.newPage();const errs=[];p.on('pageerror',e
  if(w===390){await p.screenshot({path:'/tmp/mob-'+f+'.png'});if(f==='index'){await p.locator('.mbar button[data-k=duo]').tap();await p.waitForTimeout(600);await p.screenshot({path:"/tmp/mob-sheet-duo.png"})}}
  assert(!errs.length,errs.join());await p.close()}
 // home choices
-let p=await c.newPage();await p.goto(B);await p.evaluate(()=>localStorage.clear());await p.reload();assert.equal(await p.locator('.mode').count(),3);assert(await p.locator('#glist').isHidden());
-await p.locator('.mode[data-k=multi]').tap();await p.waitForSelector('.msheet:not([hidden])');assert.equal(await p.locator('.msheet .mtile').count(),3);assert.equal(await p.locator('.msheet a.mtile').count(),3);await p.locator('.mclose').tap();
-await p.locator('.mode[data-k=duo]').tap();await p.locator('.msheet a.mtile',{hasText:'Morpion'}).tap();await p.waitForURL(/morpion\.html\?mode=duo/);
+let p=await c.newPage();await p.goto(B);await p.evaluate(()=>localStorage.clear());await p.reload();assert(await p.locator('.mode').first().isHidden());assert(await p.locator('.welcome').isVisible());assert.equal(await p.locator('.mbar button').count(),3);assert(await p.locator('#glist').isHidden());
+await p.locator('.mbar button[data-k=multi]').tap();await p.waitForSelector('.msheet:not([hidden])');assert.equal(await p.locator('.msheet .mtile').count(),3);assert.equal(await p.locator('.msheet a.mtile').count(),3);await p.locator('.mclose').tap();
+await p.locator('.mbar button[data-k=duo]').tap();await p.locator('.msheet a.mtile',{hasText:'Morpion'}).tap();await p.waitForURL(/morpion\.html\?mode=duo/);
 assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('lilou-morpion-v1')||'{}').mode||document.querySelector('[data-mode][aria-pressed=true]').dataset.mode),'two');
 assert.equal(await p.locator('.mbar button[aria-current=page]').getAttribute('data-k'),'duo');
 await p.locator('.mback').tap();await p.waitForURL(u=>!/morpion/.test(u.href));assert.equal(await p.locator('.mode[aria-pressed=true]').getAttribute('data-k'),'duo','mode remembered');
@@ -29,6 +29,6 @@ await p.goto(B+'yakazu.html');assert(await p.locator('#board .cell').first().wai
 await c.close()}
 const d=await br.newPage({viewport:{width:1440,height:900}});await d.goto(B);assert(!(await d.locator('.mbar').isVisible()));assert.equal(await d.locator('.mode').count(),3);
 await d.locator('.mode[data-k=solo]').click();assert.equal(await d.locator('a.gtile').count(),10);await d.screenshot({path:'/tmp/desk-home.png'});
-await d.goto(B+'demineur.html');assert(!(await d.locator('.mbar').isVisible()));assert(await d.locator('.games').isVisible());assert(await d.locator('.intro').isVisible());
-await d.goto(B+'yakazu.html');assert(await d.locator('.games a[href="yakazu.html"]').isVisible());
+await d.goto(B+'demineur.html');assert(!(await d.locator('.mbar').isVisible()));assert.equal(await d.locator('.games').count(),0);assert(await d.locator('.home-back').isVisible());assert(await d.locator('.intro').isVisible());
+await d.goto(B+'yakazu.html');assert(await d.locator('.home-back').isVisible());assert.equal(await d.locator('.games').count(),0);
 console.log('mobile nav + home ok');await br.close()})().catch(e=>{console.error(e);process.exit(1)})

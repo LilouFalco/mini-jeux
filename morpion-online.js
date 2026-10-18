@@ -3,7 +3,7 @@
  const $ = s => document.querySelector(s);
  const root = $('#online-root'), toggle = $('#online-toggle');
  let active = false, api, snapshot, channel, channelTopic, timer, busy = false, pending = null;
- let directoryOffset = 0;
+ let directoryOffset = 0, notice = '', leaving = false;
  let loading, syncPromise, queuedSync = false, generation = 0, connected = navigator.onLine, requestGeneration = 0;
  const G = window.MiniOnlineGame || {game: 'morpion', title: 'Salons de morpion', label: 'Morpion en ligne'};
  const symbols = {1: '♥', 2: '✦'};
@@ -20,8 +20,9 @@
  function message(text) { $('#online-status').textContent = text; }
  async function load() {
   if (!loading) loading = (async () => {
-   for (const src of ['online-config.js', 'vendor/supabase-2.118.0.js', 'online-client.js']) {
+   for (const src of ['online-config.js', 'vendor/supabase-2.118.0.js', 'online-client.js', 'online-lifecycle.js']) {
     if (src === 'online-client.js' && window.MiniOnline) continue;
+    if (src === 'online-lifecycle.js' && window.MiniLifecycle) continue;
     await new Promise((resolve, reject) => {
      const s = document.createElement('script'); s.src = src; s.onload = resolve;
      s.onerror = () => { s.remove(); reject(new Error('SDK_LOAD')); }; document.head.appendChild(s);
@@ -68,7 +69,7 @@
   status.setAttribute('aria-live', 'polite'); root.append(status);
  }
  async function lobby() {
-  await stopChannel(); clearInterval(timer); timer = null; snapshot = null; pending = null; directoryOffset = 0;
+  await stopChannel(); clearInterval(timer); timer = null; snapshot = null; pending = null; directoryOffset = 0; syncPromise = null; queuedSync = false;
   const box = $('#online-content'); box.replaceChildren();
   const form = el('form', null, 'online-form');
   form.append(input('Ton pseudo', 'online-pseudo', pseudo(), 24), input('Nom du salon public', 'online-room-name', '', 40));
@@ -98,7 +99,7 @@
   if (!active || g !== generation || snapshot) return;
   const list = root.querySelector('.online-directory'); if (!list) return; list.replaceChildren();
   for (const room of mine.filter(r => !r.game || r.game === G.game)) {
-   const b = button('Reprendre · ' + room.name, () => task(async () => enterRoom(await api.rpc('online_get_room', {p_room: room.id}))));
+   const b = button('Reprendre · ' + room.name, () => task(async () => { const r = await api.rpc('online_room_status', {p_room: room.id}); if (window.MiniLifecycle.isTerminated(r)) await terminated(r); else await enterRoom(r); }));
    b.className = 'online-resume'; list.append(b);
   }
   if (!rooms.length) list.append(el('p', 'Le premier salon pourrait être le tien ♡', 'online-note'));
@@ -113,7 +114,7 @@
   if (directoryOffset > 0) pagination.append(button('Précédents', () => task(async () => { directoryOffset = Math.max(0, directoryOffset - 30); await refreshDirectory(); })));
   if (rooms.length === 30 && directoryOffset < 990) pagination.append(button('Suivants', () => task(async () => { directoryOffset += 30; await refreshDirectory(); })));
   if (pagination.children.length) list.append(pagination);
-  message('Choisis un nom pour créer ou rejoindre un salon.');
+  message(notice || 'Choisis un nom pour créer ou rejoindre un salon.');
  }
  async function stopChannel() {
   const old = channel; channel = null; channelTopic = null;
@@ -125,33 +126,42 @@
   const c = await api.client(), topic = snapshot.topic, g = generation;
   await c.realtime.setAuth();
   channelTopic = topic;
-  channel = c.channel(topic, {config: {private: true}})
+  channel = c.channel(topic, {config: {private: true, presence: {key: 'seat' + snapshot.seat}}})
    .on('broadcast', {event: 'changed'}, () => {
     // Broadcast is only an invalidation hint, including if a malicious sender lies.
     if (active && g === generation) sync().catch(() => { connected = false; renderRoom(); });
    })
+   .on('broadcast', {event: 'terminated'}, () => {
+    // Payload is never trusted; the authoritative status decides.
+    if (active && g === generation) sync().catch(() => { connected = false; renderRoom(); });
+   })
+   .on('presence', {event: 'leave'}, ({key}) => {
+    if (!active || g !== generation || key === 'seat' + snapshot?.seat) return;
+    connected = false; renderRoom(); sync(true).catch(() => {});
+   })
    .subscribe(status => {
     if (!active || g !== generation || channelTopic !== topic) return;
-    if (status === 'SUBSCRIBED') sync().catch(() => {});
+    if (status === 'SUBSCRIBED') { channel?.track({seat: snapshot?.seat, room: snapshot?.instance}).catch(() => {}); sync().catch(() => {}); }
     else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
-     message('Temps réel indisponible. Actualisation automatique toutes les 20 secondes.');
+     message('Temps réel indisponible. Actualisation automatique toutes les 10 secondes.');
     }
    });
  }
  async function enterRoom(room) {
-  snapshot = room; connected = navigator.onLine; pending = null; renderRoom(); await subscribe(); await sync();
+  notice = ''; snapshot = room; connected = navigator.onLine; pending = null; renderRoom(); await subscribe(); await sync();
   clearInterval(timer);
   timer = setInterval(() => {
-   if (active && snapshot && document.visibilityState === 'visible' && navigator.onLine) sync(true).catch(() => { connected = false; renderRoom(); });
-  }, 20000);
+   if (active && snapshot && navigator.onLine) sync(true).catch(() => { connected = false; renderRoom(); });
+  }, window.MiniLifecycle.HEARTBEAT_MS);
  }
  async function sync(heartbeat = false) {
   if (!active || !snapshot || !api) return;
   if (syncPromise) { queuedSync = true; return syncPromise; }
   const id = snapshot.id, g = generation, seq = ++requestGeneration;
   syncPromise = (async () => {
-   const fresh = await api.rpc(heartbeat ? 'online_heartbeat' : 'online_get_room', {p_room: id});
+   const fresh = await api.rpc(heartbeat ? 'online_heartbeat' : 'online_room_status', {p_room: id});
    if (active && g === generation && snapshot?.id === id && seq === requestGeneration) {
+    if (window.MiniLifecycle.isTerminated(fresh)) { await terminated(fresh); return; }
     if (fresh.version >= snapshot.version) snapshot = fresh;
     connected = navigator.onLine; renderRoom(); await subscribe();
    }
@@ -162,6 +172,17 @@
    if (queuedSync && active && snapshot?.id === id) { queuedSync = false; queueMicrotask(() => sync().catch(() => {})); }
   }
  }
+ async function terminated(raw) {
+  const t = window.MiniLifecycle.clean(raw);
+  if (leaving) return;
+  notice = window.MiniLifecycle.message(t); snapshot = null; pending = null; clearInterval(timer); timer = null; queuedSync = false; await lobby(); message(notice);
+ }
+ async function depart() {
+  // Server decides who is leaving from auth; the client never names an actor.
+  const id = snapshot.id; leaving = true;
+  try { await window.MiniLifecycle.depart(api, id); } finally { leaving = false; }
+  notice = ''; await lobby();
+ }
  async function action(kind, cell = null) {
   await task(async () => {
    if (!snapshot) return;
@@ -169,9 +190,10 @@
     p_action: crypto.randomUUID(), p_kind: kind, p_cell: cell};
    const args = pending;
    try {
-    await api.rpc('online_action', args);
+    const res = await api.rpc('online_action', args);
     pending = null;
-    if (args.p_kind === 'leave') { await lobby(); return; }
+    if (window.MiniLifecycle.isTerminated(res)) { await terminated(res); return; }
+
     await sync(); message('');
    } catch (error) {
     // Keep an identical request only on an unknown transport outcome, never rebase it.
@@ -231,7 +253,7 @@
   }
   if (pending) box.append(button('Vérifier / réessayer la demande', () => action(pending.p_kind, pending.p_cell)));
   const leave = button('Quitter le salon', () => {
-   if (confirm(s.status === 'playing' ? 'Quitter abandonne cette manche. Continuer ?' : 'Quitter ce salon ?')) action('leave');
+   if (confirm(s.status === 'playing' ? 'Quitter abandonne cette manche. Continuer ?' : 'Quitter ce salon ?')) task(depart);
   });
   if (G.game === 'puissance4') { const row = el('div', null, 'online-actions'); if (rematch) row.append(rematch); row.append(leave); box.append(row); } else box.append(leave);
   const info = !connected ? 'Reconnexion… Aucun coup envoyé hors connexion.' :
@@ -259,6 +281,17 @@
   clearInterval(timer); timer = null; snapshot = null; pending = null;
   stopChannel().catch(() => {}); toggle.focus();
  }
+ document.addEventListener('click', async e => {
+  const a = e.target.closest?.('[data-home-link], a[href]');
+  const dest = a && (a.href || a.dataset.homeLink || a.dataset.href || './');
+  if (!a || !active || !snapshot || e.defaultPrevented || a.target || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+  const u = new URL(dest, location.href);
+  if (u.origin === location.origin && u.pathname === location.pathname) return;
+  e.preventDefault();
+  if (!confirm('Quitter ce salon avant de continuer ?')) return;
+  try { await window.MiniLifecycle.depart(api, snapshot.id); location.href = u.href; }
+  catch (error) { message(api.friendly(error) + ' Réessaie de quitter le salon.'); }
+ }, true);
  toggle.onclick = open;
  document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { if (active) close(); }, {capture: true}));
  window.addEventListener('offline', () => { connected = false; if (active && snapshot) renderRoom(); });

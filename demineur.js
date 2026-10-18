@@ -19,12 +19,10 @@ function start(level){
  game={level,R:s.R,C:s.C,total:s.mines,mines:null,counts:null,state:new Array(s.R*s.C).fill(0),elapsed:0,over:false,won:false,lost:-1,id:Date.now().toString(36)};
  selected=Math.floor(s.R/2)*s.C+Math.floor(s.C/2);build();save();message('Le premier clic ouvre toujours une zone sûre.');
 }
-const MQ=matchMedia('(max-width:700px)');
 function fitMobile(){const b=document.querySelector('#board'),sc=document.querySelector('.board-scroll');if(!b||!sc||!game)return;
- if(!MQ.matches){b.style.removeProperty('--cs');b.classList.remove('fixedfit');return}
- b.classList.add('fixedfit');const cs=getComputedStyle(sc),w=sc.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight),h=sc.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
- if(w<=0||h<=0)return;const px=Math.max(6,Math.floor(Math.min(w/game.C,h/game.R)*2)/2);b.style.setProperty('--cs',px+'px')}
-addEventListener('resize',()=>fitMobile());addEventListener('orientationchange',()=>setTimeout(fitMobile,150));
+ b.classList.add('fixedfit');const cs=getComputedStyle(sc),w=sc.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-(b.offsetWidth-b.clientWidth),h=sc.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-(b.offsetHeight-b.clientHeight);
+ if(w<=0||h<=0)return;const px=Math.max(3,Math.min(44,Math.floor(Math.min(w/game.C,h/game.R)*2)/2));b.style.setProperty('--cs',px+'px')}
+addEventListener('resize',()=>fitMobile());if(window.visualViewport)visualViewport.addEventListener('resize',()=>fitMobile());addEventListener('orientationchange',()=>setTimeout(fitMobile,150));
 addEventListener('DOMContentLoaded',()=>{const sc=document.querySelector('.board-scroll');if(sc&&window.ResizeObserver)new ResizeObserver(()=>fitMobile()).observe(sc)});
 function build(){
  const b=$('#board');b.style.setProperty('--c',game.C);b.dataset.size=game.R+'x'+game.C;b.classList.toggle('compact',compact);b.replaceChildren();requestAnimationFrame(fitMobile);
@@ -38,8 +36,8 @@ function build(){
   b.append(c);
  }
  document.querySelectorAll('[data-level]').forEach(x=>x.setAttribute('aria-pressed',String(+x.dataset.level===game.level)));
- $('#zoom').setAttribute('aria-pressed',String(compact));$('#flagmode').setAttribute('aria-pressed',String(flagMode));
- render();
+ $('#flagmode').setAttribute('aria-pressed',String(flagMode));
+ render();fitMobile();
 }
 const label=i=>{const r=Math.floor(i/game.C)+1,c=i%game.C+1,s=game.state[i];return 'Ligne '+r+', colonne '+c+', '+(s===2?'cœur posé':s===0?'cachée':game.mines&&game.mines[i]?'mine':game.counts[i]>0?game.counts[i]+' mines autour':'vide')};
 function render(){
@@ -91,13 +89,13 @@ function request(level){
 document.querySelectorAll('[data-level]').forEach(b=>b.addEventListener('click',()=>request(+b.dataset.level)));
 $('#new').onclick=()=>request(game?.level||0);
 $('#flagmode').onclick=()=>{flagMode=!flagMode;$('#flagmode').setAttribute('aria-pressed',String(flagMode));message(flagMode?'Mode cœur activé : touche pour poser ou retirer un cœur.':'Mode ouverture activé.')};
-$('#zoom').onclick=()=>{compact=!compact;$('#board').classList.toggle('compact',compact);$('#zoom').setAttribute('aria-pressed',String(compact));save()};
+{const rd=$('#rules-dialog'),rb=$('#rules-btn');rb.onclick=()=>rd.showModal();$('#rules-close').onclick=()=>rd.close();rd.addEventListener('close',()=>rb.focus({preventScroll:true}))}
 $('#next').onclick=()=>{$('#win').close();start(game.level)};
 $('#stay').onclick=()=>$('#win').close();
 $('#cancel').onclick=()=>$('#confirm').close();
 $('#replace').onclick=()=>{$('#confirm').close();start(pendingLevel)};
 document.addEventListener('keydown',e=>{
- if(!game||document.querySelector('dialog[open]')||e.ctrlKey||e.metaKey||e.altKey||e.target.matches('input,summary,a'))return;
+ if(!game||document.querySelector('dialog[open]')||e.ctrlKey||e.metaKey||e.altKey||e.target.matches('input,summary,a')||(e.target.closest('button')&&!e.target.classList.contains('cell')))return;
  if(e.key.startsWith('Arrow')){
   e.preventDefault();let r=Math.floor(selected/game.C),c=selected%game.C;
   if(e.key==='ArrowDown')r=Math.min(game.R-1,r+1);if(e.key==='ArrowUp')r=Math.max(0,r-1);if(e.key==='ArrowLeft')c=Math.max(0,c-1);if(e.key==='ArrowRight')c=Math.min(game.C-1,c+1);

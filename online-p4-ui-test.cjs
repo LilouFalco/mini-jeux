@@ -15,7 +15,7 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   create table realtime.sent(payload jsonb,event text,topic text,private boolean);
   create function realtime.topic() returns text language sql stable as $$select current_setting('realtime.topic',true)$$;
   create function realtime.send(p jsonb,e text,t text,b boolean) returns void language sql as $$insert into realtime.sent values(p,e,t,b)$$;
-  `);await db.exec(fs.readFileSync(__dirname+'/sql/001-online.sql','utf8'));await db.exec(fs.readFileSync(__dirname+'/sql/002-online-puissance4.sql','utf8'));
+  `);await require('./online-test-sql.cjs')(db);await db.exec(fs.readFileSync(__dirname+'/sql/002-online-puissance4.sql','utf8'));
   const pages=[],contexts=[],errors=[],remote=[];let chain=Promise.resolve();
   const rpc=(i,name,args)=>{const job=chain.then(async()=>{
    await db.query("select set_config('request.jwt.claim.sub',$1,false)",['10000000-0000-4000-8000-00000000000'+(i+1)]);
@@ -37,8 +37,8 @@ const BASE=process.env.BASE||'http://localhost:28461/';
    await p.addInitScript(()=>{
     const channels=new Set();
     const c={realtime:{setAuth:async()=>{}},removeChannel:async ch=>channels.delete(ch),
-     channel:(topic,config)=>{if(!config.config.private)throw Error('public channel');const ch={topic,on:(type,filter,fn)=>{ch.fn=fn;return ch;},subscribe:fn=>{channels.add(ch);queueMicrotask(()=>fn('SUBSCRIBED'));return ch;}};return ch;}};
-    window.__notify=msg=>{for(const ch of channels)if(ch.topic===msg.topic)ch.fn?.({payload:msg.payload});};
+     channel:(topic,config)=>{if(!config.config.private)throw Error('public channel');const ch={topic,hs:[],on:(type,filter,fn)=>{ch.hs.push([type,filter,fn]);return ch;},track:async()=>{},subscribe:fn=>{channels.add(ch);queueMicrotask(()=>fn('SUBSCRIBED'));return ch;}};return ch;}};
+    window.__notify=msg=>{for(const ch of channels)if(ch.topic===msg.topic)for(const [t,f,fn] of ch.hs)if(t==='broadcast'&&f.event===(msg.event||'changed'))fn({payload:msg.payload});};
     window.MiniOnline={client:async()=>c,rpc:async(name,args)=>{const r=await window.__rpc(name,args);if(r.error)throw r.error;return r.data;},friendly:e=>e.message};
    });
    await p.goto(BASE+'puissance4.html');await p.waitForSelector('#online-toggle');
@@ -78,9 +78,9 @@ const BASE=process.env.BASE||'http://localhost:28461/';
   await a.getByRole('button',{name:'Proposer une revanche'}).click();await a.waitForSelector('.online-members');
   // Leave invalidates OLD channel. Remaining player must update without manual refresh.
   a.on('dialog',d=>d.accept());await a.getByRole('button',{name:'Quitter le salon'}).click();await a.waitForSelector('#online-pseudo');
-  await b.waitForFunction(()=>document.querySelectorAll('.online-members span').length===1);
-  await b.waitForFunction(()=>[...document.querySelectorAll('#online-root button')].some(x=>x.textContent==='Démarrer'));
-  assert.equal(await b.locator('.online-board-p4').count(),0);
+  // Any departure ends the room: the remaining player returns to the lobby with the name.
+  await b.waitForSelector('#online-pseudo',{timeout:15000});await b.waitForFunction(()=>document.querySelector('#online-status').textContent.endsWith('a quitté le salon.'));
+  assert.equal(await b.locator('.online-members').count(),0);
   await b.getByRole('button',{name:'Hors ligne',exact:true}).click();await b.waitForSelector('#online-root',{state:'hidden'});
   assert.deepEqual(await b.evaluate(()=>[...document.querySelectorAll('.mbar button[data-k]')].map(x=>x.getAttribute('aria-current'))),b.__nav,'nav restored');
   await b.locator('[data-mode=two]').click();assert.equal(await b.locator('#board .pcell').count(),42);

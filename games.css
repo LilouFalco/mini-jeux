@@ -92,3 +92,57 @@ body.mf h1{font-size:60px;letter-spacing:-4px}body.mf h1 span{display:inline-blo
 .petitbac .uc .cat{display:inline-block;padding:6px 10px;border:2px solid var(--outline);border-radius:6px;background:#fff9ee;font-size:13px}
 .petitbac .uc .word{font-size:48px}
 .petitbac .scrow{display:grid;gap:4px}.petitbac .scrow .plist{grid-template-columns:repeat(2,1fr)}
+
+/* ===== Accueil back button (game pages) + home welcome ===== */
+.home-back,.mback{display:inline-flex;align-items:center;gap:6px;min-height:44px;min-width:44px;padding:0 16px 0 10px;box-sizing:border-box;font-family:'Space Mono','Yakazu Symbols',monospace;font-size:14px;font-weight:700;letter-spacing:.5px;text-decoration:none;text-transform:uppercase;white-space:nowrap;touch-action:manipulation}
+.home-back{background:#f9e4e8;color:var(--ink);border:3px solid var(--outline);border-radius:8px;box-shadow:3px 3px 0 #edd5da;transition:transform .12s,background .12s,box-shadow .12s}
+.home-back:hover{background:#f6d7de;transform:translateY(-1px);box-shadow:3px 4px 0 #edd5da}.home-back:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #edd5da}
+.home-back:focus-visible,.mback:focus-visible{outline:3px solid #c8466e;outline-offset:3px}
+.home-back .hb-ico,.mback .hb-ico{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.home-back span{padding-top:1px}
+
+/* demineur: whole grid always fits the viewport (desktop, tablet, landscape); phones <=700px use mobile.css shell */
+@media(min-width:701px){
+body.demineur{height:100vh;height:100dvh;overflow:hidden;margin:0}
+.demineur main{height:100%;max-width:1500px;box-sizing:border-box;padding:max(10px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:8px}
+.demineur main>header{flex:none;margin:0}.demineur .intro,.demineur .rules,.demineur footer,.demineur .scroll-hint,.demineur #zoom{display:none!important}
+.demineur .game-window{flex:1;min-height:0;display:flex;flex-direction:column}
+.demineur .game-body{flex:1;min-height:0;display:flex;flex-direction:column;padding:12px 20px 8px;gap:8px}
+.demineur .topline{margin:0;flex:none}.demineur #status{flex:none;margin:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.demineur .play-area{flex:1;min-height:0;display:flex;gap:24px;align-items:stretch}
+.demineur .board-wrap{flex:1;min-width:0;min-height:0;max-width:none;width:auto;margin:0;display:flex;flex-direction:column}
+.demineur .board-scroll{flex:1;min-height:0;max-height:none;width:100%;max-width:100%;overflow:hidden!important;touch-action:none;display:flex;align-items:center;justify-content:center;padding:2px;box-sizing:border-box}
+.demineur #board{flex:none;margin:auto;touch-action:none}.demineur .cell{touch-action:none;min-width:0;min-height:0;font-size:calc(var(--cs)*.6)}
+.demineur .controls{flex:none;width:210px;min-width:0;align-self:center;max-height:100%;overflow:hidden}
+}
+@media(min-width:701px) and (max-height:640px){.demineur .windowbar,.demineur .autosave,.demineur #selection,.demineur #meter{display:none}.demineur main{padding-top:6px;padding-bottom:6px;gap:4px}.demineur .game-body{padding:6px 12px 6px;gap:4px}.demineur .controls{width:176px}.demineur .tools{margin:6px 0}.demineur #new{min-height:44px}}
+
+/* demineur: short landscape phones (<=700px wide) */
+@media(max-width:700px) and (max-height:480px){
+.has-mnav.demineur .mtop{height:calc(36px + env(safe-area-inset-top))}.has-mnav.demineur .mtop strong{font-size:14px}.has-mnav.demineur .mtop .mback{min-height:30px;height:30px;box-sizing:border-box}
+.has-mnav.demineur .mbar{padding-top:3px;padding-bottom:calc(3px + env(safe-area-inset-bottom))}.has-mnav.demineur .mbar button{min-height:34px;flex-direction:row;gap:6px}
+.has-mnav.demineur main{top:calc(36px + env(safe-area-inset-top));bottom:calc(46px + env(safe-area-inset-bottom));padding:3px 8px}
+.has-mnav.demineur .game-body{padding:3px 6px;gap:3px}
+.has-mnav.demineur .levels button{min-height:30px;padding-top:4px;padding-bottom:4px}.has-mnav.demineur .topline{align-items:center}
+.has-mnav.demineur #status{display:none}
+.has-mnav.demineur .play-area{flex:1;min-height:0;display:flex;flex-direction:row;gap:8px;align-items:stretch}
+.has-mnav.demineur .board-wrap{flex:1;min-width:0;min-height:0}
+.has-mnav.demineur .controls{flex:none;width:150px;max-width:150px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.has-mnav.demineur .tools{margin:0;grid-template-columns:1fr}.has-mnav.demineur .tools button,.has-mnav.demineur #new{min-height:34px;height:34px;padding-top:0;padding-bottom:0}
+}
+/* demineur: frame hugs the grid instead of the free space around it */
+body.demineur .board-scroll{background:transparent!important;border:0!important;box-shadow:none!important;padding:6px!important}
+body.demineur #board{border:3px solid var(--outline);background:#cfa5b0;box-shadow:3px 3px 0 #edd5da;border-radius:3px}
+.demineur #rules-dialog{max-width:min(480px,calc(100vw - 24px));max-height:calc(100dvh - 24px);box-sizing:border-box}.demineur #rules-dialog p{font-size:14px;line-height:1.5}.demineur #rules-btn{min-height:44px}
+@media(max-height:480px){.demineur #rules-dialog p{font-size:12.5px;line-height:1.35;margin:6px 0}}
+.demineur #rules-dialog[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}.demineur #rules-dialog .rules-text{min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 2px 8px}.demineur #rules-dialog #rules-close{width:100%;min-height:44px;margin-top:8px}
+@media(max-height:480px){.demineur #rules-dialog .eyebrow{display:none}.demineur #rules-dialog h2{margin:0 0 4px;font-size:18px}.demineur #rules-dialog{padding-top:10px;padding-bottom:10px}}
+@media(max-width:700px) and (max-height:480px){.has-mnav.demineur #rules-btn{min-height:44px;height:44px}}
+
+/* Rules stays a full-sized target even in short landscape layouts. */
+body.demineur #rules-btn{min-width:44px;min-height:44px;height:auto;flex-shrink:0;box-sizing:border-box}
+body.demineur #rules-dialog #rules-close{position:static;min-height:44px;flex-shrink:0}
+
+@media(max-height:480px){body.demineur #rules-dialog[open]{grid-template-rows:auto minmax(0,1fr) auto}}
+
+.demineur #rules-dialog .rules-head{min-width:0}.demineur .controls .tools{flex-shrink:0}.demineur .controls{overflow:visible}

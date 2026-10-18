@@ -17,7 +17,7 @@ const G=[
  {id:'undercover',n:'Undercover',i:'M3 12s3-6 9-6 9 6 9 6-3 6-9 6-9-6-9-6zM12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z',m:{multi:'undercover.html'},min:3,max:10},
  {id:'timesup',n:"Time's Up",i:'M12 5a8 8 0 100 16 8 8 0 000-16zM12 9v4l3 2M9 2h6',m:{multi:'timesup.html'},min:4,max:12}
 ];
-const MODES=[{k:'solo',n:'Solo',t:'Un jeu, une pause, rien que pour toi',i:'M12 4a4 4 0 100 8 4 4 0 000-8zM5 21a7 7 0 0114 0'},{k:'duo',n:'Duo',t:'À deux sur le même téléphone',i:'M9 11a3 3 0 100-6 3 3 0 000 6zM3 20a6 6 0 0112 0M17 11a2.5 2.5 0 100-5M17 14a5 5 0 014 6'},{k:'multi',n:'Multi',t:'Entre amis, 3 joueurs et plus',i:'M12 10a3 3 0 100-6 3 3 0 000 6zM6 12a2.5 2.5 0 100-5M18 12a2.5 2.5 0 100-5M7 20a5 5 0 0110 0M2 19a4 4 0 014-4M22 19a4 4 0 00-4-4'}];
+const MODES=[{k:'solo',n:'Solo',t:'Un jeu, une pause, rien que pour toi',i:'M12 4a4 4 0 100 8 4 4 0 000-8zM5 21a7 7 0 0114 0'},{k:'duo',n:'Duo',t:'À deux sur le même téléphone',i:'M4 8.5a3 3 0 106 0 3 3 0 10-6 0M3 21v-1a6 6 0 0112 0v1M15.5 5.6a3 3 0 010 5.8M18 14.6a6 6 0 013 5.4v1'},{k:'multi',n:'Multi',t:'Entre amis, 3 joueurs et plus',i:'M9 7.5a3 3 0 106 0 3 3 0 10-6 0M7 21v-1a5 5 0 0110 0v1M3 9.5a2 2 0 104 0 2 2 0 10-4 0M3 20v-.5a3.5 3.5 0 013.5-3.5M17 9.5a2 2 0 104 0 2 2 0 10-4 0M21 20v-.5a3.5 3.5 0 00-3.5-3.5'}];
 const KEY='lilou-yakazu-mode';
 const getMode=()=>{try{const m=localStorage.getItem(KEY);return MODES.some(x=>x.k===m)?m:null}catch{return null}};
 const setMode=m=>{try{localStorage.setItem(KEY,m)}catch{}};

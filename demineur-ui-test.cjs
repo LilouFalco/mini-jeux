@@ -5,7 +5,7 @@ const st=p=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),K);
  for(const width of [1440,390,360]){
   const mobile=width<600,c=await b.newContext({viewport:{width,height:844},isMobile:mobile,hasTouch:mobile}),p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
   await p.goto(BASE+'demineur.html');await p.waitForSelector('#board .cell');
-  assert(await p.locator('.games a').count()>=5);
+  assert.equal(await p.locator('.games').count(),0);{const hb=p.locator(mobile?'.mtop .mback':'.home-back');assert(await hb.isVisible());assert.equal(await hb.getAttribute('href'),'./');assert.notEqual(await hb.getAttribute('data-home-link'),null)}
   const dims=[[9,9],[16,16],[16,30],[24,30]],tot=[10,40,99,160];
   for(let l=0;l<4;l++){if(l>0){await p.locator('[data-level="'+l+'"]').click();if(await p.locator('#confirm[open]').count())await p.click('#replace')}
    await p.waitForFunction(([l,n])=>document.querySelectorAll('#board .cell').length===n,[l,dims[l][0]*dims[l][1]]);
@@ -58,10 +58,10 @@ const st=p=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),K);
   await p.click('#new');if(await p.locator('#confirm[open]').count())await p.click('#replace');await p.waitForFunction(()=>!JSON.parse(localStorage.getItem('lilou-demineur-v1')).over&&!JSON.parse(localStorage.getItem('lilou-demineur-v1')).mines);await cell(39).focus();await p.keyboard.press('ArrowRight');await p.keyboard.press('f');
   g=await st(p);assert.equal(g.state[40],2);await p.keyboard.press('f');
   // compact toggle + overflow of page
-  if(!mobile){await p.click('#zoom');assert((await p.locator('#board').getAttribute('class')).includes('compact'));await p.click('#zoom');}
+  assert(await p.locator('#zoom').count()===0,'zoom removed');assert((await p.locator('#board').getAttribute('class')).includes('fixedfit'),'fit always');await p.click('#rules-btn');assert(await p.evaluate(()=>document.querySelector('#rules-dialog').open),'rules open');await p.click('#rules-close');assert(!(await p.evaluate(()=>document.querySelector('#rules-dialog').open)),'rules closed');assert(await p.evaluate(()=>document.activeElement.id==='rules-btn'),'rules focus');
   for(let l=0;l<4;l++){await p.locator('[data-level="'+l+'"]').click();if(await p.locator('#confirm[open]').count())await p.click('#replace');await p.waitForFunction(([n])=>document.querySelectorAll('#board .cell').length===n,[dims[l][0]*dims[l][1]]);
-   const ov=await p.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);assert(ov<=1,'page overflow '+ov+' level '+l);
-   const sc=await p.evaluate(()=>{const s=document.querySelector('.board-scroll');return [s.scrollWidth>s.clientWidth,s.scrollHeight>s.clientHeight]});if(l===3&&!mobile)assert(sc[0]||sc[1],'big board scrolls');}
+   await p.waitForTimeout(250);const ov=await p.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);assert(ov<=1,'page overflow '+ov+' level '+l);
+   const sc=await p.evaluate(()=>{const s=document.querySelector('.board-scroll');return [s.scrollWidth-s.clientWidth>1,s.scrollHeight-s.clientHeight>1]});assert(!sc[0]&&!sc[1],'board never scrolls, grid fits');}
   await p.locator('.cell').nth(5).click();await p.screenshot({path:'/tmp/dem-big-'+width+'.png',fullPage:true});
   assert.equal(errors.length,0,errors.join('\n'));console.log(width+' demineur levels/counts, flags, longpress, chord, win/loss, save, keyboard, scroll PASS');await c.close();}
  await b.close()})().catch(e=>{console.error(e);process.exit(1)});
