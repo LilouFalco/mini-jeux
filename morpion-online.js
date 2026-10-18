@@ -3,6 +3,7 @@
  const $ = s => document.querySelector(s);
  const root = $('#online-root'), toggle = $('#online-toggle');
  let active = false, api, snapshot, channel, channelTopic, timer, busy = false, pending = null;
+ let directoryOffset = 0;
  let loading, syncPromise, queuedSync = false, generation = 0, connected = navigator.onLine, requestGeneration = 0;
  const symbols = {1: '♥', 2: '✦'};
  const el = (tag, text, cls) => {
@@ -25,7 +26,7 @@
  }
  function setBusy(v) {
   busy = v;
-  root.querySelectorAll('button').forEach(b => b.disabled = v || b.dataset.locked === 'true');
+  root.querySelectorAll('button').forEach(b => b.disabled = (v && b.dataset.always !== 'true') || b.dataset.locked === 'true');
  }
  async function task(fn) {
   if (busy) return;
@@ -53,13 +54,14 @@
  function setup() {
   root.replaceChildren();
   const top = el('div', null, 'online-heading');
-  top.append(el('strong', '✦ Le petit salon'), button('Hors ligne', close)); root.append(top);
+  const exit = button('Hors ligne', close); exit.dataset.always = 'true';
+  top.append(el('strong', '✦ Le petit salon'), exit); root.append(top);
   const content = el('div', null, 'online-content'); content.id = 'online-content'; root.append(content);
   const status = el('p', '', 'online-status'); status.id = 'online-status'; status.role = 'status';
   status.setAttribute('aria-live', 'polite'); root.append(status);
  }
  async function lobby() {
-  await stopChannel(); clearInterval(timer); timer = null; snapshot = null; pending = null;
+  await stopChannel(); clearInterval(timer); timer = null; snapshot = null; pending = null; directoryOffset = 0;
   const box = $('#online-content'); box.replaceChildren();
   const form = el('form', null, 'online-form');
   form.append(input('Ton pseudo', 'online-pseudo', pseudo(), 24), input('Nom du salon public', 'online-room-name', '', 40));
@@ -85,7 +87,7 @@
  }
  async function refreshDirectory() {
   const g = generation;
-  const [rooms, mine] = await Promise.all([api.rpc('online_list_rooms', {p_offset: 0}), api.rpc('online_my_rooms')]);
+  const [rooms, mine] = await Promise.all([api.rpc('online_list_rooms', {p_offset: directoryOffset}), api.rpc('online_my_rooms')]);
   if (!active || g !== generation || snapshot) return;
   const list = root.querySelector('.online-directory'); if (!list) return; list.replaceChildren();
   for (const room of mine) {
@@ -100,6 +102,10 @@
    item.append(el('strong', room.name), el('small', room.host + ' · ' + room.count + '/' + room.capacity + ' · ' + statuses[room.status]));
    list.append(item);
   }
+  const pagination = el('div', null, 'online-actions');
+  if (directoryOffset > 0) pagination.append(button('Précédents', () => task(async () => { directoryOffset = Math.max(0, directoryOffset - 30); await refreshDirectory(); })));
+  if (rooms.length === 30 && directoryOffset < 990) pagination.append(button('Suivants', () => task(async () => { directoryOffset += 30; await refreshDirectory(); })));
+  if (pagination.children.length) list.append(pagination);
   message('Choisis un nom pour créer ou rejoindre un salon.');
  }
  async function stopChannel() {
