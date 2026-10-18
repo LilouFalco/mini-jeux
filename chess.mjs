@@ -101,3 +101,5 @@ $('#promotion').addEventListener('cancel',()=>{pending=null;clearSelection();ren
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('dialog[open]')){claimIntent=false;notice='';clearSelection();render()}});
 addEventListener('pagehide',cancelAI);addEventListener('pageshow',()=>scheduleAI());
 save();render();scheduleAI();
+
+import('./online-chess.mjs').then(o=>o.start({pieceSVG})).catch(()=>{$('#online-toggle')?.setAttribute('hidden','')});
