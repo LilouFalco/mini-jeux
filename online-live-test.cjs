@@ -2,6 +2,14 @@
 const pw=require('/tmp/qa/node_modules/playwright'),assert=require('node:assert/strict');
 const BASE=process.env.BASE||'http://localhost:28461/';
 if(process.env.ONLINE_LIVE!=='1')throw Error('Set ONLINE_LIVE=1 for separately authorized live execution');
+// Parent-controlled one-shot gate: ONLINE_LIVE=1 alone is NOT enough. The parent creates this file (mode 0600,
+// text 'APPROVED <epoch-ms>') outside the repo right before an approved run; it expires after 10 min and is consumed.
+(()=>{const fs=require('fs');const f=process.env.ONLINE_LIVE_GATE_FILE||'/home/yakazu-secure/live-gate';
+ let st;try{st=fs.statSync(f)}catch{throw Error('Live run blocked: no parent gate file')}
+ if((st.mode&0o077)!==0)throw Error('Live run blocked: gate file permissions');
+ const m=/^APPROVED (\d+)\s*$/.exec(fs.readFileSync(f,'utf8'));
+ if(!m||Date.now()-Number(m[1])>600000||Date.now()<Number(m[1]))throw Error('Live run blocked: gate invalid or expired');
+ fs.unlinkSync(f);})();
 const fs=require('node:fs'),path=require('node:path');
 const sessionFiles=(process.env.ONLINE_SESSION_FILES||'').split(',').filter(Boolean);
 assert.equal(new Set(sessionFiles.map(f=>path.resolve(f))).size,2,'session filenames must be distinct');

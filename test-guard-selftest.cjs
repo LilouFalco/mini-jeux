@@ -25,6 +25,7 @@ const REAL=fs.readFileSync(__dirname+'/online-config.js','utf8').match(/https:\/
  // local server
  const srv=http.createServer((q,s)=>{
   if(q.url==='/online-config.js'){s.setHeader('content-type','text/javascript');return s.end(fs.readFileSync(__dirname+'/online-config.js'))}
+  if(q.url==='/redir'){s.statusCode=302;s.setHeader('location','https://project.invalid/auth/v1/signup');s.setHeader('access-control-allow-origin','*');return s.end()}
   if(q.url==='/ok'){s.setHeader('access-control-allow-origin','*');return s.end('local-ok')}
   s.setHeader('content-type','text/html');s.end('<meta charset=utf-8><script src="/online-config.js"><\/script><body>t')}).listen(0,'127.0.0.1');
  await new Promise(r=>srv.once('listening',r));const base='http://127.0.0.1:'+srv.address().port;
@@ -44,6 +45,11 @@ const REAL=fs.readFileSync(__dirname+'/online-config.js','utf8').match(/https:\/
   assert.equal(r2,'blocked');ok(engine+' without route layer: dead proxy/resolver still blocks (.invalid only)');
   // 3 assertClean fails when violated
   let thrown=false;try{G.assertClean('selftest')}catch{thrown=true}assert.ok(thrown);ok(engine+' assertClean throws after violation (fail closed)');
+  const rd=await p.evaluate(async()=>{try{await fetch('/redir');return 'REACHED'}catch(e){return 'blocked'}});
+  assert.equal(rd,'blocked');ok(engine+' HTTP redirect from localhost to reserved/real host blocked');
+  const nrd=await new Promise(r=>http.get(base+'/redir',x=>{x.resume();r(x.headers.location)}));assert.ok(/project\.invalid/.test(nrd));
+  let nerr;try{await fetch(base+'/redir')}catch(e){nerr=e}
+  assert.ok(nerr,'node fetch following redirect must fail');ok('node fetch redirect to non-local host fails closed');
   G.violations.length=0;await b.close();
  }
  srv.close();console.log('GUARD PROVEN',out.length,'checks');
