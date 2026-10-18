@@ -102,4 +102,4 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySele
 addEventListener('pagehide',cancelAI);addEventListener('pageshow',()=>scheduleAI());
 save();render();scheduleAI();
 
-import('./online-chess.mjs').then(o=>o.start({pieceSVG})).catch(()=>{$('#online-toggle')?.setAttribute('hidden','')});
+if (!$('#online-toggle')?.hidden) import('./online-chess.mjs').then(o=>o.start({pieceSVG})).catch(()=>{$('#online-toggle')?.setAttribute('hidden','')});
