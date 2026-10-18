@@ -1,14 +1,16 @@
 // Actual Supabase Auth, RPC, and private WebSockets. Explicit opt-in only.
 const pw=require('/tmp/qa/node_modules/playwright'),assert=require('node:assert/strict');
 const BASE=process.env.BASE||'http://localhost:28461/';
-if(process.env.ONLINE_LIVE!=='1')throw Error('Set ONLINE_LIVE=1 to create real anonymous test users and rooms');
+if(process.env.ONLINE_LIVE!=='1')throw Error('Set ONLINE_LIVE=1 for separately authorized live execution');
 const fs=require('node:fs'),path=require('node:path');
+const allowNew=process.env.ONLINE_ALLOW_NEW_IDENTITIES==='1';
 const sessionFiles=(process.env.ONLINE_SESSION_FILES||'').split(',').filter(Boolean);
 assert.equal(sessionFiles.length,3,'ONLINE_SESSION_FILES requires three existing external storageState files; no new signups');
 for(const file of sessionFiles){
  assert.ok(path.resolve(file).startsWith('/tmp/'),'sessions must be external /tmp files');
- assert.ok(fs.existsSync(file),'missing saved session file');
- const dir=path.dirname(path.resolve(file));assert.notEqual(dir,'/tmp','use a dedicated private session directory, not /tmp itself');fs.chmodSync(dir,0o700);
+ const dir=path.dirname(path.resolve(file));assert.notEqual(dir,'/tmp','use a dedicated private session directory, not /tmp itself');
+ if(!fs.existsSync(dir)){assert.ok(allowNew,'missing saved session directory');fs.mkdirSync(dir,{recursive:true,mode:0o700});}fs.chmodSync(dir,0o700);
+ if(!fs.existsSync(file)){assert.ok(allowNew,'missing saved session file; fresh identities require separate authorization and ONLINE_ALLOW_NEW_IDENTITIES=1');continue;}
  fs.chmodSync(file,0o600);
  const state=JSON.parse(fs.readFileSync(file,'utf8'));
  assert.ok(state.origins?.some(o=>o.origin===new URL(BASE).origin&&o.localStorage?.some(x=>x.name==='mini-online-auth-v1')),'saved Auth session required for current BASE origin');
@@ -28,7 +30,12 @@ async function act(p,s,kind,cell=null){return rpc(p,'online_action',{p_room:s.id
  for(let i=0;i<3;i++){
  const saved=sessionFiles[i];
  const c=await browser.newContext({...(require('node:fs').existsSync(saved)?{storageState:saved}:{}),viewport:i%2?{width:390,height:844}:{width:360,height:640},serviceWorkers:'block'});contexts.push(c);
- await c.route('**/auth/v1/signup',r=>r.abort('blockedbyclient'));
+ let signupAttempted=false;
+ await c.route('**/auth/v1/signup',r=>{
+  // At most one fresh signup per missing identity, Chromium only. No retry burst.
+  if(!allowNew||engine!=='chromium'||fs.existsSync(saved)||signupAttempted)return r.abort('blockedbyclient');
+  signupAttempted=true;return r.continue();
+ });
  await c.addInitScript(()=>{const orig=window.setInterval;window.setInterval=(fn,ms,...args)=>ms===20000?0:orig(fn,ms,...args);});
  const p=await c.newPage();pages.push(p);const st={changed:0,subscribed:0,rpc:0,heartbeat:0,payloadKeys:[],topics:[]};stats.push(st);
  p.on('pageerror',e=>errors.push(e.message));
