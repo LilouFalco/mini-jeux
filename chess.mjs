@@ -9,7 +9,7 @@ const PATHS={
  q:'M16 38h32v7H16zM20 34h24v4H20zM21 15l5 7 6-13 6 13 5-7-3 19H24zM19 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM32 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM45 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',
  k:'M16 38h32v7H16zM20 34h24v4H20zM24 28h16l3 6H21zM32 13c-10-8-20 5-9 14h18c11-9 1-22-9-14zM32 2v12M27 7h10'
 };
-function pieceSVG(p){return '<svg class="chess-piece" aria-hidden="true" viewBox="0 0 64 50"><path d="'+PATHS[p.type]+'" fill="'+(p.color==='w'?'#fffdf4':'#755064')+'" stroke="'+(p.color==='w'?'#80566a':'#402e3c')+'" stroke-width="2.1" stroke-linejoin="round"/>'+(p.type==='n'?'<circle cx="30" cy="12" r="1.5" fill="#402e3c"/>':'')+'</svg>'}
+function pieceSVG(p){return '<svg class="chess-piece" aria-hidden="true" viewBox="12 0 40 50"><path d="'+PATHS[p.type]+'" fill="'+(p.color==='w'?'#fffdf4':'#755064')+'" stroke="'+(p.color==='w'?'#80566a':'#402e3c')+'" stroke-width="2.1" stroke-linejoin="round"/>'+(p.type==='n'?'<circle cx="30" cy="12" r="1.5" fill="#402e3c"/>':'')+'</svg>'}
 let game=new Chess(),st={mode:'easy',n1:'Lilou',n2:'Lulu',flipped:false,claimed:false};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s){game=restore(s);for(const k of ['n1','n2'])if(typeof s[k]==='string')st[k]=s[k].slice(0,20);st.mode=s.mode;st.flipped=s.flipped===true;st.claimed=s.claimed===true}}catch{}
 const q=new URLSearchParams(location.search).get('mode');
@@ -31,10 +31,11 @@ function render(){
  const b=$('#chess-board');b.replaceChildren();b.setAttribute('aria-label','Échiquier, '+(st.flipped?'noirs':'blancs')+' en bas');b.setAttribute('aria-busy',String(busy));
  for(let i=0;i<64;i++){
   const row=Math.floor(i/8),col=i%8,rank=st.flipped?row+1:8-row,file=st.flipped?7-col:col,sq='abcdefgh'[file]+rank,p=game.get(sq),legal=targets.some(m=>m.to===sq),c=document.createElement('button');
-  c.type='button';c.className='chess-cell'+((file+rank)%2===0?' dark':'')+(sq===selected?' selected':'')+(legal?' legal':'')+(legal&&p?' capture':'')+(last&&(last.from===sq||last.to===sq)?' last':'')+(p?.type==='k'&&p.color===game.turn()&&game.isCheck()?' check':'');
+  c.type='button';c.className='chess-cell'+((file+rank)%2===1?' dark':'')+(sq===selected?' selected':'')+(legal?' legal':'')+(legal&&p?' capture':'')+(last&&(last.from===sq||last.to===sq)?' last':'')+(p?.type==='k'&&p.color===game.turn()&&game.isCheck()?' check':'');
   c.dataset.square=sq;c.setAttribute('aria-label',sq+(p?' '+N[p.type]+' '+(p.color==='w'?'blanc':'noir'):' vide')+(legal?', coup possible':''));c.setAttribute('aria-pressed',String(selected===sq));
   if(p)c.innerHTML=pieceSVG(p);
-  if(row===7||col===0){const small=document.createElement('small');small.textContent=(col===0?rank:'')+(row===7?'abcdefgh'[file]:'');c.appendChild(small)}
+  if(col===0){const small=document.createElement('small');small.className='rank';small.textContent=rank;c.appendChild(small)}
+  if(row===7){const small=document.createElement('small');small.className='file';small.textContent='abcdefgh'[file];c.appendChild(small)}
   c.onclick=()=>tap(sq);b.appendChild(c);
  }
 }

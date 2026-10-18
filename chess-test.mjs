@@ -30,3 +30,10 @@ for(const level of ['easy','medium','hard']){
 const tactical='6k1/8/8/8/8/5q2/5pp1/7K b - - 0 1';
 c=new Chess(tactical);const hard=bestMove(c,'hard',{budget:1800});c.move(hard.move);assert(c.isCheckmate(),'hard finds mate');
 console.log('chess rules, history, draws, restore and AI pass');
+// Hard reaches a deeper completed horizon than medium from the same position.
+const shallow=bestMove(new Chess(),'medium',{budget:6000});
+const deep=bestMove(new Chess(),'hard',{budget:6000});
+assert.equal(shallow.depth,2);assert(deep.depth>=3);assert(deep.nodes>shallow.nodes);
+// Interrupted searches unwind every speculative move even with a zero budget.
+c=new Chess();const before=c.fen();bestMove(c,'hard',{budget:0});assert.equal(c.fen(),before);assert.equal(c.history().length,0);
+console.log('deeper hard search and interrupted search unwind pass',shallow.depth,deep.depth);
