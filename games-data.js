@@ -12,7 +12,7 @@ const G=[
  {id:'puissance4',n:'Puissance 4',i:'M3 5h18v14H3zM8 10a1.5 1.5 0 100 .1M12 14a1.5 1.5 0 100 .1M16 10a1.5 1.5 0 100 .1',m:{solo:'puissance4.html?mode=solo',duo:'puissance4.html?mode=duo'}},
  {id:'naval',n:'Bataille navale',i:'M3 15h18l-3 5H6zM12 4v11M12 5l6 7h-6',m:{solo:'naval.html?mode=solo',duo:'naval.html?mode=duo'}},
  {id:'quiestce',n:'Qui est-ce LoL',i:'M12 4a4 4 0 100 8 4 4 0 000-8zM5 21a7 7 0 0114 0',m:{duo:'quiestce.html'}},
- {id:'petitbac',n:'Petit bac',i:'M5 4h14v16H5zM8 9h8M8 13h8M8 17h4',m:{multi:'petitbac.html'},min:2,max:10},
+ {id:'petitbac',n:'Petit bac',i:'M5 4h14v16H5zM8 9h8M8 13h8M8 17h4',m:{multi:'petitbac.html',online:'petitbac.html?mode=online'},min:2,max:10},
  {id:'undercover',n:'Undercover',i:'M3 12s3-6 9-6 9 6 9 6-3 6-9 6-9-6-9-6zM12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z',m:{multi:'undercover.html',online:'undercover.html?mode=online'},min:3,max:10},
  {id:'timesup',n:"Time's Up",i:'M12 5a8 8 0 100 16 8 8 0 000-16zM12 9v4l3 2M9 2h6',m:{multi:'timesup.html'},min:4,max:12}
 ];

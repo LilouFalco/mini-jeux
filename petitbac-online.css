@@ -1,0 +1,5 @@
+.online-active.petitbac #v,.online-active.petitbac .game-body>.levels{display:none}
+.pb-review{border:2px solid var(--outline,#d9b3ba);padding:10px;border-radius:6px}
+.pb-review-row{padding:6px 0;border-top:1px solid #d9b3ba;overflow-wrap:anywhere}
+.pb-review h3{margin:0 0 8px}.pb-review-row p{margin:0 0 6px}
+.petitbac #online-root{min-height:0}.petitbac #online-root input{font-size:16px}
