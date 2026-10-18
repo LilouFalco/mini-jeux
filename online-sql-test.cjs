@@ -98,7 +98,7 @@ const assert=require('node:assert/strict'), fs=require('node:fs');
  let q=await rpc(5,'online_create_room_game',['puissance4','  Quatre   Rose ','Pia',uuid()]);
  assert.equal(q.game,'puissance4');assert.equal(q.board.length,42);assert.ok(q.board.every(v=>v===0));assert.equal(q.name,'Quatre Rose');
  const pk=uuid();
- await fail(()=>rpc(5,'online_create_room_game',['chess','Autre jeu','Pia',uuid()]),'INVALID_ACTION');
+ await fail(()=>rpc(5,'online_create_room_game',['unknown-game','Autre jeu','Pia',uuid()]),'INVALID_ACTION');
  await fail(()=>rpc(5,'online_create_room_game',['naval','Autre jeu','Pia',uuid()]),'INVALID_ACTION');
  await fail(()=>rpc(5,'online_create_room_game',[null,'Autre jeu','Pia',uuid()]),'INVALID_ACTION');
  {const k2=uuid();const a=await rpc(5,'online_create_room_game',['puissance4','Idem salon','Pia',k2]);

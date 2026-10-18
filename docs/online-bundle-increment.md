@@ -63,3 +63,22 @@ They must receive dedicated secret storage and actor-filtered RPCs, never raw sh
 or opponent state snapshots. Petit Bac still needs the features listed above. Chess needs
 its actual secured service and atomic commit RPC. Independent SQL/security review is required
 before any file is offered for application. No remote SQL, Auth, network or push was performed.
+
+User architecture decision supersedes the separate chess service proposal above
+
+Casual chess now uses sql/sources/002-chess.sql inside the SAME generated 002, with
+membership, host readiness/start, turn ordering, bounded UCI payload, append-only moves,
+version/replay and mutual matching result reports. Full move legality is deliberately NOT
+server-enforced. Tests explicitly accept a well-shaped illegal move to demonstrate this
+limitation. chess-online-history.mjs reconstructs and rejects illegal received history using
+the existing chess.js; it is a pure helper and is NOT yet wired to online UI clients.
+Both clients must wire it before online chess may be released. Never silently apply bad history.
+No separate server/Edge Function is needed or planned. server/chess-validator.mjs is an
+unused earlier experiment, not part of installation or deployment.
+
+Additional guarded tests passed
+node -r ./test-guard.cjs online-chess-sql-test.cjs
+node -r ./test-guard.cjs chess-online-history-test.mjs
+Existing online-sql-test.cjs unsupported-game fixture now uses unknown-game because chess
+has a supported casual protocol. P4/Morpion and Petit Bac regression tests passed again.
+Still NOT the finished seven-game bundle, not independently reviewed, not ready to apply.
