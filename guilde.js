@@ -1,17 +1,18 @@
 'use strict';
-(function(){const E=window.GuildeEngine,D=window.GuildeData,KEY='rouky-guilde-v1',root=document.getElementById('app');
+(function(){const E=window.GuildeEngine,D=window.GuildeData,KEY='rouky-guilde-v2',OLD_KEY='rouky-guilde-v1',root=document.getElementById('app');
 const h=(t,a,...k)=>{const e=document.createElement(t);for(const n in a||{}){const v=a[n];if(v==null||v===false)continue;if(n==='class')e.className=v;else if(n.startsWith('on'))e.addEventListener(n.slice(2),v);else if(n==='text')e.textContent=v;else e.setAttribute(n,v===true?'':v)}
  for(const c of k.flat())if(c!=null&&c!==false)e.append(c.nodeType?c:document.createTextNode(c));return e};
 const tid=(e,id)=>(e.setAttribute('data-testid',id),e);
 if(!D||!Array.isArray(D.themes)){root.append(h('p',{class:'g-note',role:'alert'},'Les données de la Guilde ne sont pas chargées.'));return}
 try{E.check(D,D.production===true)}catch(e){root.append(h('p',{class:'g-note',role:'alert','data-testid':'data-error'},'Données de la Guilde invalides : '+e.message));return}
+const NEUTRAL='Action impossible. Rien n\'a été enregistré, réessaie.';
 const trait=id=>D.traits.find(t=>t.id===id)||{label:id,definition:''};
 let setup={names:['','','',''],count:2,themes:[]},G=null,ui={screen:'setup',seat:0,next:'turn'},pick=null,msg='';
 const lockedScreen=s=>s==='secret'||s==='turn'?'pass':s;
-function save(){try{const u=Object.assign({},ui,{screen:lockedScreen(ui.screen)});if(ui.screen==='secret')u.next='secret';if(ui.screen==='turn')u.next='turn';localStorage.setItem(KEY,JSON.stringify({v:1,setup,game:G,ui:u}))}catch(e){}}
-function load(){try{const r=JSON.parse(localStorage.getItem(KEY)||'null');if(!r||r.v!==1)return;
+function save(){try{const u=Object.assign({},ui,{screen:lockedScreen(ui.screen)});if(ui.screen==='secret')u.next='secret';if(ui.screen==='turn')u.next='turn';localStorage.setItem(KEY,JSON.stringify({v:2,setup,game:G,ui:u}))}catch(e){}}
+function load(){try{const r=JSON.parse(localStorage.getItem(KEY)||'null');if(!r||r.v!==2)return;
  const s=r.setup;if(s&&Array.isArray(s.names)&&s.names.length===4&&s.names.every(x=>typeof x==='string')&&[2,3,4].includes(s.count)&&Array.isArray(s.themes))setup={names:s.names.map(x=>x.slice(0,16)),count:s.count,themes:s.themes.filter(x=>E.themeOk(D,x))};
- if(r.game){if(!E.validate(D,r.game)){try{localStorage.removeItem(KEY)}catch(e){}return}G=r.game;const u=r.ui||{};const n=G.names.length;
+ if(r.game){if(!E.validate(D,r.game))return;G=r.game;const u=r.ui||{};const n=G.names.length;
   const seat=Number.isInteger(u.seat)&&u.seat>=0&&u.seat<n?u.seat:G.turn;
   if(G.stage==='won')ui={screen:'end',seat:0,next:'turn'};
   else if(u.screen==='result'&&G.last)ui={screen:'result',seat:0,next:'turn'};
@@ -45,7 +46,7 @@ const mbtns=(...k)=>h('div',{class:'g-mbtns'},k);
 const gBtn=()=>tid(h('button',{type:'button',class:'g-btn g-mini',onclick:e=>openOv('gloss',e.currentTarget)},'Glossaire'),'open-gloss');
 const hBtn=()=>tid(h('button',{type:'button',class:'g-btn g-mini',onclick:e=>openOv('hist',e.currentTarget)},'Registre'),'open-hist');
 const seatName=i=>G.names[i];
-function setupView(){const el=E.eligibility(D,setup.themes);const av=D.themes.filter(t=>E.themeOk(D,t.id));const allOk=av.length>0;const all=allOk&&setup.themes.length===av.length;const nOf=id=>D.characters.filter(c=>c.theme===id).length;
+function setupView(){const el=E.eligibility(D,setup.themes);const av=D.themes.filter(t=>E.themeOk(D,t.id));const allOk=av.length>0&&E.eligibility(D,av.map(t=>t.id)).ok;const all=allOk&&setup.themes.length===av.length;const nOf=id=>D.characters.filter(c=>c.theme===id).length;
  const names=h('div',{class:'g-names'});for(let i=0;i<setup.count;i++){const id='gn'+i;names.append(h('label',{for:id,class:'g-lab'},'Joueur '+(i+1),tid(h('input',{id,class:'g-in',maxlength:16,autocomplete:'off',value:setup.names[i],placeholder:'Joueur '+(i+1),onchange:e=>{setup.names[i]=e.target.value;save()},oninput:e=>{setup.names[i]=e.target.value}}),'name-'+i)))}
  const cnt=h('div',{class:'g-seg',role:'group','aria-label':'Nombre de joueurs'},[2,3,4].map(n=>tid(h('button',{type:'button','aria-pressed':String(setup.count===n),onclick:()=>{setup.count=n;save();render()}},n+' joueurs'),'count-'+n)));
  const th=h('fieldset',{class:'g-themes'},h('legend',null,'Thèmes de la Guilde'),D.themes.map(t=>h('label',{class:'g-chk'+(E.themeOk(D,t.id)?'':' off')},tid(h('input',{type:'checkbox',disabled:!E.themeOk(D,t.id),checked:setup.themes.includes(t.id),onchange:e=>{setup.themes=e.target.checked?[...setup.themes,t.id]:setup.themes.filter(x=>x!==t.id);save();render()}}),'theme-'+t.id),h('span',null,t.label+(E.themeOk(D,t.id)?'':' (bientôt)')))),
@@ -80,10 +81,10 @@ function turnView(){const me=ui.seat,el=E.eligibility(D,G.themes);const others=G
   const choose=c=>{pick=c;inp.value=c.name;res=[];paint();btn.disabled=false;btn.textContent='Demander pour '+c.name;};
   inp.addEventListener('input',()=>{pick=null;btn.disabled=true;btn.textContent='Poser la question';res=E.search(D,G.themes,inp.value,[],6);hi=0;pgI=0;paint()});
   inp.addEventListener('keydown',e=>{if(e.key==='ArrowDown'&&res.length){e.preventDefault();hi=(hi+1)%res.length;paint()}else if(e.key==='ArrowUp'&&res.length){e.preventDefault();hi=(hi+res.length-1)%res.length;paint()}else if(e.key==='Enter'){e.preventDefault();if(res.length)choose(res[hi]);else if(pick)submitQ()}else if(e.key==='Escape'){res=[];paint()}});
-  const submitQ=()=>{if(!pick)return;E.ask(D,G,t,pick.id);save();go('result',{mode:'query'})};
+  const submitQ=()=>{if(!pick)return;try{E.ask(D,G,t,pick.id)}catch(e){msg=NEUTRAL;pick=null;render();return}save();go('result',{mode:'query'})};
   body=h('div',{class:'g-form'},h('label',{for:'gq',class:'g-lab'},'Ce personnage a-t-il le trait de '+seatName(t)+' ?'),h('div',{class:'g-combo'},inp,list),btn)}
  else{const sel=tid(h('select',{class:'g-in',id:'gt','aria-label':'Trait'},h('option',{value:''},'Choisir un trait…'),el.traits.map(x=>h('option',{value:x.id},x.label))),'guess-select');
-  const b=tid(h('button',{class:'g-btn warn',type:'button',disabled:true,onclick:()=>{E.guess(D,G,t,sel.value);save();go(G.stage==='won'?'end':'result',{mode:'guess'})}},'Tenter ce trait'),'guess-submit');
+  const b=tid(h('button',{class:'g-btn warn',type:'button',disabled:true,onclick:()=>{try{E.guess(D,G,t,sel.value)}catch(e){msg=NEUTRAL;render();return}save();go(G.stage==='won'?'end':'result',{mode:'guess'})}},'Tenter ce trait'),'guess-submit');
   const dfn=h('p',{class:'g-note'},'');sel.addEventListener('change',()=>{b.disabled=!sel.value;dfn.textContent=sel.value?trait(sel.value).definition:''});
   const tl=tid(h('dl',{class:'g-traits'},el.traits.map(x=>h('div',{'data-testid':'trait-def-'+x.id},h('dt',null,x.label),h('dd',null,x.definition)))),'trait-list');body=h('div',{class:'g-form'},h('label',{for:'gt',class:'g-lab'},'Quel est le trait de '+seatName(t)+' ? Une erreur coûte ton tour.'),sel,dfn,b,h('h3',null,'Traits possibles ('+el.traits.length+')'),tl)}
  return card(h('p',{class:'g-eyebrow'},'Tour de '+seatName(me)),tid(h('div',{class:'g-mine'},h('span',null,'Ton trait'),h('b',{'data-qa-private-secret':'turn','data-seat':String(me)},trait(G.secrets[me]).label)),'turn-trait'),tid(h('h2',null,seatName(me)+', à toi'),'turn-seat'),
