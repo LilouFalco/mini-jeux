@@ -61,3 +61,19 @@ body.guilde #app{max-width:640px;margin:auto}
 .has-mnav.guilde .g-lock{font-size:30px}
 .has-mnav.guilde .g-secrets{margin:0}
 
+
+/* restore glossary/registre via in-viewport paginated overlay */
+.g-mbtns,.g-mini{display:none}
+.has-mnav.guilde .g-mbtns{display:flex;gap:6px}.has-mnav.guilde .g-mbtns .g-mini{flex:1}
+.has-mnav.guilde .g-mini{display:block;min-height:40px;padding:4px 10px;font-size:13px;box-shadow:none;background:var(--surface,#fffdf6);color:var(--ink)}
+.g-row{display:contents}.has-mnav.guilde .g-row{display:flex;gap:8px;align-items:center;justify-content:space-between}.has-mnav.guilde .g-row .g-mini{flex:none;width:auto;min-height:40px}.has-mnav.guilde #app[data-screen=setup] [data-testid=start]{order:-1}
+.g-ov{position:fixed;left:0;right:0;z-index:50;display:flex;flex-direction:column;gap:6px;padding:8px;background:var(--surface,#fffdf6);color:var(--ink);overflow:hidden}
+.g-ov-bar{display:flex;align-items:center;gap:8px;font-size:15px}.g-ov-bar b{flex:1}.g-ov-cnt{font-size:12px;color:var(--muted)}
+.g-ov-x{min-width:44px;min-height:44px;font-size:18px;border:2px solid var(--outline);border-radius:8px;background:var(--surface,#fffdf6);color:var(--ink)}
+.g-ov-body{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:6px;align-content:flex-start}
+.g-ov-it{padding:6px 10px;border:1px solid var(--outline);border-radius:8px;display:grid;gap:2px;font-size:13px;line-height:1.35;overflow-wrap:anywhere;flex:none}
+.g-ov-it span{color:var(--muted);font-size:12px}.g-ov-q{display:flex;justify-content:space-between;gap:10px}.g-ov-q span{color:var(--ink);font-size:13px}
+.g-ov-q.yes strong{color:var(--green)}.g-ov-h{background:var(--pale);border-style:dashed}
+.g-ov-foot{display:flex;gap:8px}.g-ov-nav{flex:1;min-height:46px;padding:6px}
+.has-mnav.guilde .g-list{max-height:none;overflow:hidden;padding:2px}.g-pgnav{cursor:default!important;justify-content:space-between!important;padding:2px 4px!important}.g-pgnav button{min-width:56px;min-height:44px;border:2px solid var(--outline);border-radius:8px;background:var(--surface,#fffdf6);color:var(--ink);font-size:20px}.g-pgnav button:disabled{opacity:.4}.g-pgnav span{font-size:12px;color:var(--muted)}
+.has-mnav.guilde .g-list li{min-height:44px;padding:4px 10px}
