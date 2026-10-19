@@ -32,3 +32,6 @@ body.guilde #app{max-width:640px;margin:auto}
 .g-chk.off{opacity:.55}.g-chk input:disabled{cursor:not-allowed}
 @media(max-width:480px){.g-names{grid-template-columns:1fr}.g-card h2{font-size:21px}}
 @media(prefers-reduced-motion:no-preference){.g-card{animation:gin .25s ease-out}@keyframes gin{from{opacity:0;transform:translateY(6px)}}}
+
+/* hotfix: in the mobile fixed layout the setup card must scroll so the start button is reachable */
+.has-mnav.guilde .game-window{min-height:0}.has-mnav.guilde .game-body{overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;display:block}.has-mnav.guilde #app{padding-bottom:12px}
